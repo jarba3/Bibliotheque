@@ -22,7 +22,7 @@ class LoadUser implements FixtureInterface
       // On ne se sert pas du sel pour l'instant
       $user->setSalt('');
       // On définit uniquement le role ROLE_USER qui est le role de base
-      $user->setRoles(array('ROLE_ETUDIANT'));
+      $user->setRoles(array('ROLE_ADMIN'));
       // On le persiste
       $manager->persist($user);
     }

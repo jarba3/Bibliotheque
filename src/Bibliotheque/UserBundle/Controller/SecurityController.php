@@ -30,4 +30,8 @@ class SecurityController extends Controller
 			));
 
 	}
+	public function adminAction()
+	{
+		return $this->render('UserBundle:Admin:admin.html.twig');
+	}
 }

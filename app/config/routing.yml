@@ -15,3 +15,7 @@ login_check:
 
 logout:
   pattern:    /logout
+
+admin:
+  pattern:    /admin
+  defaults:   { _controller: UserBundle:Security:admin }
