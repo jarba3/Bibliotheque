@@ -34,4 +34,8 @@ class SecurityController extends Controller
 	{
 		return $this->render('UserBundle:Admin:admin.html.twig');
 	}
+	public function bibliothecaireAction()
+	{
+		return $this->render('UserBundle:Admin:bibliothecaire.html.twig');
+	}
 }
