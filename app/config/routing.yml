@@ -1,0 +1,17 @@
+user:
+    resource: "@UserBundle/Resources/config/routing.yml"
+    prefix:   /
+
+bibliotheque:
+    resource: "@BibliothequeBundle/Resources/config/routing.yml"
+    prefix:   /
+
+login:
+   pattern:   /login
+   defaults:  { _controller: UserBundle:Security:login }
+
+login_check:
+   pattern:   /login_check
+
+logout:
+  pattern:    /logout

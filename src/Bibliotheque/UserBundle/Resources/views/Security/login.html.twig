@@ -1,0 +1,20 @@
+{% extends "::base.html.twig" %}
+
+
+{% block body %}
+  {% if error %}
+    <div class="alert alert-danger">{{ error.message }}</div>
+  {% endif %}
+  <form action="{{ path('login_check') }}" method="post">
+    <fieldset class="fieldLogin">
+        <label for="username">Nom d'utilisateur :</label>
+        <input class="username spacer" type="text" id="username" name="_username" value="{{ last_username }}" />
+        <br>
+        <label for="password">Mot de passe :</label>
+        <input class="password spacer" type="password" id="password" name="_password" />
+        <br />
+        <label for="rememberMe">Se rappeller de moi</label><input type="checkbox" name="rememberMe">
+        <input class="submit spacer" type="submit" value="Connexion" />
+      </fieldset>
+  </form>
+{% endblock %}

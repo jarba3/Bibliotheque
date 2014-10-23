@@ -1,0 +1,16 @@
+bibliotheque_index:
+    path:     /
+    defaults: { _controller: BibliothequeBundle:Bibliotheque:index }
+
+bibliotheque_livres:
+    path:     /livres
+    defaults: { _controller: BibliothequeBundle:Bibliotheque:livres }
+
+bibliotheque_profil:
+    path:     /profil
+    defaults: { _controller: BibliothequeBundle:Bibliotheque:profil }
+
+bibliotheque_panier:
+    path:     /panier
+    defaults: { _controller: BibliothequeBundle:Bibliotheque:panier }
+
