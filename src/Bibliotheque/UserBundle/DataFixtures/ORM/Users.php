@@ -13,20 +13,49 @@ class LoadUser implements FixtureInterface
   {
     // Les noms d'utilisateurs à créer
     $listNames = array('Alexandre', 'Marine', 'Anna');
+    $listNames2 = array('Robert', 'Etienne');
+    $listNames3 = array('Jacqueline', 'Bernadette');
+    $listNames4 = array('Bastien', 'Arnaud');
+
     foreach ($listNames as $name) {
-      // On crée l'utilisateur
+      
       $user = new User;
-      // Le nom d'utilisateur et le mot de passe sont identiques
+      
       $user->setUsername($name);
       $user->setPassword($name);
-      // On ne se sert pas du sel pour l'instant
       $user->setSalt('');
-      // On définit uniquement le role ROLE_USER qui est le role de base
-      $user->setRoles(array('ROLE_ADMIN'));
-      // On le persiste
+      $user->setRoles(array('ROLE_ETUDIANT'));
       $manager->persist($user);
     }
-    // On déclenche l'enregistrement
+
+    foreach ($listNames2 as $name) {
+      $user = new User;
+
+      $user->setUsername($name);
+      $user->setPassword($name);
+      $user->setSalt('');
+      $user->setRoles(array('ROLE-PROFESSEUR'));
+      $manager->persist($user);
+    }
+    foreach ($listNames3 as $name) {
+      $user = new User;
+
+      $user->setUsername($name);
+      $user->setPassword($name);
+      $user->setSalt('');
+      $user->setRoles(array('ROLE-BIBLIOTHECAIRE'));
+      $manager->persist($user);
+    }
+    foreach ($listNames4 as $name) {
+      $user = new User;
+
+      $user->setUsername($name);
+      $user->setPassword($name);
+      $user->setSalt('');
+      $user->setRoles(array('ROLE-ADMIN'));
+      $manager->persist($user);
+    }
+
     $manager->flush();
   }
 }
