@@ -12,7 +12,13 @@
         <ul>
             <li><a href="{{ path( 'bibliotheque_index' ) }}">Accueil</a></li>
             <li><a href="livres">Livres</a></li>
-            <li><a href="login">Connexion</a></li>
+            <li>
+                {% if app.user %} 
+                <a href="logout">Deconnexion</a>
+                {% else  %}
+                <a href="login">Connexion</a>
+                {% endif %}
+            </li>
         </ul>
     </nav>
     <body>

@@ -1,0 +1,35 @@
+.spacer{
+	margin-top: 20px;
+}
+
+
+/*Menu navigation*/
+
+nav ul{
+	list-style: none;
+}
+nav ul li{
+	display: inline-block;
+}
+nav ul li a{
+	text-decoration: none;
+}
+/*Page login*/
+
+.fieldLogin{
+	margin-left: auto;
+	margin-right: auto;
+	width: 320px;
+}
+.fieldLogin label{
+	display: inline-block;
+	width: 130px;
+}
+.username, .password{
+	display: inline-block;
+}
+.submit{
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+}
