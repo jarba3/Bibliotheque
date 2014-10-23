@@ -10,12 +10,19 @@ class BibliothequeController extends Controller
     {
         return $this->render('BibliothequeBundle:Bibliotheque:index.html.twig');
     }
+
     public function livresAction()
     {
         return $this->render('BibliothequeBundle:Bibliotheque:livres.html.twig');
     }
+
     public function panierAction()
     {
         return $this->render('BibliothequeBundle:Bibliotheque:panier.html.twig');
+    }
+
+    public function profilAction()
+    {
+        return $this->render('BibliothequeBundle:Bibliotheque:profil.html.twig');
     }
 }

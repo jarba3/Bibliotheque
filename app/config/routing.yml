@@ -19,3 +19,15 @@ logout:
 admin:
   pattern:    /admin
   defaults:   { _controller: UserBundle:Security:admin }
+
+bibliotheque_admin_livres:
+  pattern:    /admin/livres
+  defaults:   { _controller: UserBundle:Security:admin_livres }
+
+bibliotheque_admin_prets:
+  pattern:    /admin/prets
+  defaults:   { _controller: UserBundle:Security:admin_prets }
+
+bibliotheque_admin_profils:
+  pattern:    /admin/profils
+  defaults:   { _controller: UserBundle:Security:admin_profils }

@@ -13,4 +13,3 @@ bibliotheque_profil:
 bibliotheque_panier:
     path:     /panier
     defaults: { _controller: BibliothequeBundle:Bibliotheque:panier }
-

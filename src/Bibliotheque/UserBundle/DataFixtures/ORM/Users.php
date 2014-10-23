@@ -34,7 +34,7 @@ class LoadUser implements FixtureInterface
       $user->setUsername($name);
       $user->setPassword($name);
       $user->setSalt('');
-      $user->setRoles(array('ROLE-PROFESSEUR'));
+      $user->setRoles(array('ROLE_PROFESSEUR'));
       $manager->persist($user);
     }
     foreach ($listNames3 as $name) {
@@ -43,7 +43,7 @@ class LoadUser implements FixtureInterface
       $user->setUsername($name);
       $user->setPassword($name);
       $user->setSalt('');
-      $user->setRoles(array('ROLE-BIBLIOTHECAIRE'));
+      $user->setRoles(array('ROLE_BIBLIOTHECAIRE'));
       $manager->persist($user);
     }
     foreach ($listNames4 as $name) {
@@ -52,7 +52,7 @@ class LoadUser implements FixtureInterface
       $user->setUsername($name);
       $user->setPassword($name);
       $user->setSalt('');
-      $user->setRoles(array('ROLE-ADMIN'));
+      $user->setRoles(array('ROLE_ADMIN'));
       $manager->persist($user);
     }
 

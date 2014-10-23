@@ -28,8 +28,8 @@ class SecurityController extends Controller
 			'last_username' => $session->get(SecurityContext::LAST_USERNAME),
 			'error'         => $error,
 			));
-
 	}
+
 	public function adminAction()
 	{
 		return $this->render('UserBundle:Admin:admin.html.twig');
@@ -38,4 +38,20 @@ class SecurityController extends Controller
 	{
 		return $this->render('UserBundle:Admin:bibliothecaire.html.twig');
 	}
+
+	public function admin_livresAction()
+	{
+		return $this->render('UserBundle:Admin:admin_livres.html.twig');
+	}
+
+	public function admin_pretsAction()
+	{
+		return $this->render('UserBundle:Admin:admin_prets.html.twig');
+	}
+
+	public function admin_profilsAction()
+	{
+		return $this->render('UserBundle:Admin:admin_profils.html.twig');
+	}
+
 }

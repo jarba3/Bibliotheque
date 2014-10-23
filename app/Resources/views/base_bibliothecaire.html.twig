@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Bibliothécaire{% endblock %}</title>
+        {% block stylesheets %}
+        <link rel="stylesheet" href="{{asset('bundles/Bibliotheque/css/style.css')}}">
+        {% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <nav>
+        <ul>
+            <li><a href="{{ path( 'bibliotheque_index' ) }}">Accueil</a></li>
+            <li><a href="{{ path( 'bibliotheque_livres' ) }}">Livres</a></li>
+            <li><a href="{{ path( 'bibliotheque_panier' ) }}">Panier</a></li>
+            <li><a href="{{ path( 'bibliotheque_profil' ) }}">Profil</a></li>
+            <li>
+                {% if app.user %} 
+                <a href="{{ path( 'logout' ) }}">Deconnexion</a>
+                {% else  %}
+                <a href="{{ path( 'login' ) }}">Connexion</a>
+                {% endif %}
+            </li>
+        </ul>
+    </nav>
+    <body>
+        {% block body %}{% endblock %}
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>
