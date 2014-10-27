@@ -10,21 +10,21 @@
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
-    <section id="wrapper">
-            <header id="header">
+    <section>
+            <header>
 
                 <hgroup>
-                    <h2>{% block bibliotheque_title %}<a href="{{ path( 'bibliotheque_index' ) }}">Bibliothèque du Landry</a>{% endblock %}</h2>
+                    <h2 class="titre">{% block bibliotheque_title %}<a href="{{ path( 'bibliotheque_index' ) }}">Bibliothèque Le Landry</a>{% endblock %}</h2>
                 </hgroup>
 
             {% block navigation %}
                 <nav>
-                    <ul class="navigation">
+                    <ul class="menu">
                         <li><a href="{{ path( 'bibliotheque_index' ) }}">Accueil</a></li>
                         <li><a href="{{ path( 'bibliotheque_livres' ) }}">Livres</a></li>
                         <li><a href="{{ path( 'bibliotheque_panier' ) }}">Panier</a></li>
                         <li><a href="{{ path( 'bibliotheque_profil' ) }}">Profil</a></li>
-                        <li>
+                        <li class="connexion">
                             {% if app.user %} 
                             <a href="{{ path( 'logout' ) }}">Deconnexion</a>
                             {% else  %}
@@ -33,6 +33,7 @@
                         </li>
                     </ul>
                 </nav>
+                <hr>
             {% endblock %}
 
             </header>
