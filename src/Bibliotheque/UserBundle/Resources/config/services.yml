@@ -1,4 +1,4 @@
 services:
-#    user.example:
-#        class: Bibliotheque\UserBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
+    RedirectionApresLogin:
+        class: Bibliotheque\UserBundle\Redirection\UserRedirection
+        arguments: [@router]
