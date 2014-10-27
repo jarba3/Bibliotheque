@@ -11,48 +11,50 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-        <section>
+        <section class="header">
                 <header>
-
                     <hgroup>
-                        <h2 class="titre">{% block bibliotheque_title %}<a href="{{ path( 'bibliotheque_index' ) }}">Bibliothèque Le Landry</a>{% endblock %}</h2>
+                        <img class="logo" src="{{asset('bundles/Bibliotheque/images/logo.png')}}" alt="Impossible à charger"><h2 class="titre">{% block bibliotheque_title %}<a href="{{ path( 'bibliotheque_index' ) }}">&nbsp;Bibliothèque Le Landry</a>{% endblock %}</h2>
                     </hgroup>
 
-                {% block navigation %}
-                    <nav>
-                        <ul class="menu">
-                            <li><a href="{{ path( 'bibliotheque_admin_livres' ) }}">Gestion des livres</a></li>
-                            <li><a href="{{ path( 'bibliotheque_admin_prets' ) }}">Gestion des prêts</a></li>
-                            <li><a href="{{ path( 'bibliotheque_admin_profils' ) }}">Gestion des Profils</a></li>
-                            <li class="connexion">
-                                {% if app.user %} 
-                                <a href="{{ path( 'logout' ) }}">Deconnexion</a>
-                                {% else  %}
-                                <a href="{{ path( 'login' ) }}">Connexion</a>
-                                {% endif %}
-                            </li>
-                        </ul>
-                    </nav>
-                    <hr>
-                {% endblock %}
-
-                </header>
-
-        </section>
-
-        <section class="main-col">
-            {% block body %}{% endblock %}
-            {% block javascripts %}{% endblock %}
-        </section>
-        <aside class="sidebar">
-                {% block sidebar %}{% endblock %}
-        </aside>
-    
-        <div id="footer">
-                    {% block footer %}
-                        Site internet - créé par Bastien et Arnaud</a>
+                    {% block navigation %}
+                        <nav>
+                            <ul class="menu">
+                                <li><a href="{{ path( 'bibliotheque_admin_livres' ) }}">Gestion des livres</a></li>
+                                <li><a href="{{ path( 'bibliotheque_admin_prets' ) }}">Gestion des prêts</a></li>
+                                <li><a href="{{ path( 'bibliotheque_admin_profils' ) }}">Gestion des Profils</a></li>
+                                <li class="connexion">
+                                    {% if app.user %} 
+                                    <a href="{{ path( 'logout' ) }}">Deconnexion</a>
+                                    {% else  %}
+                                    <a href="{{ path( 'login' ) }}">Connexion</a>
+                                    {% endif %}
+                                </li>
+                            </ul>
+                        </nav>
+                        <hr>
                     {% endblock %}
-        </div>
-    </body>
+                </header>
+        </section>
 
+    
+        <section class="main-col">
+                    {% block body %}{% endblock %}
+                    {% block javascripts %}{% endblock %}
+        </section>
+        <section>
+                <aside class="sidebar">
+                        {% block sidebar %}{% endblock %}
+                </aside>
+                
+        </section>
+        <section>
+            <footer>
+                    {% block footer %}
+                            <hr>
+                            Site internet - créé par Bastien et Arnaud
+                    {% endblock %}
+            </footer>
+        </section>
+    </body>
 </html>

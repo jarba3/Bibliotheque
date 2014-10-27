@@ -25,7 +25,12 @@ footer a{
 	margin-top: 20px;
 }
 
+hr {
+	border-top: 1px solid #ccc;
+}
+
 .menu{
+	text-align: left;
 	list-style: none;
 	display: inline;
 	margin-left: 50px;
@@ -39,7 +44,7 @@ footer a{
 	color: #799312;
 }
 .menu li{
-	border-left: 1px solid #ccc;
+	border-right: 1px solid #ccc;
 	display: inline-block;
 	padding-left: 30px;
 	padding-right: 30px;
@@ -50,7 +55,7 @@ footer a{
 }
 
 .logo{
-	display: inline-block;
+	text-align: center
 }
 .form{
 	margin-top: 150px;
@@ -67,13 +72,19 @@ label{
 }
 
 .titre{
+	width:672px;
 	text-align: center;
+	display: inline-block;
 	font-family: 'La Belle Aurore', cursive;
 	font-size: 50px;
 	margin-bottom: 20px;
 	font-weight: normal;
+	vertical-align: top;
 }
 
+.titre a{
+	text-decoration: none;
+}
 
 
 /*Page login*/
@@ -94,4 +105,33 @@ label{
 	margin-left: auto;
 	margin-right: auto;
 	display: block;
+}
+
+.main-col {
+	width: 801px;
+	display: inline-block;
+	float: left;
+	border-right: 1px solid #ccc;
+	padding: 10px;
+	margin-bottom: 20px;
+	margin-top: 25px;
+	height:2000px;
+}
+
+.sidebar {
+	width: 250px;
+	padding: 10px;
+	display: inline-block;
+	float: right;
+	margin-top: 13px;
+}
+.body{
+	border: 1px solid #ccc;
+	padding: 10px;
+	display: inline-block;
+	float: left;	
+}
+
+.header{
+	margin-bottom: 20px;
 }
