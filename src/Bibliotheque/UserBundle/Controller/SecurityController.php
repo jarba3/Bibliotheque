@@ -6,6 +6,8 @@ namespace Bibliotheque\UserBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContext;
+use Bibliotheque\UserBundle\Entity\User;
+
 
 class SecurityController extends Controller
 {
@@ -34,10 +36,6 @@ class SecurityController extends Controller
 	{
 		return $this->render('UserBundle:Admin:admin.html.twig');
 	}
-	public function bibliothecaireAction()
-	{
-		return $this->render('UserBundle:Admin:bibliothecaire.html.twig');
-	}
 
 	public function admin_livresAction()
 	{
@@ -51,7 +49,29 @@ class SecurityController extends Controller
 
 	public function admin_profilsAction()
 	{
-		return $this->render('UserBundle:Admin:admin_profils.html.twig');
+		$user = new User();
+
+		$form = $this->createFormBuilder($user)
+					->add('username', 'text')
+					->add('password', 'password')
+					->add("roles", 'choice', array(
+        				'expanded' => true,
+        				'multiple' => false,
+        				'choices'  => array(
+							            'ROLE_ADMIN' => 'Administrateur',
+							            'ROLE_BIBLIOTHECAIRE'  => 'Bibliothecaire',
+							            'ROLE_ETUDIANT'   => 'Etudiant',
+							            'ROLE_PROFESSEUR'  => 'Professeur',
+					        ),
+					    ))
+					->getForm();
+
+
+		return $this->render('UserBundle:Admin:admin_profils.html.twig', array('form' => $form->createView()));
 	}
 
+	public function bibliothecaireAction()
+	{
+		return $this->render('UserBundle:bibliothecaire:bibliothecaire.html.twig');
+	}
 }

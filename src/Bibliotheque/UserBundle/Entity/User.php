@@ -25,6 +25,41 @@ class User implements UserInterface
     /**
      * @var string
      *
+     * @ORM\Column(name="nom", type="string", length=255)
+     */
+    private $nom;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="prenom", type="string", length=255)
+     */
+    private $prenom;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="adresse1", type="string", length=255)
+     */
+    private $adresse1;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="adresse2", type="string", length=255)
+     */
+    private $adresse2;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="codepostal", type="integer", length=5)
+     */
+    private $codepostal;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="username", type="string", length=255)
      */
     private $username;

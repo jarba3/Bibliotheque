@@ -2,8 +2,17 @@
 {% block body %}
 <h1>Gestion des profils utilisateurs</h1>
 
+{{ form_label(form.username, 'Nom d\'utilisateur') }}
+{{ form(form.username) }}
+
+{{ form_label(form.password, 'Mot de passe') }}
+{{ form(form.password) }}
+
+{{  form_label(form.roles, 'Type d\'utilisateur :') }}
+{{ form(form.roles) }}
+
 {% endblock %}
 
 {% block sidebar %}
-    Try
+    
 {% endblock %}

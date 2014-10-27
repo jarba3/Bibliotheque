@@ -26,7 +26,7 @@ class UserRedirection implements AuthenticationSuccessHandlerInterface
         
         if (in_array("ROLE_BIBLIOTHECAIRE", $rolesTab)){
 
-            $redirection = new RedirectResponse($this->router->generate('bibliotheque_index'));
+            $redirection = new RedirectResponse($this->router->generate('bibliotheque_bibliothecaire'));
         }
 
         if (in_array("ROLE_ADMIN", $rolesTab)){
