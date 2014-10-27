@@ -66,10 +66,10 @@ hr {
 .form input{
 	display: inline-block;
 }
-label{
+/*label{
 	width: 100px;
 	display: inline-block;
-}
+}*/
 
 .titre{
 	width:672px;
@@ -134,4 +134,25 @@ label{
 
 .header{
 	margin-bottom: 20px;
+}
+
+/*Page ajout utilisateur*/
+
+.spacerUser{
+	margin-top: 5px;
+}
+
+.label{
+	width: 150px;
+	display: inline-block;
+}
+
+.userField{
+	width: 350px;
+	margin-right: auto;
+	margin-left: auto;
+	border-radius: 10px;
+	padding-top: 15px;
+	padding-bottom: 20px;
+	padding-left: 20px;
 }

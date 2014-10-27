@@ -47,23 +47,23 @@ class SecurityController extends Controller
 		return $this->render('UserBundle:Admin:admin_prets.html.twig');
 	}
 
-	public function admin_profilsAction()
+	public function admin_profilsAction(request $request)
 	{
 		$user = new User();
 
 		$form = $this->createFormBuilder($user)
-					->add('nom', 'text')
-					->add('prenom', 'text')
-					->add('adresse1', 'text')
-					->add('adresse2', 'text')
-					->add('codepostal', 'number')
-					->add('ville', 'text')
-					->add('telephone', 'number')
-					->add('email', 'text')
-					->add('username', 'text')
-					->add('password', 'password')
+					->add('nom', 'text', array('required' => true))
+					->add('prenom', 'text', array('required' => true))
+					->add('adresse1', 'text', array('required' => true))
+					->add('adresse2', 'text', array('required' => false))
+					->add('codepostal', 'number', array('required' => true))
+					->add('ville', 'text', array('required' => true))
+					->add('telephone', 'number', array('required' => true))
+					->add('email', 'text', array('required' => true))
+					->add('username', 'text', array('required' => true))
+					->add('password', 'password', array('required' => true))
 					->add("roles", 'choice', array(
-        				'expanded' => true,
+        				'expanded' => false,
         				'multiple' => false,
         				'choices'  => array(
 							            'ROLE_ADMIN' => 'Administrateur',
@@ -72,7 +72,20 @@ class SecurityController extends Controller
 							            'ROLE_PROFESSEUR'  => 'Professeur',
 					        ),
 					    ))
+					->add('Enregistrer', 'submit')
+					->add('salt', 'text')
 					->getForm();
+
+		$form->handleRequest($request);
+
+	    if ($form->isValid()) {
+	    		$data = $form->getData();
+
+	        	$em = $this->getDoctrine()->getManager();
+				$em->persist($data);
+				$em->flush();
+
+	    }
 
 
 		return $this->render('UserBundle:Admin:admin_profils.html.twig', array('form' => $form->createView()));

@@ -46,7 +46,7 @@ class User implements UserInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="adresse2", type="string", length=255)
+     * @ORM\Column(name="adresse2", type="string", length=255, nullable=true)
      */
     private $adresse2;
 
