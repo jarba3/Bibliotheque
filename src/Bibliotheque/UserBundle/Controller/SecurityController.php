@@ -52,6 +52,14 @@ class SecurityController extends Controller
 		$user = new User();
 
 		$form = $this->createFormBuilder($user)
+					->add('nom', 'text')
+					->add('prenom', 'text')
+					->add('adresse1', 'text')
+					->add('adresse2', 'text')
+					->add('codepostal', 'number')
+					->add('ville', 'text')
+					->add('telephone', 'number')
+					->add('email', 'text')
 					->add('username', 'text')
 					->add('password', 'password')
 					->add("roles", 'choice', array(

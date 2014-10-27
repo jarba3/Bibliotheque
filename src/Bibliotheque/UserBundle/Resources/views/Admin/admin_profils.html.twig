@@ -2,6 +2,13 @@
 {% block body %}
 <h1>Gestion des profils utilisateurs</h1>
 
+
+{{ form_label(form.username, 'Nom') }}
+{{ form(form.nom) }}
+
+{{ form_label(form.username, 'Prenom') }}
+{{ form(form.prenom) }}
+
 {{ form_label(form.username, 'Nom d\'utilisateur') }}
 {{ form(form.username) }}
 

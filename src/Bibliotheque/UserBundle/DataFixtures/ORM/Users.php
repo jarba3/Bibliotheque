@@ -20,7 +20,14 @@ class LoadUser implements FixtureInterface
     foreach ($listNames as $name) {
       
       $user = new User;
-      
+      $user->setNom($name);
+      $user->setPrenom($name);
+      $user->setEmail('bibliotheque@afap.com');
+      $user->setAdresse1('10 rue de mon cul');
+      $user->setAdresse2('');
+      $user->setCodepostal(75001);
+      $user->setVille('Paris');
+      $user->setTelephone(0100000000);
       $user->setUsername($name);
       $user->setPassword($name);
       $user->setSalt('');
@@ -30,7 +37,14 @@ class LoadUser implements FixtureInterface
 
     foreach ($listNames2 as $name) {
       $user = new User;
-
+      $user->setNom($name);
+      $user->setPrenom($name);
+      $user->setEmail('bibliotheque@afap.com');
+      $user->setAdresse1('10 rue de mon cul');
+      $user->setAdresse2('');
+      $user->setCodepostal(75001);
+      $user->setVille('Paris');
+      $user->setTelephone(0100000000);
       $user->setUsername($name);
       $user->setPassword($name);
       $user->setSalt('');
@@ -39,7 +53,14 @@ class LoadUser implements FixtureInterface
     }
     foreach ($listNames3 as $name) {
       $user = new User;
-
+      $user->setNom($name);
+      $user->setPrenom($name);
+      $user->setEmail('bibliotheque@afap.com');
+      $user->setAdresse1('10 rue de mon cul');
+      $user->setAdresse2('');
+      $user->setCodepostal(75001);
+      $user->setVille('Paris');
+      $user->setTelephone(0100000000);
       $user->setUsername($name);
       $user->setPassword($name);
       $user->setSalt('');
@@ -48,7 +69,14 @@ class LoadUser implements FixtureInterface
     }
     foreach ($listNames4 as $name) {
       $user = new User;
-
+      $user->setNom($name);
+      $user->setPrenom($name);
+      $user->setEmail('bibliotheque@afap.com');
+      $user->setAdresse1('10 rue de mon cul');
+      $user->setAdresse2('');
+      $user->setCodepostal(75001);
+      $user->setVille('Paris');
+      $user->setTelephone(0100000000);
       $user->setUsername($name);
       $user->setPassword($name);
       $user->setSalt('');
