@@ -72,17 +72,25 @@ class SecurityController extends Controller
 							            'ROLE_PROFESSEUR'  => 'Professeur',
 					        ),
 					    ))
-					->add('Enregistrer', 'submit')
-					->add('salt', 'text')
+					->add('save', 'submit', array(
+										'label' => 'Enregistrer',
+								  'attr' => array(
+								  		'class' => 'submit spacer'
+							)
+						))
 					->getForm();
 
 		$form->handleRequest($request);
 
 	    if ($form->isValid()) {
-	    		$data = $form->getData();
+
+	    		$factory = $this->get('security.encoder_factory');
+	            $encoder = $factory->getEncoder($user);
+	            $password = $encoder->encodePassword($form->get('password')->getData(), $user->getSalt());
+	            $user->setPassword($password);
 
 	        	$em = $this->getDoctrine()->getManager();
-				$em->persist($data);
+				$em->persist($user);
 				$em->flush();
 
 	    }

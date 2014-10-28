@@ -95,9 +95,9 @@ class User implements UserInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="salt", type="string", length=255)
+     * @ORM\Column(name="salt", type="text", nullable=false)
      */
-    private $salt;
+    private $salt = "v1-s@lt";
 
     /**
      * @var array
@@ -198,7 +198,7 @@ class User implements UserInterface
      */
     public function setRoles($roles)
     {
-        $this->roles = $roles;
+        $this->roles[] = $roles;
 
         return $this;
     }
@@ -397,26 +397,4 @@ class User implements UserInterface
         return $this->email;
     }
 
-    /**
-     * Set adhesion
-     *
-     * @param \DateTime $adhesion
-     * @return User
-     */
-    public function setAdhesion($adhesion)
-    {
-        $this->adhesion = $adhesion;
-
-        return $this;
-    }
-
-    /**
-     * Get adhesion
-     *
-     * @return \DateTime 
-     */
-    public function getAdhesion()
-    {
-        return $this->adhesion;
-    }
 }

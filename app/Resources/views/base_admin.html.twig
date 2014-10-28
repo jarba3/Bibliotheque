@@ -7,35 +7,40 @@
         <link href='http://fonts.googleapis.com/css?family=Irish+Grover' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=La+Belle+Aurore' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="{{asset('bundles/Bibliotheque/css/style.css')}}">
-        {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        {% endblock %}
     </head>
-    <body>
-        <section class="header">
-                <header>
-                    <hgroup>
-                        <img class="logo" src="{{asset('bundles/Bibliotheque/images/logo.png')}}" alt="Impossible à charger"><h2 class="titre">{% block bibliotheque_title %}<a href="{{ path( 'bibliotheque_index' ) }}">&nbsp;Bibliothèque Le Landry</a>{% endblock %}</h2>
-                    </hgroup>
+            <header>
+                <hgroup>
+                    <h2 class="titre">{% block bibliotheque_title %}<a href="{{ path( 'bibliotheque_index' ) }}">&nbsp;Bibliothèque Le Landry</a>{% endblock %}</h2>
+                </hgroup>
 
-                    {% block navigation %}
-                        <nav>
-                            <ul class="menu">
-                                <li><a href="{{ path( 'bibliotheque_admin_livres' ) }}">Gestion des livres</a></li>
-                                <li><a href="{{ path( 'bibliotheque_admin_prets' ) }}">Gestion des prêts</a></li>
-                                <li><a href="{{ path( 'bibliotheque_admin_profils' ) }}">Gestion des Profils</a></li>
-                                <li class="connexion">
+                    <nav>
+                    <img class="logo" src="{{asset('bundles/Bibliotheque/images/logo.png')}}" alt="Impossible à charger">
+                        <ul class="menu">
+                            <li><a href="{{ path( 'bibliotheque_index' ) }}">Accueil</a></li>
+                            <li><a href="{{ path( 'bibliotheque_admin_livres' ) }}">Gestion des livres</a></li>
+                            <li><a href="{{ path( 'bibliotheque_admin_prets' ) }}">Gestion des prêts</a></li>
+                            <li>
+                                Gestion des Profils
+                                <ul>
+                                    <li><a href="{{ path( 'bibliotheque_admin_profils' ) }}">Ajout utilisateur</a></li>
+                                    <li><a href="">Modification utilisateur</a></li>
+                                    <li><a href="">Suppression utilisateur</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                            <div class="connexion">
                                     {% if app.user %} 
                                     <a href="{{ path( 'logout' ) }}">Deconnexion</a>
                                     {% else  %}
                                     <a href="{{ path( 'login' ) }}">Connexion</a>
                                     {% endif %}
-                                </li>
-                            </ul>
-                        </nav>
-                        <hr>
-                    {% endblock %}
-                </header>
-        </section>
+                            </div>
+                    </nav>
+
+                    <hr>
+            </header>
 
     
         <section class="main-col">
