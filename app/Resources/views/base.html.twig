@@ -25,17 +25,16 @@
                                 <li><a href="{{ path( 'bibliotheque_livres' ) }}">Livres</a></li>
                                 <li><a href="{{ path( 'bibliotheque_panier' ) }}">Panier</a></li>
                                 <li><a href="{{ path( 'bibliotheque_profil' ) }}">Profil</a></li>
-                                <li class="connexion">
-                                    {% if is_granted('ROLE_ADMIN') %}
-                                    <a href="{{ path( 'admin' ) }}">Administration</a>
-                                    {% endif %}
-                                </li>
                             </ul>
                             <div class="connexion">
                                     {% if app.user %} 
                                     <a href="{{ path( 'logout' ) }}">Deconnexion</a>
                                     {% else  %}
                                     <a href="{{ path( 'login' ) }}">Connexion</a>
+                                    {% endif %}
+                                    <hr>
+                                    {% if is_granted('ROLE_ADMIN') %}
+                                    <a href="{{ path( 'admin' ) }}">Administration</a>
                                     {% endif %}
                             </div>
                         </nav>

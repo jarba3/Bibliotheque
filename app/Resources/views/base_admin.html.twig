@@ -18,7 +18,6 @@
                     <nav>
                     <img class="logo" src="{{asset('bundles/Bibliotheque/images/logo.png')}}" alt="Impossible à charger">
                         <ul class="menu">
-                            <li><a href="{{ path( 'bibliotheque_index' ) }}">Accueil</a></li>
                             <li><a href="{{ path( 'bibliotheque_admin_livres' ) }}">Gestion des livres</a></li>
                             <li><a href="{{ path( 'bibliotheque_admin_prets' ) }}">Gestion des prêts</a></li>
                             <li>
@@ -36,6 +35,8 @@
                                     {% else  %}
                                     <a href="{{ path( 'login' ) }}">Connexion</a>
                                     {% endif %}
+                                    <hr>
+                                    <a href="{{ path( 'bibliotheque_index' ) }}">Accueil</a>
                             </div>
                     </nav>
 

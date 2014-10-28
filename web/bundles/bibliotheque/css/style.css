@@ -84,6 +84,13 @@ min-height:0;
 .connexion{
 	display: inline-block;
 	float: right;
+
+}
+.connexion a{
+	text-decoration: none;
+	font-size: 18px;
+	display: block;
+	color: black;
 }
 /*.menu, .menu ul{
 	list-style: none; 
