@@ -51,9 +51,15 @@ hr {
 }
 .menu li ul 
 {
-position: absolute; 
-width: 144px; 
+position: absolute;
+margin-left: -45px;
+width: 200px; 
 left: -999em; 
+}
+.menu li ul li{
+	padding-top: 10px;
+	padding-bottom: 10px;
+	background-color: white;
 }
 .menu li:hover ul ul, .menu li:hover ul ul ul
 {
