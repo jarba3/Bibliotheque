@@ -102,6 +102,7 @@ class SecurityController extends Controller
 	public function admin_modif_userAction(request $request)
 	{
 
+
 		$search = $this->createFormBuilder()
 							->add('recherche', 'search')
 							->getForm();
@@ -112,14 +113,38 @@ class SecurityController extends Controller
 		$user = $repository->findByUsername($nom);
 		
 
+
+
 		if($user != NULL){
-			var_dump($user[0]->getNom());
-				
-				
+
+			$form = $this->createFormBuilder($user)
+					->add('nom', 'text', array('required' => true, 'attr' => array('value' => $user[0]->getNom())))
+					->add('prenom', 'text', array('required' => true, 'attr' => array('value' => $user[0]->getPrenom())))
+					->add('adresse1', 'text', array('required' => true, 'attr' => array('value' => $user[0]->getAdresse1())))
+					->add('adresse2', 'text', array('required' => false, 'attr' => array('value' => $user[0]->getAdresse2())))
+					->add('codepostal', 'number', array('required' => true, 'attr' => array('value' => $user[0]->getCodepostal())))
+					->add('ville', 'text', array('required' => true, 'attr' => array('value' => $user[0]->getVille())))
+					->add('telephone', 'number', array('required' => true, 'attr' => array('value' => $user[0]->getTelephone())))
+					->add('email', 'text', array('required' => true, 'attr' => array('value' => $user[0]->getEmail())))
+					->add('username', 'text', array('required' => true, 'attr' => array('value' => $user[0]->getUsername())))
+					->add('password', 'password', array('required' => true))
+					->add("roles", 'choice', array(
+        				'expanded' => false,
+        				'multiple' => false,
+        				'choices'  => array(
+							            'ROLE_ADMIN' => 'Administrateur',
+							            'ROLE_BIBLIOTHECAIRE'  => 'Bibliothecaire',
+							            'ROLE_ETUDIANT'   => 'Etudiant',
+							            'ROLE_PROFESSEUR'  => 'Professeur',
+					        				),'attr' => array('value' => $user[0]->getRoles()[0])))
+					->add('save', 'submit', array('label' => 'Enregistrer', 'attr' => array('class' => 'submit spacer')))
+					->getForm();
+
+				return $this->render('UserBundle:admin:admin_modif_user.html.twig', array('form' => $form->createView(), 'user' => $user));
 
 		}
 
-		return $this->render('UserBundle:admin:admin_modif_user.html.twig', array('form' => $search->createView()));
+		return $this->render('UserBundle:admin:admin_modif_user.html.twig', array('form' => $search->createView(), 'user' => $user));
 	}
 
 
