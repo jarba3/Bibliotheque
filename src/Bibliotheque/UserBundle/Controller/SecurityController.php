@@ -47,7 +47,7 @@ class SecurityController extends Controller
 		return $this->render('UserBundle:Admin:admin_prets.html.twig');
 	}
 
-	public function admin_profilsAction(request $request)
+	public function admin_ajout_userAction(request $request)
 	{
 		$user = new User();
 
@@ -98,6 +98,31 @@ class SecurityController extends Controller
 
 		return $this->render('UserBundle:Admin:admin_profils.html.twig', array('form' => $form->createView()));
 	}
+
+	public function admin_modif_userAction(request $request)
+	{
+
+		$search = $this->createFormBuilder()
+							->add('recherche', 'search')
+							->getForm();
+		
+		$nom = $request->get('form')['recherche'];
+		
+		$repository = $this->getDoctrine()->getManager()->getRepository('UserBundle:User');
+		$user = $repository->findByUsername($nom);
+		
+
+		if($user != NULL){
+			var_dump($user[0]->getNom());
+				
+				
+
+		}
+
+		return $this->render('UserBundle:admin:admin_modif_user.html.twig', array('form' => $search->createView()));
+	}
+
+
 
 	public function bibliothecaireAction()
 	{

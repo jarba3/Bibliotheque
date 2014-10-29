@@ -1,0 +1,16 @@
+{% extends 'base_admin.html.twig' %}
+{% block body %}
+<h1>Modifier un utilisateur</h1>
+<br>
+{{ form_start(form) }}
+<fieldset class="search">
+
+{{ form_label(form.recherche, "Recherche par nom d'utilisateur :") }}
+{{ form_widget(form.recherche) }}
+
+</fieldset>
+{{ form_end(form) }}
+
+
+
+{% endblock %}

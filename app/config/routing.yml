@@ -16,6 +16,10 @@ login_check:
 logout:
   pattern:    /logout
 
+
+
+
+
 admin:
   pattern:    /admin
   defaults:   { _controller: UserBundle:Security:admin }
@@ -28,9 +32,21 @@ bibliotheque_admin_prets:
   pattern:    /admin/prets
   defaults:   { _controller: UserBundle:Security:admin_prets }
 
-bibliotheque_admin_profils:
-  pattern:    /admin/profils
-  defaults:   { _controller: UserBundle:Security:admin_profils }
+bibliotheque_admin_ajout_user:
+  pattern:    /admin/ajout_utilisateur
+  defaults:   { _controller: UserBundle:Security:admin_ajout_user }
+
+bibliotheque_admin_modif_user:
+  pattern:    /admin/modif_utilisateur
+  defaults:   { _controller: UserBundle:Security:admin_modif_user }
+
+
+
+
+
+
+
+
 
 bibliotheque_bibliothecaire:
   pattern:    /bibliothecaire

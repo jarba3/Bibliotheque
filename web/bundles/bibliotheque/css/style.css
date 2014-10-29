@@ -98,6 +98,14 @@ min-height:0;
 	display: block;
 	color: black;
 }
+.search{
+	width: 400px;
+	margin-right: auto;
+	margin-left: auto;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
 /*.menu, .menu ul{
 	list-style: none; 
 	line-height: 25px; 
