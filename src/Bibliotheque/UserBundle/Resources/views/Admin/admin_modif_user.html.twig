@@ -5,59 +5,15 @@
 <h1>Modifier un utilisateur</h1>
 <br>
 
-{% if user == NULL %}
 
-	{{ form_start(form) }}
+	{{ form_start(search) }}
 		<fieldset class="search">
-			{{ form_label(form.recherche, "Recherche par nom d'utilisateur :") }}
-			{{ form_widget(form.recherche) }}
+			{{ form_label(search.recherche, "Recherche par nom d'utilisateur :") }}
+			{{ form_widget(search.recherche) }}
 		</fieldset>
-	{{ form_end(form) }}
-
-{% endif %}
+	{{ form_end(search) }}
 
 
-{% if user != NULL %}
-
-	{{ form_start(form) }}
-		<fieldset class='userField'>
-			{{ form_label(form.nom, 'Nom :', {'label_attr': {'class': 'label spacerUser'}}) }}
-			{{ form_widget(form.nom) }}
-			<br>
-			{{ form_label(form.prenom, 'Prenom :', {'label_attr': {'class': 'label spacerUser'}}) }}
-			{{ form_widget(form.prenom) }}
-			<br>
-			{{ form_label(form.adresse1, 'Adresse 1 :',{'label_attr': {'class': 'label spacerUser'}}) }}
-			{{ form_widget(form.adresse1) }}
-			<br>
-			{{ form_label(form.adresse2, 'Adresse 2 :', {'label_attr': {'class': 'label spacerUser'}}) }}
-			{{ form_widget(form.adresse2) }}
-			<br>
-			{{ form_label(form.codepostal, 'Code postal :', {'label_attr': {'class': 'label spacerUser'}}) }}
-			{{ form_widget(form.codepostal) }}
-			<br>
-			{{ form_label(form.ville, 'Ville :', {'label_attr': {'class': 'label spacerUser'}}) }}
-			{{ form_widget(form.ville) }}
-			<br>
-			{{ form_label(form.email, 'Email :', {'label_attr': {'class': 'label spacerUser'}}) }}
-			{{ form_widget(form.email) }}
-			<br>
-			{{ form_label(form.telephone, 'Telephone :', {'label_attr': {'class': 'label spacerUser'}}) }}
-			{{ form_widget(form.telephone) }}
-			<br>
-			{{ form_label(form.username, "Nom d'utilisateur :", {'label_attr': {'class': 'label spacerUser'}}) }}
-			{{ form_widget(form.username) }}
-			<br>
-			{{ form_label(form.password, 'Mot de passe :', {'label_attr': {'class': 'label spacerUser'}}) }}
-			{{ form_widget(form.password) }}
-			<br>
-			{{  form_label(form.roles, "Type d\'utilisateur :", {'label_attr': {'class': 'label spacerUser'}}) }}
-			{{ form_widget(form.roles) }}
-			<br>
-		</fieldset>
-	{{ form_end(form) }}
-
-{% endif %}
 
 
 

@@ -40,6 +40,10 @@ bibliotheque_admin_modif_user:
   pattern:    /admin/modif_utilisateur
   defaults:   { _controller: UserBundle:Security:admin_modif_user }
 
+bibliotheque_admin_modif_user_form:
+  pattern:    /admin/modif_utilisateur_form
+  defaults:   { _controller: UserBundle:Security:admin_modif_user_form }
+
 
 
 

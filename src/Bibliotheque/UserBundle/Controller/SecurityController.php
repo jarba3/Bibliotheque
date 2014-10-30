@@ -104,77 +104,72 @@ class SecurityController extends Controller
 	public function admin_modif_userAction(request $request)
 	{
 
-		if(!isset($user)){
-
 			$search = $this->createFormBuilder()
+								->setAction($this->generateUrl('bibliotheque_admin_modif_user_form'))
 								->add('recherche', 'search')
-								->getForm();
+								->getForm();	
 			
 			$nom = $request->get('form')['recherche'];
-			
-			$repository = $this->getDoctrine()->getManager()->getRepository('UserBundle:User');
-			$user = $repository->findByUsername($nom);
+
+
+			$search->handleRequest($request);
+
+
+		return $this->render('UserBundle:admin:admin_modif_user.html.twig', array('search' => $search->createView()));
+	}
+
+	public function admin_modif_user_formAction(request $request)
+	{
 		
-		}
+		$repository = $this->getDoctrine()->getManager()->getRepository('UserBundle:User');
+		$user = $repository->findByUsername($_POST['form']['recherche']);
+		// var_dump($user[0]->getRoles()[0]);
+		// die();
+
+		$form = $this->createFormBuilder($user)
+				->add('nom', 'text', array('required' => true, 'attr' => array('value' => $user[0]->getNom())))
+				->add('prenom', 'text', array('required' => true, 'attr' => array('value' => $user[0]->getPrenom())))
+				->add('adresse1', 'text', array('required' => true, 'attr' => array('value' => $user[0]->getAdresse1())))
+				->add('adresse2', 'text', array('required' => false, 'attr' => array('value' => $user[0]->getAdresse2())))
+				->add('codepostal', 'number', array('required' => true, 'attr' => array('value' => $user[0]->getCodepostal())))
+				->add('ville', 'text', array('required' => true, 'attr' => array('value' => $user[0]->getVille())))
+				->add('telephone', 'number', array('required' => true, 'attr' => array('value' => $user[0]->getTelephone())))
+				->add('email', 'text', array('required' => true, 'attr' => array('value' => $user[0]->getEmail())))
+				->add('username', 'text', array('required' => true, 'attr' => array('value' => $user[0]->getUsername())))
+				->add('password', 'password', array('required' => true))
+				->add("roles", 'choice', array(
+    				'expanded' => false,
+    				'multiple' => false,
+    				'choices'  => array(
+						            'ROLE_ADMIN' => 'Administrateur',
+						            'ROLE_BIBLIOTHECAIRE'  => 'Bibliothecaire',
+						            'ROLE_ETUDIANT'   => 'Etudiant',
+						            'ROLE_PROFESSEUR'  => 'Professeur',
+				        				), 'data' => $user[0]->getRoles()[0]))
+				->add('save', 'submit', array('label' => 'Enregistrer les modifications', 'attr' => array('class' => 'submit spacer')))
+				->getForm();
+
+		    		
+			 // $form->handleRequest($request);
+
+	    if ($form->isSubmitted()) {
 
 
-		if($user != NULL){
+    		$factory = $this->get('security.encoder_factory');
+            $encoder = $factory->getEncoder($user);
+            $password = $encoder->encodePassword($form->get('password')->getData(), $user->getSalt());
+            $user->setPassword($password);
 
-			$form = $this->createFormBuilder($user)
-					->add('nom', 'text', array('required' => true, 'attr' => array('value' => $user[0]->getNom())))
-					->add('prenom', 'text', array('required' => true, 'attr' => array('value' => $user[0]->getPrenom())))
-					->add('adresse1', 'text', array('required' => true, 'attr' => array('value' => $user[0]->getAdresse1())))
-					->add('adresse2', 'text', array('required' => false, 'attr' => array('value' => $user[0]->getAdresse2())))
-					->add('codepostal', 'number', array('required' => true, 'attr' => array('value' => $user[0]->getCodepostal())))
-					->add('ville', 'text', array('required' => true, 'attr' => array('value' => $user[0]->getVille())))
-					->add('telephone', 'number', array('required' => true, 'attr' => array('value' => $user[0]->getTelephone())))
-					->add('email', 'text', array('required' => true, 'attr' => array('value' => $user[0]->getEmail())))
-					->add('username', 'text', array('required' => true, 'attr' => array('value' => $user[0]->getUsername())))
-					->add('password', 'password', array('required' => true))
-					->add("roles", 'choice', array(
-        				'expanded' => false,
-        				'multiple' => false,
-        				'choices'  => array(
-							            'ROLE_ADMIN' => 'Administrateur',
-							            'ROLE_BIBLIOTHECAIRE'  => 'Bibliothecaire',
-							            'ROLE_ETUDIANT'   => 'Etudiant',
-							            'ROLE_PROFESSEUR'  => 'Professeur',
-					        				), 'data' => $user[0]->getRoles()[0]))
-					->add('save', 'submit', array('label' => 'Enregistrer', 'attr' => array('class' => 'submit spacer')))
-					->getForm();
+        	$em = $this->getDoctrine()->getManager();
+			$em->flush();
 
 
-			// $form->handleRequest($request);
-
-
-
-	    if ($form->isValid()) {
-
-	    		var_dump('ca marche');
-	    		die();
-
-	    		$factory = $this->get('security.encoder_factory');
-	            $encoder = $factory->getEncoder($user);
-	            $password = $encoder->encodePassword($form->get('password')->getData(), $user->getSalt());
-	            $user->setPassword($password);
-
-	        	$em = $this->getDoctrine()->getManager();
-				$em->flush();
-
-
-				return $this->redirect($this->generateUrl('bibliotheque_admin_modif_user'));
+			return $this->redirect($this->generateUrl('bibliotheque_admin_modif_user'));
 
 	    }
 
-
-				return $this->render('UserBundle:admin:admin_modif_user.html.twig', array('form' => $form->createView(), 'user' => $user));
-
-		}
-
-
-		return $this->render('UserBundle:admin:admin_modif_user.html.twig', array('form' => $search->createView(), 'user' => $user));
+		return $this->render('UserBundle:admin:admin_modif_user_form.html.twig', array('form' => $form->createView()));
 	}
-
 
 
 	public function bibliothecaireAction()
