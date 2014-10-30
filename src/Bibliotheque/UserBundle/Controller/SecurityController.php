@@ -93,6 +93,8 @@ class SecurityController extends Controller
 				$em->persist($user);
 				$em->flush();
 
+				return $this->redirect($this->generateUrl('bibliotheque_admin_ajout_user'));
+
 	    }
 
 
@@ -102,17 +104,18 @@ class SecurityController extends Controller
 	public function admin_modif_userAction(request $request)
 	{
 
+		if(!isset($user)){
 
-		$search = $this->createFormBuilder()
-							->add('recherche', 'search')
-							->getForm();
+			$search = $this->createFormBuilder()
+								->add('recherche', 'search')
+								->getForm();
+			
+			$nom = $request->get('form')['recherche'];
+			
+			$repository = $this->getDoctrine()->getManager()->getRepository('UserBundle:User');
+			$user = $repository->findByUsername($nom);
 		
-		$nom = $request->get('form')['recherche'];
-		
-		$repository = $this->getDoctrine()->getManager()->getRepository('UserBundle:User');
-		$user = $repository->findByUsername($nom);
-		
-
+		}
 
 
 		if($user != NULL){
@@ -136,13 +139,38 @@ class SecurityController extends Controller
 							            'ROLE_BIBLIOTHECAIRE'  => 'Bibliothecaire',
 							            'ROLE_ETUDIANT'   => 'Etudiant',
 							            'ROLE_PROFESSEUR'  => 'Professeur',
-					        				),'attr' => array('value' => $user[0]->getRoles()[0])))
+					        				), 'data' => $user[0]->getRoles()[0]))
 					->add('save', 'submit', array('label' => 'Enregistrer', 'attr' => array('class' => 'submit spacer')))
 					->getForm();
+
+
+			// $form->handleRequest($request);
+
+
+
+	    if ($form->isValid()) {
+
+	    		var_dump('ca marche');
+	    		die();
+
+	    		$factory = $this->get('security.encoder_factory');
+	            $encoder = $factory->getEncoder($user);
+	            $password = $encoder->encodePassword($form->get('password')->getData(), $user->getSalt());
+	            $user->setPassword($password);
+
+	        	$em = $this->getDoctrine()->getManager();
+				$em->flush();
+
+
+				return $this->redirect($this->generateUrl('bibliotheque_admin_modif_user'));
+
+	    }
+
 
 				return $this->render('UserBundle:admin:admin_modif_user.html.twig', array('form' => $form->createView(), 'user' => $user));
 
 		}
+
 
 		return $this->render('UserBundle:admin:admin_modif_user.html.twig', array('form' => $search->createView(), 'user' => $user));
 	}
