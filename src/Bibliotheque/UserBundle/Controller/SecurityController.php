@@ -7,7 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContext;
 use Bibliotheque\UserBundle\Entity\User;
-
+use Symfony\Component\HttpFoundation\Response;
 
 class SecurityController extends Controller
 {
@@ -47,8 +47,9 @@ class SecurityController extends Controller
 		return $this->render('UserBundle:Admin:admin_prets.html.twig');
 	}
 
-	public function admin_ajout_userAction(request $request)
+	public function admin_ajout_userAction(Request $request)
 	{
+
 		$user = new User();
 
 		$form = $this->createFormBuilder($user)
@@ -64,20 +65,13 @@ class SecurityController extends Controller
 					->add('password', 'password', array('required' => true))
 					->add("roles", 'choice', array(
         				'expanded' => false,
-        				'multiple' => false,
+        				'multiple' => true,
         				'choices'  => array(
 							            'ROLE_ADMIN' => 'Administrateur',
 							            'ROLE_BIBLIOTHECAIRE'  => 'Bibliothecaire',
 							            'ROLE_ETUDIANT'   => 'Etudiant',
-							            'ROLE_PROFESSEUR'  => 'Professeur',
-					        ),
-					    ))
-					->add('save', 'submit', array(
-										'label' => 'Enregistrer',
-								  'attr' => array(
-								  		'class' => 'submit spacer'
-							)
-						))
+							            'ROLE_PROFESSEUR'  => 'Professeur')))
+					->add('save', 'submit', array('label' => 'Enregistrer', 'attr' => array('class' => 'submit spacer')))
 					->getForm();
 
 		$form->handleRequest($request);
@@ -88,10 +82,13 @@ class SecurityController extends Controller
 	            $encoder = $factory->getEncoder($user);
 	            $password = $encoder->encodePassword($form->get('password')->getData(), $user->getSalt());
 	            $user->setPassword($password);
+	            $role = $form->get('roles')->getData();
+	            $user->setRoles($role[0]);
 
 	        	$em = $this->getDoctrine()->getManager();
 				$em->persist($user);
 				$em->flush();
+
 
 				return $this->redirect($this->generateUrl('bibliotheque_admin_ajout_user'));
 
@@ -101,74 +98,82 @@ class SecurityController extends Controller
 		return $this->render('UserBundle:Admin:admin_profils.html.twig', array('form' => $form->createView()));
 	}
 
-	public function admin_modif_userAction(request $request)
+	public function admin_modif_userAction(Request $request)
 	{
 
 			$search = $this->createFormBuilder()
-								->setAction($this->generateUrl('bibliotheque_admin_modif_user_form'))
-								->add('recherche', 'search')
-								->getForm();	
-			
+								->add('recherche', 'search', array('required' => true))
+								->add('save', 'submit', array('label' => 'Rechercher','attr' => array('class' => 'submit spacer')))
+								->getForm();
+
 			$nom = $request->get('form')['recherche'];
 
+			$search->handleRequest($request);	
+			
+			if($search->isValid()){
 
-			$search->handleRequest($request);
+					return $this->redirect($this->generateUrl('bibliotheque_admin_modif_user_form', array('nom' => $nom)));
+				
+			}
 
 
 		return $this->render('UserBundle:admin:admin_modif_user.html.twig', array('search' => $search->createView()));
 	}
 
-	public function admin_modif_user_formAction(request $request)
+	public function admin_modif_user_formAction($nom,  Request $request)
 	{
-		
-		$repository = $this->getDoctrine()->getManager()->getRepository('UserBundle:User');
-		$user = $repository->findByUsername($_POST['form']['recherche']);
-		// var_dump($user[0]->getRoles()[0]);
-		// die();
 
-		$form = $this->createFormBuilder($user)
-				->add('nom', 'text', array('required' => true, 'attr' => array('value' => $user[0]->getNom())))
-				->add('prenom', 'text', array('required' => true, 'attr' => array('value' => $user[0]->getPrenom())))
-				->add('adresse1', 'text', array('required' => true, 'attr' => array('value' => $user[0]->getAdresse1())))
-				->add('adresse2', 'text', array('required' => false, 'attr' => array('value' => $user[0]->getAdresse2())))
-				->add('codepostal', 'number', array('required' => true, 'attr' => array('value' => $user[0]->getCodepostal())))
-				->add('ville', 'text', array('required' => true, 'attr' => array('value' => $user[0]->getVille())))
-				->add('telephone', 'number', array('required' => true, 'attr' => array('value' => $user[0]->getTelephone())))
-				->add('email', 'text', array('required' => true, 'attr' => array('value' => $user[0]->getEmail())))
-				->add('username', 'text', array('required' => true, 'attr' => array('value' => $user[0]->getUsername())))
-				->add('password', 'password', array('required' => true))
-				->add("roles", 'choice', array(
-    				'expanded' => false,
-    				'multiple' => false,
-    				'choices'  => array(
-						            'ROLE_ADMIN' => 'Administrateur',
-						            'ROLE_BIBLIOTHECAIRE'  => 'Bibliothecaire',
-						            'ROLE_ETUDIANT'   => 'Etudiant',
-						            'ROLE_PROFESSEUR'  => 'Professeur',
-				        				), 'data' => $user[0]->getRoles()[0]))
-				->add('save', 'submit', array('label' => 'Enregistrer les modifications', 'attr' => array('class' => 'submit spacer')))
-				->getForm();
+	    $em = $this->getDoctrine()->getManager();
+	    $user = $em->getRepository('UserBundle:User')->findByUsername($nom)[0];
+	   	
 
-		    		
-			 // $form->handleRequest($request);
+	  
+	    $form = $this->createFormBuilder($user)
+					    			->add('nom', 'text', array('required' => true))
+									->add('prenom', 'text', array('required' => true))
+									->add('adresse1', 'text', array('required' => true))
+									->add('adresse2', 'text', array('required' => false))
+									->add('codepostal', 'number', array('required' => true))
+									->add('ville', 'text', array('required' => true))
+									->add('telephone', 'number', array('required' => true))
+									->add('email', 'text', array('required' => true))
+									->add('username', 'text', array('required' => true))
+									// ->add('password', 'password', array('required' => true))
+									->add("roles", 'choice', array(
+				        				'expanded' => true,
+				        				'multiple' => true,
+				        				'choices'  => array(
+											            'ROLE_ADMIN' => 'Administrateur',
+											            'ROLE_BIBLIOTHECAIRE'  => 'Bibliothecaire',
+											            'ROLE_ETUDIANT'   => 'Etudiant',
+											            'ROLE_PROFESSEUR'  => 'Professeur',
+									        ),
+									    ))
+									->add('save', 'submit', array(
+														'label' => 'Enregistrer',
+												  'attr' => array(
+												  		'class' => 'submit spacer'
+											)
+										))
+									->getForm();
 
-	    if ($form->isSubmitted()) {
+	    $form->handleRequest($request);
+	 
+	    if ($form->isValid()) {
 
-
-    		$factory = $this->get('security.encoder_factory');
-            $encoder = $factory->getEncoder($user);
-            $password = $encoder->encodePassword($form->get('password')->getData(), $user->getSalt());
-            $user->setPassword($password);
+        	$role = $form->get('roles')->getData();
+	        $user->setRoles($role[0]);
 
         	$em = $this->getDoctrine()->getManager();
 			$em->flush();
 
 
 			return $this->redirect($this->generateUrl('bibliotheque_admin_modif_user'));
-
 	    }
+	    
+	    $build['form'] = $form->createView();
 
-		return $this->render('UserBundle:admin:admin_modif_user_form.html.twig', array('form' => $form->createView()));
+	    return $this->render('UserBundle:admin:admin_modif_user_form.html.twig', $build);
 	}
 
 
