@@ -28,13 +28,16 @@
                             </ul>
                             <div class="connexion">
                                     {% if app.user %} 
-                                    <a href="{{ path( 'logout' ) }}">Deconnexion</a>
+                                        <a href="{{ path( 'logout' ) }}">Deconnexion</a>
                                     {% else  %}
-                                    <a href="{{ path( 'login' ) }}">Connexion</a>
+                                        <a href="{{ path( 'login' ) }}">Connexion</a>
                                     {% endif %}
                                     <hr>
                                     {% if is_granted('ROLE_ADMIN') %}
-                                    <a href="{{ path( 'admin' ) }}">Administration</a>
+                                        <a href="{{ path( 'admin' ) }}">Administration</a>
+                                    {% endif %}
+                                    {% if is_granted('ROLE_BIBLIOTHECAIRE') %}
+                                        <a href="{{ path('bibliotheque_bibliothecaire') }}">Administration</a>
                                     {% endif %}
                             </div>
                         </nav>

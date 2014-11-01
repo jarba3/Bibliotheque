@@ -18,14 +18,22 @@
                     <nav>
                     <img class="logo" src="{{asset('bundles/Bibliotheque/images/logo.png')}}" alt="Impossible à charger">
                         <ul class="menu">
-                            <li><a href="{{ path( 'bibliotheque_admin_livres' ) }}">Gestion des livres</a></li>
+                            <li><a href="{{ path( 'admin' ) }}">Accueil administration</a></li>
+                            <li>
+                                Gestion des livres
+                                <ul>
+                                    <li><a href="{{ path( 'bibliotheque_admin_livres' ) }}">Ajout livre</a></li>
+                                    <li><a href="{{ path( 'bibliotheque_admin_modif_user' ) }}">Modification livre</a></li>
+                                    <li><a href="{{ path( 'bibliotheque_admin_suppr_user' ) }}">Suppression livre</a></li>
+                                </ul>
+                            </li>
                             <li><a href="{{ path( 'bibliotheque_admin_prets' ) }}">Gestion des prêts</a></li>
                             <li>
                                 Gestion des Profils
                                 <ul>
                                     <li><a href="{{ path( 'bibliotheque_admin_ajout_user' ) }}">Ajout utilisateur</a></li>
                                     <li><a href="{{ path( 'bibliotheque_admin_modif_user' ) }}">Modification utilisateur</a></li>
-                                    <li><a href="">Suppression utilisateur</a></li>
+                                    <li><a href="{{ path( 'bibliotheque_admin_suppr_user' ) }}">Suppression utilisateur</a></li>
                                 </ul>
                             </li>
                         </ul>
