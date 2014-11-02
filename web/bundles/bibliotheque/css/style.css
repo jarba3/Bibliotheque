@@ -105,44 +105,6 @@ min-height:0;
 	padding-top: 10px;
 	padding-bottom: 10px;
 }
-
-/*.menu, .menu ul{
-	list-style: none; 
-	line-height: 25px; 
-	text-align: center;
-	text-align: left;
-	margin-left: 50px;
-}
-.menu li a{
-	text-decoration: none;
-	color: #000;
-	font-size: 25px;
-}
-.menu a:hover{
-	color: #799312;
-}
-.menu li:hover{
-	color: #799312;
-	cursor: pointer;
-}
-.menu ul li{
-	border-right: 1px solid #ccc;
-	display: inline-block;
-	padding-left: 30px;
-	padding-right: 30px;
-	color: #000;
-	font-size: 25px;
-}
-.sousMenu{
-	display: block;
-}
-.connexion{
-	float: right;
-}*/
-
-/*.logo{
-	text-align: center
-}*/
 .form{
 	margin-top: 150px;
 	width: 300px;
@@ -223,4 +185,33 @@ min-height:0;
 	padding-top: 15px;
 	padding-bottom: 20px;
 	padding-left: 20px;
+}
+
+/*Page livres*/
+
+.listLivres{
+	width: 120px;
+	border: 1px solid #000;
+	border-radius: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+	background-color: #ECEAE5;
+}
+.listLivres ul{
+	list-style: none;
+	display: block;
+	margin-left: -40px;
+}
+.listLivres li{
+	margin-top: 10px;
+}
+.listLivres ul a{
+	text-decoration: none;
+	color: #000;
+}
+.listLivres ul li a:hover{
+	color: red;
+}
+.searchInput{
+	width: 350px;
 }

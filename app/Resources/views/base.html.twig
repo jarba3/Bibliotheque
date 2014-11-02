@@ -23,8 +23,12 @@
                             <ul class="menu">
                                 <li><a href="{{ path( 'bibliotheque_index' ) }}">Accueil</a></li>
                                 <li><a href="{{ path( 'bibliotheque_livres' ) }}">Livres</a></li>
-                                <li><a href="{{ path( 'bibliotheque_panier' ) }}">Panier</a></li>
-                                <li><a href="{{ path( 'bibliotheque_profil' ) }}">Profil</a></li>
+                                <li>
+                                {{ form_start(search) }}
+                                    {{ form_widget(search.recherche, {'attr': {'class': 'searchInput'}}) }}
+                                    {{ form_widget(search.save) }}
+                                {{ form_end(search) }}
+                                </li>
                             </ul>
                             <div class="connexion">
                                     {% if app.user %} 
@@ -35,10 +39,17 @@
                                     <hr>
                                     {% if is_granted('ROLE_ADMIN') %}
                                         <a href="{{ path( 'admin' ) }}">Administration</a>
+                                    <hr>
                                     {% endif %}
                                     {% if is_granted('ROLE_BIBLIOTHECAIRE') %}
                                         <a href="{{ path('bibliotheque_bibliothecaire') }}">Administration</a>
+                                    <hr>
                                     {% endif %}
+                                    {% if is_granted('ROLE_ETUDIANT', 'ROLE_PROFESSEUR') %}
+                                        <a href="{{ path( 'bibliotheque_profil' ) }}">Profil</a>
+                                    <hr>
+                                    {% endif %}
+                                    <a href="{{ path( 'bibliotheque_panier' ) }}">Panier</a>
                             </div>
                         </nav>
                         <hr>

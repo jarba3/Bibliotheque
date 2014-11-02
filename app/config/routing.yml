@@ -24,10 +24,6 @@ admin:
   pattern:    /admin
   defaults:   { _controller: UserBundle:Admin:admin }
 
-bibliotheque_admin_livres:
-  pattern:    /admin/livres
-  defaults:   { _controller: UserBundle:Admin:admin_livres }
-
 bibliotheque_admin_prets:
   pattern:    /admin/prets
   defaults:   { _controller: UserBundle:Admin:admin_prets }
@@ -52,6 +48,9 @@ bibliotheque_admin_suppr_user_form:
   path:       /admin/suppr_utilisateur_form/{nom}
   defaults:   { _controller: UserBundle:Admin:admin_suppr_user_form }
 
+bibliotheque_admin_ajout_livre:
+  pattern:    /admin/ajout_livre
+  defaults:   { _controller: UserBundle:Admin:admin_ajout_livre }
 
 
 

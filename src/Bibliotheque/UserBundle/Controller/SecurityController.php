@@ -13,6 +13,10 @@ class SecurityController extends Controller
 {
 	public function loginAction(Request $request)
 	{
+		$search = $this->createFormBuilder()
+                                ->add('recherche', 'search', array('label' => '', 'attr' => array('class' => 'livreSearch')))
+                                ->add('save', 'submit', array('label' => 'Rechercher','attr' => array('class' => 'livreSearch')))
+                                ->getForm();
 
 		if ($this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
 			return $this->redirect($this->generateUrl('bibliotheque_index'));
@@ -29,6 +33,7 @@ class SecurityController extends Controller
 
 			'last_username' => $session->get(SecurityContext::LAST_USERNAME),
 			'error'         => $error,
+			'search' => $search->createView(),
 			));
 	}
 }

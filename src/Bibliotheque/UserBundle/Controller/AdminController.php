@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContext;
 use Bibliotheque\UserBundle\Entity\User;
+use Bibliotheque\UserBundle\Entity\Livres;
 use Symfony\Component\HttpFoundation\Response;
 
 class AdminController extends Controller
@@ -16,9 +17,19 @@ class AdminController extends Controller
 		return $this->render('UserBundle:Admin:admin.html.twig');
 	}
 
-	public function admin_livresAction()
+	public function admin_ajout_livreAction()
 	{
-		return $this->render('UserBundle:Admin:admin_livres.html.twig');
+		$livre = new Livres();
+
+		$form = $this->createFormBuilder($livre)
+					->add('titre', 'text')
+					->add('isbn', 'number')
+					->add('description', 'textarea')
+					->add('dateparution', 'date')
+					->getForm();
+
+
+		return $this->render('UserBundle:Admin:admin_ajout_livre.html.twig', array('form' => $form->createView()));
 	}
 
 	public function admin_pretsAction()
