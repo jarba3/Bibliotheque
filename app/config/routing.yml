@@ -16,6 +16,9 @@ login_check:
 logout:
   pattern:    /logout
 
+bibliotheque_profil:
+    path:     /profil
+    defaults: { _controller: UserBundle:Security:profil }
 
 
 
