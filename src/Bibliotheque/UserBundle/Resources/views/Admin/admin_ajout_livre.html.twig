@@ -2,7 +2,7 @@
 {% block body %}
 <h1>Ajouter un livre</h1>
 <br>
-{{ form_start(form) }}
+{{ form_start(form, {'enctype': 'multipart/form-data'}) }}
 	<fieldset class="livreForm" >
 		{{ form_label(form.titre, 'Titre :', {'label_attr': {'class': 'label spacerUser'}}) }}
 		{{ form_widget(form.titre) }}
@@ -14,6 +14,8 @@
 		{{ form_widget(form.dateparution) }}
 		{{ form_label(form.theme, 'Thème :', {'label_attr': {'class': 'label spacerUser'}}) }}
 		{{ form_widget(form.theme) }}
+		{{ form_label(form.image, 'Couverture :') }}
+		{{ form_widget(form.image) }}
 	</fieldset>
 {{ form_end(form) }}
 

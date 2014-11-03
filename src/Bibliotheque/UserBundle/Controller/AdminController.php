@@ -9,6 +9,7 @@ use Symfony\Component\Security\Core\SecurityContext;
 use Bibliotheque\UserBundle\Entity\User;
 use Bibliotheque\UserBundle\Entity\Livres;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class AdminController extends Controller
 {
@@ -17,7 +18,7 @@ class AdminController extends Controller
 		return $this->render('UserBundle:Admin:admin.html.twig');
 	}
 
-	public function admin_ajout_livreAction()
+	public function admin_ajout_livreAction(request $request)
 	{
 		$livre = new Livres();
 
@@ -60,7 +61,28 @@ class AdminController extends Controller
 										'sports_passions' => 'Sports et passions',
 										'tourisme_voyages' => 'Tourisme et Voyages',
 							)), array('required' => true))
+					->add('save', 'submit', array('label' => 'Enregistrer', 'attr' => array('class' => 'submit spacer')))
+					->add('image', 'file', array('required' => true))
 					->getForm();
+
+		$form->handleRequest($request);
+
+		if($form->isValid()){
+			
+			$dir = 'bundles/Bibliotheque/images';
+			$file = $form['image']->getData();
+
+			$extension = $file->guessExtension();
+				if (!$extension) {
+				    $extension = 'jpeg';
+				}
+			$nomImage = rand(1, 99999).'.'.$extension;
+
+			$file->move($dir, $nomImage);
+			
+			
+
+		}
 
 
 		return $this->render('UserBundle:Admin:admin_ajout_livre.html.twig', array('form' => $form->createView()));

@@ -3,6 +3,7 @@
 namespace Bibliotheque\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Livres
@@ -31,7 +32,7 @@ class Livres
     /**
      * @var integer
      *
-     * @ORM\Column(name="isbn", type="integer")
+     * @ORM\Column(name="isbn", type="bigint")
      */
     private $isbn;
 
@@ -59,24 +60,23 @@ class Livres
     /**
      * @var integer
      *
-     * @ORM\Column(name="id_auteur", type="integer")
-     */
-    private $idAuteur;
-
-    /**
-     * @var integer
-     *
      * @ORM\Column(name="id_editeur", type="integer")
      */
     private $idEditeur;
 
     /**
-     * @var string
+     * @var integer
      *
-     * @ORM\OneToOne(targetEntity="Bibliotheque\UserBundle\Entity\Images", cascade={"persist"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(name="id_auteur", type="integer")
      */
-    private $idEditeur;
+    private $idAuteur;
+
+    /**
+     * @var string
+     * @Assert\File( maxSize = "2048k", mimeTypesMessage = "Please upload a valid Image")
+     * @ORM\Column(name="image", type="string", length=255)
+     */
+    private $image;
 
 
     /**
@@ -205,6 +205,29 @@ class Livres
     }
 
     /**
+     * Set idEditeur
+     *
+     * @param integer $idEditeur
+     * @return Livres
+     */
+    public function setIdEditeur($idEditeur)
+    {
+        $this->idEditeur = $idEditeur;
+
+        return $this;
+    }
+
+    /**
+     * Get idEditeur
+     *
+     * @return integer 
+     */
+    public function getIdEditeur()
+    {
+        return $this->idEditeur;
+    }
+
+    /**
      * Set idAuteur
      *
      * @param integer $idAuteur
@@ -228,33 +251,23 @@ class Livres
     }
 
     /**
-     * Set idEditeur
+     * Set image
      *
-     * @param integer $idEditeur
+     * @param string $image
      * @return Livres
      */
-    public function setIdEditeur($idEditeur)
+    public function setImage($image)
     {
-        $this->idEditeur = $idEditeur;
+        $this->image = $image;
 
         return $this;
     }
 
     /**
-     * Get idEditeur
+     * Get image
      *
-     * @return integer 
+     * @return string 
      */
-    public function getIdEditeur()
-    {
-        return $this->idEditeur;
-    }
-
-     public function setImage(Image $image = null)
-    {
-        $this->image = $image;
-    }
-    
     public function getImage()
     {
         return $this->image;
