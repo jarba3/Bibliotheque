@@ -2,6 +2,12 @@
 {% block body %}
 <h1>Gestion des profils utilisateurs</h1>
 
+{% for flashMessage in app.session.flashbag.get('user_add_success') %}
+        <div class="add_success">
+        {{ flashMessage }}
+        </br>
+        </div>
+{% endfor %}
 
 {{ form_start(form) }}
 <fieldset class='userField'>
@@ -46,6 +52,6 @@
 
 {% endblock %}
 
-{% block sidebar %}
+{#% block sidebar %}
     
-{% endblock %}
+{% endblock %#}

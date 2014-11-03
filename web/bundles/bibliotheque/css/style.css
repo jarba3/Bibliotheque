@@ -108,6 +108,7 @@ min-height:0;
 	margin-left: auto;
 	padding-top: 10px;
 	padding-bottom: 10px;
+	border-radius: 10px;
 }
 .form{
 	margin-top: 150px;
@@ -127,6 +128,7 @@ min-height:0;
 	margin-left: auto;
 	margin-right: auto;
 	width: 320px;
+	border-radius: 10px;
 }
 .fieldLogin label{
 	display: inline-block;
@@ -142,10 +144,10 @@ min-height:0;
 }
 
 .main-col {
-	width: 801px;
+	width: 1152px;
 	display: inline-block;
 	float: left;
-	border-right: 1px solid #ccc;
+	/*border-right: 1px solid #ccc;*/
 	padding: 10px;
 	margin-bottom: 20px;
 	margin-top: 25px;
@@ -189,6 +191,17 @@ min-height:0;
 	padding-top: 15px;
 	padding-bottom: 20px;
 	padding-left: 20px;
+}
+
+
+.add_success{
+	width: 750px;
+	border-radius: 10px;
+	background-color: #5cb85c;
+	border-color: #4cae4c;
+	margin-right: auto;
+	margin-left: auto;
+	text-align: center;
 }
 
 /*Page livres*/
