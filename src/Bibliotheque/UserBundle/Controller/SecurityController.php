@@ -45,4 +45,6 @@ class SecurityController extends Controller
                                 
         return $this->render('UserBundle:Security:profil.html.twig', array('search' => $search->createView()));
     }
+
+    
 }
