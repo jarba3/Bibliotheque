@@ -26,6 +26,40 @@ class AdminController extends Controller
 					->add('isbn', 'number')
 					->add('description', 'textarea')
 					->add('dateparution', 'date')
+					->add('theme', 'choice', array(
+						'choices' => array(
+										'actu_politique_societe' => 'Actu, Politique et Société',
+										'adolescents' => 'Adolescents',
+										'art_musique_cinema' => 'Art, Musique et Cinéma',
+										'bandes_dessinees' => 'Bandes dessinées',
+										'beaux_livres' => 'Beaux livres',
+										'cuisine_vins' => 'Cuisine et Vins',
+										'dictionnaires_langues_encyclopedies' => 'Dictionnaires, langues et encyclopédies',
+										'droit' => 'Droit',
+										'entreprise_bourse' => 'Entreprise et Bourse',
+										'erotisme' => 'Erotisme',
+										'esotérisme_paranormal' => 'Esotérisme et Paranormal',
+										'etudes_superieures' => 'Etudes supérieures',
+										'famille_sante_bien-etre' => 'Famille, Santé et Bien-être',
+										'fantasy_terreur' => 'Fantasy et Terreur',
+										'histoire' => 'Histoire',
+										'humour' => 'Humour',
+										'informatique_internet' => 'Informatique et Internet',
+										'litterature' => 'Littérature',
+										'litterature_sentimentale' => 'Littérature sentimentale',
+										'livres_enfants' => 'Livres pour enfants',
+										'loisirs_creatifs_decoration_bricolage' => 'Loisirs créatifs, décoration et bricolage',
+										'manga' => 'Manga',
+										'nature_animaux' => 'Nature et animaux',
+										'policier_suspense' => 'Policier et Suspense',
+										'religions_spiritualites' => 'Religions et Spiritualités',
+										'science-fiction' => 'Science-Fiction',
+										'sciences_humaines' => 'Sciences humaines',
+										'sciences_techniques_Medecine' => 'Sciences, Techniques et Médecine',
+										'scolaire_parascolaire' => 'Scolaire et Parascolaire',
+										'sports_passions' => 'Sports et passions',
+										'tourisme_voyages' => 'Tourisme et Voyages',
+							)))
 					->getForm();
 
 
@@ -128,7 +162,6 @@ class AdminController extends Controller
 									->add('telephone', 'number', array('required' => true))
 									->add('email', 'text', array('required' => true))
 									->add('username', 'text', array('required' => true))
-									// ->add('password', 'password', array('required' => true))
 									->add("roles", 'choice', array(
 				        				'expanded' => false,
 				        				'multiple' => true,
