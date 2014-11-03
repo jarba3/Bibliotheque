@@ -22,10 +22,10 @@ class AdminController extends Controller
 		$livre = new Livres();
 
 		$form = $this->createFormBuilder($livre)
-					->add('titre', 'text')
-					->add('isbn', 'number')
-					->add('description', 'textarea')
-					->add('dateparution', 'date')
+					->add('titre', 'text', array('required' => true))
+					->add('isbn', 'number', array('required' => true))
+					->add('description', 'textarea', array('required' => true))
+					->add('dateparution', 'date', array('required' => true))
 					->add('theme', 'choice', array(
 						'choices' => array(
 										'actu_politique_societe' => 'Actu, Politique et Société',
@@ -59,7 +59,7 @@ class AdminController extends Controller
 										'scolaire_parascolaire' => 'Scolaire et Parascolaire',
 										'sports_passions' => 'Sports et passions',
 										'tourisme_voyages' => 'Tourisme et Voyages',
-							)))
+							)), array('required' => true))
 					->getForm();
 
 

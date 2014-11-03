@@ -70,6 +70,14 @@ class Livres
      */
     private $idEditeur;
 
+    /**
+     * @var string
+     *
+     * @ORM\OneToOne(targetEntity="Bibliotheque\UserBundle\Entity\Images", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $idEditeur;
+
 
     /**
      * Get id
@@ -240,5 +248,15 @@ class Livres
     public function getIdEditeur()
     {
         return $this->idEditeur;
+    }
+
+     public function setImage(Image $image = null)
+    {
+        $this->image = $image;
+    }
+    
+    public function getImage()
+    {
+        return $this->image;
     }
 }

@@ -38,4 +38,4 @@ security:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/bibliothecaire, roles: [ ROLE_BIBLIOTHECAIRE, ROLE_ADMIN ] }
-        - { path: ^/utilisateur, roles: [ ROLE_PROFESSEUR, ROLE_ETUDIANT ] }
+        - { path: ^/profil, roles: [ ROLE_PROFESSEUR, ROLE_ETUDIANT, ROLE_BIBLIOTHECAIRE, ROLE_ADMIN ] }

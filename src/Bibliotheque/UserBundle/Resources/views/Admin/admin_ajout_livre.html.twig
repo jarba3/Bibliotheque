@@ -3,9 +3,17 @@
 <h1>Ajouter un livre</h1>
 <br>
 {{ form_start(form) }}
-	<fieldset>
-		{{ form_label(form.titre, 'Titre du livre :') }}
+	<fieldset class="livreForm" >
+		{{ form_label(form.titre, 'Titre :', {'label_attr': {'class': 'label spacerUser'}}) }}
 		{{ form_widget(form.titre) }}
+		{{ form_label(form.isbn, 'Isbn :', {'label_attr': {'class': 'label spacerUser'}}) }}
+		{{ form_widget(form.isbn) }}
+		{{ form_label(form.description, 'Description :', {'label_attr': {'class': 'label spacerUser'}}) }}
+		{{ form_widget(form.description) }}
+		{{ form_label(form.dateparution, 'Date de parution :', {'label_attr': {'class': 'label spacerUser'}}) }}
+		{{ form_widget(form.dateparution) }}
+		{{ form_label(form.theme, 'Thème :', {'label_attr': {'class': 'label spacerUser'}}) }}
+		{{ form_widget(form.theme) }}
 	</fieldset>
 {{ form_end(form) }}
 
