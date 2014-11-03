@@ -22,9 +22,30 @@
                             <li>
                                 Gestion des livres
                                 <ul>
-                                    <li><a href="{{ path( 'bibliotheque_admin_ajout_livre' ) }}">Ajout livre</a></li>
-                                    <li><a href="">Modification livre</a></li>
-                                    <li><a href="">Suppression livre</a></li>
+                                    <li>
+                                        <a href="">Livres</a>
+                                        <ul>
+                                            <li><a href="{{ path( 'bibliotheque_admin_ajout_livre' ) }}">Ajouter un livre</a></li>
+                                            <li><a href="">Modifier un livre</a></li>
+                                            <li><a href="">Supprimer un livre</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="">Editeur</a>
+                                        <ul>
+                                            <li><a href="">Ajouter un éditeur</a></li>
+                                            <li><a href="">Modifier un éditeur</a></li>
+                                            <li><a href="">Supprimer un éditeur</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="">Auteur</a>
+                                        <ul>
+                                            <li><a href="">Ajouter un auteur</a></li>
+                                            <li><a href="">Modifier un auteur</a></li>
+                                            <li><a href="">Supprimer un auteur</a></li>
+                                        </ul>
+                                    </li>
                                 </ul>
                             </li>
                             <li><a href="{{ path( 'bibliotheque_admin_prets' ) }}">Gestion des prêts</a></li>

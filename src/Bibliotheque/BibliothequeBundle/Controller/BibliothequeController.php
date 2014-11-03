@@ -38,13 +38,5 @@ class BibliothequeController extends Controller
         return $this->render('BibliothequeBundle:Bibliotheque:panier.html.twig', array('search' => $search->createView()));
     }
 
-    public function profilAction()
-    {
-        $search = $this->createFormBuilder()
-                                ->add('recherche', 'search', array('label' => '', 'attr' => array('class' => 'livreSearch')))
-                                ->add('save', 'submit', array('label' => 'Rechercher','attr' => array('class' => 'livreSearch')))
-                                ->getForm();
-                                
-        return $this->render('BibliothequeBundle:Bibliotheque:profil.html.twig', array('search' => $search->createView()));
-    }
+    
 }

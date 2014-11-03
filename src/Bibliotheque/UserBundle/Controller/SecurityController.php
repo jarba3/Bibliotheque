@@ -36,4 +36,13 @@ class SecurityController extends Controller
 			'search' => $search->createView(),
 			));
 	}
+	public function profilAction()
+    {
+        $search = $this->createFormBuilder()
+                                ->add('recherche', 'search', array('label' => '', 'attr' => array('class' => 'livreSearch')))
+                                ->add('save', 'submit', array('label' => 'Rechercher','attr' => array('class' => 'livreSearch')))
+                                ->getForm();
+                                
+        return $this->render('UserBundle:Security:profil.html.twig', array('search' => $search->createView()));
+    }
 }

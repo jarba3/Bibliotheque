@@ -3,7 +3,10 @@
 <h1>Ajouter un livre</h1>
 <br>
 {{ form_start(form) }}
-
+	<fieldset>
+		{{ form_label(form.titre, 'Titre du livre :') }}
+		{{ form_widget(form.titre) }}
+	</fieldset>
 {{ form_end(form) }}
 
 {% endblock %}

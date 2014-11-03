@@ -5,10 +5,10 @@ namespace Bibliotheque\UserBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * livres
+ * Livres
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Bibliotheque\UserBundle\Repository\livresRepository")
+ * @ORM\Entity(repositoryClass="Bibliotheque\UserBundle\Repository\LivresRepository")
  */
 class Livres
 {
@@ -50,11 +50,18 @@ class Livres
     private $dateparution;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="theme", type="string", length=255)
+     */
+    private $theme;
+
+    /**
      * @var integer
      *
-     * @ORM\Column(name="id_theme", type="integer")
+     * @ORM\Column(name="id_auteur", type="integer")
      */
-    private $idTheme;
+    private $idAuteur;
 
     /**
      * @var integer
@@ -78,7 +85,7 @@ class Livres
      * Set titre
      *
      * @param string $titre
-     * @return livres
+     * @return Livres
      */
     public function setTitre($titre)
     {
@@ -101,7 +108,7 @@ class Livres
      * Set isbn
      *
      * @param integer $isbn
-     * @return livres
+     * @return Livres
      */
     public function setIsbn($isbn)
     {
@@ -124,7 +131,7 @@ class Livres
      * Set description
      *
      * @param string $description
-     * @return livres
+     * @return Livres
      */
     public function setDescription($description)
     {
@@ -147,7 +154,7 @@ class Livres
      * Set dateparution
      *
      * @param \DateTime $dateparution
-     * @return livres
+     * @return Livres
      */
     public function setDateparution($dateparution)
     {
@@ -167,33 +174,56 @@ class Livres
     }
 
     /**
-     * Set idTheme
+     * Set theme
      *
-     * @param integer $idTheme
-     * @return livres
+     * @param string $theme
+     * @return Livres
      */
-    public function setIdTheme($idTheme)
+    public function setTheme($theme)
     {
-        $this->idTheme = $idTheme;
+        $this->theme = $theme;
 
         return $this;
     }
 
     /**
-     * Get idTheme
+     * Get theme
+     *
+     * @return string 
+     */
+    public function getTheme()
+    {
+        return $this->theme;
+    }
+
+    /**
+     * Set idAuteur
+     *
+     * @param integer $idAuteur
+     * @return Livres
+     */
+    public function setIdAuteur($idAuteur)
+    {
+        $this->idAuteur = $idAuteur;
+
+        return $this;
+    }
+
+    /**
+     * Get idAuteur
      *
      * @return integer 
      */
-    public function getIdTheme()
+    public function getIdAuteur()
     {
-        return $this->idTheme;
+        return $this->idAuteur;
     }
 
     /**
      * Set idEditeur
      *
      * @param integer $idEditeur
-     * @return livres
+     * @return Livres
      */
     public function setIdEditeur($idEditeur)
     {
