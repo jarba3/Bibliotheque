@@ -202,6 +202,8 @@ min-height:0;
 	margin-right: auto;
 	margin-left: auto;
 	text-align: center;
+	height: 40px;
+	padding: 4px 12px;
 }
 
 /*Page livres*/

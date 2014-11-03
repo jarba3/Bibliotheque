@@ -73,7 +73,7 @@ class AdminController extends Controller
 
 	public function admin_ajout_userAction(Request $request)
 	{
-
+		$session = $this->getRequest()->getSession();
 		$user = new User();
 
 		$form = $this->createFormBuilder($user)
@@ -113,7 +113,7 @@ class AdminController extends Controller
 				$em->persist($user);
 				$em->flush();
 
-				$this->get('session')->getFlashBag()->add('user_add_success', 'Utilisateur créé dans la base de donnée ! L\'utilisateur doit se connecter pour changer son mot de passe.');
+				$session->getFlashBag()->add('user_add_success', 'Utilisateur créé dans la base de donnée ! L\'utilisateur doit se connecter pour changer son mot de passe.');
 
 				return $this->redirect($this->generateUrl('bibliotheque_admin_ajout_user'));
 
@@ -125,7 +125,6 @@ class AdminController extends Controller
 
 	public function admin_modif_userAction(Request $request)
 	{
-			$this->get('session')->getFlashBag()->add('user_modif_success', 'Utilisateur modifié dans la base de donnée !');
 
 			$search = $this->createFormBuilder()
 								->add('recherche', 'search', array('required' => true))
@@ -148,6 +147,7 @@ class AdminController extends Controller
 
 	public function admin_modif_user_formAction($nom,  Request $request)
 	{
+		$session = $this->getRequest()->getSession();
 
 	    $em = $this->getDoctrine()->getManager();
 	    $user = $em->getRepository('UserBundle:User')->findByUsername($nom)[0];
@@ -192,12 +192,17 @@ class AdminController extends Controller
         	$em = $this->getDoctrine()->getManager();
 			$em->flush();
 
+			$session->getFlashBag()->add('user_modif_success', 'Utilisateur mis à jour correctement dans la base de donnée.');
+
 			return $this->redirect($this->generateUrl('bibliotheque_admin_modif_user'));
+
+
 	    }
 	    
 	    $build['form'] = $form->createView();
 
 	    return $this->render('UserBundle:admin:admin_modif_user_form.html.twig', $build);
+
 	}
 
 

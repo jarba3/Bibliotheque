@@ -4,7 +4,14 @@
 {% block body %}
 <h1>Modifier un utilisateur</h1>
 <br>
-
+	{% for flashMessage in app.session.flashbag.get('user_modif_success') %}
+        <div class="add_success">
+        <p>
+        {{ flashMessage }}
+        </p>
+        </div>
+        <br>
+    {% endfor %}
 
 	{{ form_start(search) }}
 		<fieldset class="search">

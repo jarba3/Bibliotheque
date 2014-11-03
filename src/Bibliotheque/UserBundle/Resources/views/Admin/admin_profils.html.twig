@@ -4,13 +4,15 @@
 
 {% for flashMessage in app.session.flashbag.get('user_add_success') %}
         <div class="add_success">
+        <p>
         {{ flashMessage }}
-        </br>
+        </p>
+        <br>
         </div>
 {% endfor %}
 
 {{ form_start(form) }}
-<fieldset class='userField'>
+<fieldset class='userField spacer'>
 
 {{ form_label(form.nom, 'Nom :', {'label_attr': {'class': 'label spacerUser'}}) }}
 {{ form_widget(form.nom) }}
