@@ -6,10 +6,13 @@ namespace Bibliotheque\UserBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContext;
-use Bibliotheque\UserBundle\Entity\User;
-use Bibliotheque\UserBundle\Entity\Livres;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+
+use Bibliotheque\UserBundle\Entity\User;
+use Bibliotheque\UserBundle\Entity\Livres;
+use Bibliotheque\UserBundle\Entity\Auteur;
+use Bibliotheque\UserBundle\Entity\Editeur;
 
 class AdminController extends Controller
 {
@@ -24,7 +27,7 @@ class AdminController extends Controller
 
 		$form = $this->createFormBuilder($livre)
 					->add('titre', 'text', array('required' => true))
-					->add('isbn', 'number', array('required' => true))
+					->add('isbn', 'text', array('required' => true))
 					->add('description', 'textarea', array('required' => true))
 					->add('dateparution', 'date', array('required' => true))
 					->add('theme', 'choice', array(
@@ -79,18 +82,67 @@ class AdminController extends Controller
 			$nomImage = rand(1, 99999).'.'.$extension;
 
 			$file->move($dir, $nomImage);
-			
-			
 
+			$livre->setUrlimage($dir.'/'.$nomImage);
+			$livre->setAltimage($livre->getTitre());
+
+
+			$em = $this->getDoctrine()->getManager();
+			$em->persist($livre);
+			$em->flush();
+
+			return $this->redirect($this->generateUrl('bibliotheque_admin_ajout_livre'));
 		}
 
 
 		return $this->render('UserBundle:Admin:admin_ajout_livre.html.twig', array('form' => $form->createView()));
 	}
-
-	public function admin_pretsAction()
+	
+	public function admin_ajout_auteurAction(request $request)
 	{
-		return $this->render('UserBundle:Admin:admin_prets.html.twig');
+		$auteur = new Auteur;
+
+		$form = $this->createFormBuilder($auteur)
+							->add('nom', 'text', array('required' => true))
+							->add('prenom', 'text', array('required' => true))
+							->add('ajouter', 'submit', array('label' => 'Enregistrer', 'attr' => array('class' => 'submit spacer')))
+							->getForm();
+
+		$form->handleRequest($request);
+
+		if($form->isValid()){
+
+			$em = $this->getDoctrine()->getManager();
+			$em->persist($auteur);
+			$en->flush();
+
+			return $this->redirect($this->generateUrl('bibliotheque_admin_ajout_auteur'));
+		}
+
+		return $this->render('UserBundle:Admin:admin_ajout_auteur.html.twig', array('form' => $form->createView()));
+	}
+
+	public function admin_ajout_editeurAction(request $request)
+	{
+		$editeur = new Editeur;
+
+		$form = $this->createFormBuilder($editeur)
+							->add('nom', 'text', array('required' => true))
+							->add('ajouter', 'submit', array('label' => 'Enregistrer', 'attr' => array('class' => 'submit spacer')))
+							->getForm();
+
+		$form->handleRequest($request);
+
+		if($form->isValid()){
+
+			$em = $this->getDoctrine()->getManager();
+			$em->persist($editeur);
+			$en->flush();
+
+			return $this->redirect($this->generateUrl('bibliotheque_admin_ajout_editeur'));
+		}
+
+		return $this->render('UserBundle:Admin:admin_ajout_editeur.html.twig', array('form' => $form->createView()));
 	}
 
 	public function admin_ajout_userAction(Request $request)
@@ -293,4 +345,9 @@ class AdminController extends Controller
 
 	    return $this->render('UserBundle:Admin:admin_suppr_user_form.html.twig', $build);
 	}
+	public function admin_pretsAction()
+	{
+		return $this->render('UserBundle:Admin:admin_prets.html.twig');
+	}
+
 }

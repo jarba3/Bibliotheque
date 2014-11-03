@@ -4,6 +4,7 @@ namespace Bibliotheque\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints\Isbn;
 
 /**
  * Livres
@@ -30,9 +31,9 @@ class Livres
     private $titre;
 
     /**
-     * @var integer
+     * @var string
      *
-     * @ORM\Column(name="isbn", type="bigint")
+     * @ORM\Column(name="isbn", type="string", length=16)
      */
     private $isbn;
 
@@ -58,11 +59,25 @@ class Livres
     private $theme;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="id_editeur", type="integer")
+     * @var string
+     * @Assert\File( maxSize = "2048k", mimeTypesMessage = "Please upload a valid Image")
+     * @ORM\Column(name="image", type="string", length=255)
      */
-    private $idEditeur;
+    private $image;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="urlimage", type="string", length=255)
+     */
+    private $urlimage;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="altimage", type="string", length=255)
+     */
+    private $altimage;
 
     /**
      * @var integer
@@ -72,11 +87,11 @@ class Livres
     private $idAuteur;
 
     /**
-     * @var string
-     * @Assert\File( maxSize = "2048k", mimeTypesMessage = "Please upload a valid Image")
-     * @ORM\Column(name="image", type="string", length=255)
+     * @var integer
+     *
+     * @ORM\Column(name="id_editeur", type="integer")
      */
-    private $image;
+    private $idEditeur;
 
 
     /**
@@ -115,7 +130,7 @@ class Livres
     /**
      * Set isbn
      *
-     * @param integer $isbn
+     * @param string $isbn
      * @return Livres
      */
     public function setIsbn($isbn)
@@ -128,7 +143,7 @@ class Livres
     /**
      * Get isbn
      *
-     * @return integer 
+     * @return string 
      */
     public function getIsbn()
     {
@@ -205,26 +220,72 @@ class Livres
     }
 
     /**
-     * Set idEditeur
+     * Set image
      *
-     * @param integer $idEditeur
+     * @param string $image
      * @return Livres
      */
-    public function setIdEditeur($idEditeur)
+    public function setImage($image)
     {
-        $this->idEditeur = $idEditeur;
+        $this->image = $image;
 
         return $this;
     }
 
     /**
-     * Get idEditeur
+     * Get image
      *
-     * @return integer 
+     * @return string 
      */
-    public function getIdEditeur()
+    public function getImage()
     {
-        return $this->idEditeur;
+        return $this->image;
+    }
+
+    /**
+     * Set urlimage
+     *
+     * @param string $urlimage
+     * @return Livres
+     */
+    public function setUrlimage($urlimage)
+    {
+        $this->urlimage = $urlimage;
+
+        return $this;
+    }
+
+    /**
+     * Get urlimage
+     *
+     * @return string 
+     */
+    public function getUrlimage()
+    {
+        return $this->urlimage;
+    }
+
+    /**
+     * Set altimage
+     *
+     * @param string $altimage
+     * @return Livres
+     */
+    public function setAltimage($altimage)
+    {
+        $this->altimage = $altimage;
+
+        return $this;
+    }
+
+    /**
+     * Get altimage
+     *
+     * @return string 
+     */
+    public function getAltimage()
+    {
+        return $this->altimage;
     }
 
     /**
@@ -251,25 +312,25 @@ class Livres
     }
 
     /**
-     * Set image
+     * Set idEditeur
      *
-     * @param string $image
+     * @param integer $idEditeur
      * @return Livres
      */
-    public function setImage($image)
+    public function setIdEditeur($idEditeur)
     {
-        $this->image = $image;
+        $this->idEditeur = $idEditeur;
 
         return $this;
     }
 
     /**
-     * Get image
+     * Get idEditeur
      *
-     * @return string 
+     * @return integer 
      */
-    public function getImage()
+    public function getIdEditeur()
     {
-        return $this->image;
+        return $this->idEditeur;
     }
 }

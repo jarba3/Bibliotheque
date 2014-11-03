@@ -28,13 +28,6 @@ class Editeur
      */
     private $nom;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="prenom", type="string", length=255)
-     */
-    private $prenom;
-
 
     /**
      * Get id
@@ -69,26 +62,4 @@ class Editeur
         return $this->nom;
     }
 
-    /**
-     * Set prenom
-     *
-     * @param string $prenom
-     * @return Editeur
-     */
-    public function setPrenom($prenom)
-    {
-        $this->prenom = $prenom;
-
-        return $this;
-    }
-
-    /**
-     * Get prenom
-     *
-     * @return string 
-     */
-    public function getPrenom()
-    {
-        return $this->prenom;
-    }
 }

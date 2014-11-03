@@ -2,7 +2,7 @@
 
 // src/Bibliotheque/UserBundle/EventListener/UserExceptionListener.php
 
-namespace Bibliotheque/UserBundle/EventListener;
+namespace Bibliotheque\UserBundle\EventListener;
 
 use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 use Symfony\Component\HttpFoundation\Response;
