@@ -3,14 +3,9 @@
 {% block body %}
     <h1>Modifier un utilisateur</h1>
 
-    {% for flashMessage in app.session.flashbag.get('user_modif_success') %}
-        <div class="add_success">
-        {{ flashMessage }}
-        </div>
-    {% endfor %}
 
     {{ form_start(form) }}
-		<fieldset class='userField'>
+		<fieldset class='userField spacer'>
 			{{ form_label(form.nom, 'Nom :', {'label_attr': {'class': 'label spacerUser'}}) }}
 			{{ form_widget(form.nom) }}
 			<br>
