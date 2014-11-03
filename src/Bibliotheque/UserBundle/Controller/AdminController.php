@@ -79,6 +79,7 @@ class AdminController extends Controller
 				$em->persist($user);
 				$em->flush();
 
+				$this->get('session')->getFlashBag()->add('user_add_success', 'Utilisateur créé dans la base de donnée ! L\'utilisateur doit se connecter pour changer son mot de passe.');
 
 				return $this->redirect($this->generateUrl('bibliotheque_admin_ajout_user'));
 
@@ -90,6 +91,7 @@ class AdminController extends Controller
 
 	public function admin_modif_userAction(Request $request)
 	{
+			$this->get('session')->getFlashBag()->add('user_modif_success', 'Utilisateur modifié dans la base de donnée !');
 
 			$search = $this->createFormBuilder()
 								->add('recherche', 'search', array('required' => true))
@@ -156,7 +158,6 @@ class AdminController extends Controller
 
         	$em = $this->getDoctrine()->getManager();
 			$em->flush();
-
 
 			return $this->redirect($this->generateUrl('bibliotheque_admin_modif_user'));
 	    }
