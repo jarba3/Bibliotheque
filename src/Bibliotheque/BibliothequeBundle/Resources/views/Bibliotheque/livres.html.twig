@@ -36,8 +36,21 @@
 		<li><a href="">Tourisme et Voyages</a></li>
 	</ul>
 </div>
-{% endblock %}
 
-{% block sidebar %}
-    Try
+
+<table class="listLivre">
+	<tr>
+			{% for livre in livre %}
+		<td>
+				<img src="{{ asset(livre.urlimage) }}" alt="{{ livre.altimage }}" class="">
+				{{ livre.titre }}
+		</td>
+			{% endfor %}
+	</tr>
+</table>
+
+
+
+
+
 {% endblock %}

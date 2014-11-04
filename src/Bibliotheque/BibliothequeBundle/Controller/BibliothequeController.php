@@ -5,6 +5,8 @@ namespace Bibliotheque\BibliothequeBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
+use Bibliotheque\UserBundle\Entity\Livres;
+
 class BibliothequeController extends Controller
 {
     public function indexAction()
@@ -25,7 +27,10 @@ class BibliothequeController extends Controller
                                 ->add('save', 'submit', array('label' => 'Rechercher','attr' => array('class' => 'livreSearch')))
                                 ->getForm();
 
-        return $this->render('BibliothequeBundle:Bibliotheque:livres.html.twig', array('search' => $search->createView()));
+        $repository = $this->getDoctrine()->getManager()->getRepository('UserBundle:Livres');
+        $livre = $repository->findAll();
+
+        return $this->render('BibliothequeBundle:Bibliotheque:livres.html.twig', array('search' => $search->createView(), 'livre' => $livre ));
     }
 
     public function panierAction()

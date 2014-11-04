@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Doctrine\Common\Collections\ArrayCollection;
 
 use Bibliotheque\UserBundle\Entity\User;
 use Bibliotheque\UserBundle\Entity\Livres;
@@ -23,6 +24,7 @@ class AdminController extends Controller
 
 	public function admin_ajout_livreAction(request $request)
 	{
+
 		$livre = new Livres();
 
 		$form = $this->createFormBuilder($livre)
@@ -64,15 +66,33 @@ class AdminController extends Controller
 										'sports_passions' => 'Sports et passions',
 										'tourisme_voyages' => 'Tourisme et Voyages',
 							)), array('required' => true))
+					->add('auteur', 'entity', array(
+							'class' => 'UserBundle:Auteur',
+							'property' => 'nom',
+							'expanded' => false,
+							'multiple' => false,
+							'empty_value' => 'Choisissez un auteur',
+						))
+					->add('editeur', 'entity', array(
+							'class' => 'UserBundle:Editeur',
+							'property' => 'nom',
+							'expanded' => false,
+							'multiple' => false,
+							'empty_value' => 'Choisissez un éditeur'
+						))
 					->add('save', 'submit', array('label' => 'Enregistrer', 'attr' => array('class' => 'submit spacer')))
 					->add('image', 'file', array('required' => true))
 					->getForm();
 
+		
+
 		$form->handleRequest($request);
+
+
 
 		if($form->isValid()){
 			
-			$dir = 'bundles/Bibliotheque/images';
+			$dir = 'bundles/bibliotheque/images';
 			$file = $form['image']->getData();
 
 			$extension = $file->guessExtension();
@@ -104,7 +124,6 @@ class AdminController extends Controller
 
 		$form = $this->createFormBuilder($auteur)
 							->add('nom', 'text', array('required' => true))
-							->add('prenom', 'text', array('required' => true))
 							->add('ajouter', 'submit', array('label' => 'Enregistrer', 'attr' => array('class' => 'submit spacer')))
 							->getForm();
 
@@ -114,7 +133,7 @@ class AdminController extends Controller
 
 			$em = $this->getDoctrine()->getManager();
 			$em->persist($auteur);
-			$en->flush();
+			$em->flush();
 
 			return $this->redirect($this->generateUrl('bibliotheque_admin_ajout_auteur'));
 		}
@@ -137,7 +156,7 @@ class AdminController extends Controller
 
 			$em = $this->getDoctrine()->getManager();
 			$em->persist($editeur);
-			$en->flush();
+			$em->flush();
 
 			return $this->redirect($this->generateUrl('bibliotheque_admin_ajout_editeur'));
 		}

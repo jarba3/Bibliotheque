@@ -4,7 +4,6 @@ namespace Bibliotheque\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Validator\Constraints\Isbn;
 
 /**
  * Livres
@@ -80,20 +79,16 @@ class Livres
     private $altimage;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="id_auteur", type="integer")
+     * @ORM\ManyToOne(targetEntity="Bibliotheque\UserBundle\Entity\Auteur")
      */
-    private $idAuteur;
+    private $auteur;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="id_editeur", type="integer")
+     * @ORM\ManyToOne(targetEntity="Bibliotheque\UserBundle\Entity\Editeur")     
      */
-    private $idEditeur;
+    private $editeur;
 
-
+    
     /**
      * Get id
      *
@@ -289,48 +284,48 @@ class Livres
     }
 
     /**
-     * Set idAuteur
+     * Set auteur
      *
-     * @param integer $idAuteur
+     * @param \Bibliotheque\UserBundle\Entity\Auteur $auteur
      * @return Livres
      */
-    public function setIdAuteur($idAuteur)
+    public function setAuteur(\Bibliotheque\UserBundle\Entity\Auteur $auteur = null)
     {
-        $this->idAuteur = $idAuteur;
+        $this->auteur = $auteur;
 
         return $this;
     }
 
     /**
-     * Get idAuteur
+     * Get auteur
      *
-     * @return integer 
+     * @return \Bibliotheque\UserBundle\Entity\Auteur 
      */
-    public function getIdAuteur()
+    public function getAuteur()
     {
-        return $this->idAuteur;
+        return $this->auteur;
     }
 
     /**
-     * Set idEditeur
+     * Set editeur
      *
-     * @param integer $idEditeur
+     * @param \Bibliotheque\UserBundle\Entity\Editeur $editeur
      * @return Livres
      */
-    public function setIdEditeur($idEditeur)
+    public function setEditeur(\Bibliotheque\UserBundle\Entity\Editeur $editeur = null)
     {
-        $this->idEditeur = $idEditeur;
+        $this->editeur = $editeur;
 
         return $this;
     }
 
     /**
-     * Get idEditeur
+     * Get editeur
      *
-     * @return integer 
+     * @return \Bibliotheque\UserBundle\Entity\Editeur 
      */
-    public function getIdEditeur()
+    public function getEditeur()
     {
-        return $this->idEditeur;
+        return $this->editeur;
     }
 }

@@ -209,7 +209,8 @@ min-height:0;
 /*Page livres*/
 
 .listLivres{
-	width: 120px;
+	display: inline-block;
+	width: 180px;
 	border: 1px solid #000;
 	border-radius: 10px;
 	padding-left: 10px;
@@ -234,6 +235,24 @@ min-height:0;
 .searchInput{
 	width: 350px;
 }
+.listLivre{
+	display: inline-block;
+}
+.listLivre td{
+	border: 1px solid #000;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 /*Page livre admin*/
 .livreForm{
 	width: 420px;
