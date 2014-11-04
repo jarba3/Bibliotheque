@@ -40,12 +40,20 @@
 
 <table class="listLivre">
 	<tr>
-			{% for livre in livre %}
-		<td>
-				<img src="{{ asset(livre.urlimage) }}" alt="{{ livre.altimage }}" class="">
-				{{ livre.titre }}
-		</td>
-			{% endfor %}
+		{% for livre in livre|slice(0, 5) %}
+			<td>
+				<img src="{{ asset(livre.urlimage) }}" alt="{{ livre.altimage }}" class="miniCouv">
+				 <p>{{ livre.titre }}</p> 
+			</td>
+		{% endfor %}
+	</tr>
+	<tr>
+		{% for livre in livre|slice(5, 10) %}
+			<td>
+				<img src="{{ asset(livre.urlimage) }}" alt="{{ livre.altimage }}" class="miniCouv">
+				 <p>{{ livre.titre }}</p> 
+			</td>
+		{% endfor %}
 	</tr>
 </table>
 
