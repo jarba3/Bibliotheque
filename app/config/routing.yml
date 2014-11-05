@@ -16,9 +16,6 @@ login_check:
 logout:
   pattern:    /logout
 
-bibliotheque_profil:
-    path:     /profil
-    defaults: { _controller: UserBundle:Security:profil }
 
 
 
@@ -72,3 +69,16 @@ bibliotheque_admin_ajout_editeur:
 bibliotheque_bibliothecaire:
   pattern:    /bibliothecaire
   defaults:   { _controller: UserBundle:Bibliothecaire:bibliothecaire }
+
+
+
+
+
+
+bibliotheque_profil:
+  path:     /profil
+  defaults: { _controller: UserBundle:Security:profil }
+
+profil_info:
+  path:     /profil_info/{username}
+  defaults: { _controller: UserBundle:Security:profil_info }
