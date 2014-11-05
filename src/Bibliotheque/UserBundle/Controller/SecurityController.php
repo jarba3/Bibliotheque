@@ -8,6 +8,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContext;
 use Bibliotheque\UserBundle\Entity\User;
 use Symfony\Component\HttpFoundation\Response;
+use Bibliotheque\UserBundle\Entity\Enquiry;
+use Bibliotheque\UserBundle\Form\EnquiryType;
 
 class SecurityController extends Controller
 {
@@ -105,5 +107,42 @@ class SecurityController extends Controller
     	return $this->render('UserBundle:Security:profil_info.html.twig', array('search' => $search->createView(), 'form'=> $form->createView()));
 
     }
+
+
+
+
+	public function contactAction()
+	{
+			$search = $this->createFormBuilder()
+                                ->add('recherche', 'search', array('label' => '', 'attr' => array('class' => 'livreSearch')))
+                                ->add('save', 'submit', array('label' => 'Rechercher','attr' => array('class' => 'livreSearch')))
+                                ->getForm();
+
+	        $enquiry = new Enquiry();
+	        $form = $this->createForm(new EnquiryType(), $enquiry);
+
+
+	        $request = $this->getRequest();
+	        if ($request->getMethod() == 'POST') {
+	            $form->bind($request);
+
+	            if ($form->isValid()) {
+	                $message = \Swift_Message::newInstance()
+	                    ->setSubject('Demande de contact du site de la bibliotheque')
+	                    ->setFrom('arnaud.hascoet@gmail.com')
+	                    ->setTo($this->container->getParameter('Bibliotheque_Bibliotheque.emails.contact_email'))
+	                    ->setBody($this->renderView('UserBundle:Security:contactEmail.txt.twig', array('enquiry' => $enquiry)));
+	                $this->get('mailer')->send($message);
+	        
+	                $this->get('session')->getFlashBag()->add('contact-notice', 'Votre message a bien été envoyé. Merci!');
+	        
+	                return $this->redirect($this->generateUrl('Bibliotheque_contact', array('username' => $username)));
+	            }
+	        }
+
+	        return $this->render('UserBundle:Security:contact.html.twig', array('search' => $search->createView(),'form' => $form->createView()));
+	    }
+
+
 
 }
