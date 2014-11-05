@@ -1,14 +1,11 @@
 {% extends '::base.html.twig' %}
 {% block body %}
-<h1>Profil</h1>
-<ul>
+<h1>Votre profil</h1>
+<ul class="menu">
 	<li><a href="#">Mes emprunts</a></li>
 	<li><a href="#">Mes réservations</a></li>
 	<li><a href="{{ path( 'profil_info', {'username' : username } ) }}">Mes informations</a></li>
 </ul>
-
-{{ username }}
-
 
 {% endblock %}
 
