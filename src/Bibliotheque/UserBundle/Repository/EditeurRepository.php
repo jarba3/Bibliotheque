@@ -12,4 +12,12 @@ use Doctrine\ORM\EntityRepository;
  */
 class EditeurRepository extends EntityRepository
 {
+	public function findAllOrderedByName()
+    {
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT nom FROM UserBundle:Editeur nom ORDER BY nom.nom ASC'
+            )
+            ->getResult();
+    }
 }

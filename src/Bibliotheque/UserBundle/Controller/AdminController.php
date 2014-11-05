@@ -368,6 +368,19 @@ class AdminController extends Controller
 		return $this->render('UserBundle:Admin:admin_ajout_auteur.html.twig', array('form' => $form->createView()));
 	}
 
+	public function admin_suppr_auteurAction(Request $request)
+	{
+		$repository = $this->getDoctrine()->getManager()->getRepository('UserBundle:Auteur');
+		$auteur = $repository->findAllOrderedByName();
+
+		return $this->render('UserBundle:Admin:admin_suppr_auteur.html.twig', array('auteur' => $auteur));
+	}
+
+	public function suppr_auteurAction()
+	{
+		var_dump($_POST);
+	}
+
 	public function admin_ajout_editeurAction(request $request)
 	{
 		$editeur = new Editeur;

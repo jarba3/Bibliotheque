@@ -71,6 +71,10 @@ bibliotheque_admin_ajout_auteur:
   pattern:    /admin/ajout_auteur
   defaults:   { _controller: UserBundle:Admin:admin_ajout_auteur }
 
+bibliotheque_admin_suppr_auteur:
+  pattern:    /admin/suppr_auteur
+  defaults:   { _controller: UserBundle:Admin:admin_suppr_auteur }
+
 bibliotheque_admin_ajout_editeur:
   pattern:    /admin/ajout_editeur
   defaults:   { _controller: UserBundle:Admin:admin_ajout_editeur }

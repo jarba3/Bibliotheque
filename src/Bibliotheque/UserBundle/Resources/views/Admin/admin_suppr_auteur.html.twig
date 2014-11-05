@@ -1,0 +1,12 @@
+{% extends '::base_admin.html.twig' %}
+{% block body %}
+    <h1>Supprimer un auteur</h1>
+	<table>
+	    {% for auteur in auteur %}
+	        <tr>
+	        	<td>{{ auteur.nom }}</td>
+	        	<td></td>
+	        </tr>
+	    {% endfor %}
+    </table>
+{% endblock %}
