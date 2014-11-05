@@ -9,6 +9,7 @@ use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\EntityRepository;
 
 use Bibliotheque\UserBundle\Entity\User;
 use Bibliotheque\UserBundle\Entity\Livres;
@@ -31,7 +32,7 @@ class AdminController extends Controller
 					->add('titre', 'text', array('required' => true))
 					->add('isbn', 'text', array('required' => true))
 					->add('description', 'textarea', array('required' => true))
-					->add('dateparution', 'date', array('required' => true))
+					->add('dateparution', 'date', array('required' => true, 'widget' => 'choice', 'years' => range(1900, 2014), 'empty_value' => ''))
 					->add('theme', 'choice', array(
 						'choices' => array(
 										'actu_politique_societe' => 'Actu, Politique et Société',
@@ -71,6 +72,10 @@ class AdminController extends Controller
 							'property' => 'nom',
 							'expanded' => false,
 							'multiple' => false,
+							'query_builder' => function(EntityRepository $er)
+							{
+        					return $er->createQueryBuilder('auteur')->orderBy('auteur.nom', 'ASC');
+    						},
 							'empty_value' => 'Choisissez un auteur',
 						))
 					->add('editeur', 'entity', array(
@@ -78,6 +83,10 @@ class AdminController extends Controller
 							'property' => 'nom',
 							'expanded' => false,
 							'multiple' => false,
+							'query_builder' => function(EntityRepository $er)
+							{
+        					return $er->createQueryBuilder('editeur')->orderBy('editeur.nom', 'ASC');
+    						},
 							'empty_value' => 'Choisissez un éditeur'
 						))
 					->add('save', 'submit', array('label' => 'Enregistrer', 'attr' => array('class' => 'submit spacer')))
