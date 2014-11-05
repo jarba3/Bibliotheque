@@ -1,0 +1,10 @@
+{% extends 'base_admin.html.twig' %}
+{% block body %}
+<h1>Modifier un livre</h1>
+{{ form_start(search) }}
+<fieldset class="searchLivre">
+			{{ form_label(search.recherche, "Rechercher un livre :") }}
+			{{ form_widget(search.recherche) }}
+			</fieldset>
+{{ form_end(search) }}
+{% endblock %}
