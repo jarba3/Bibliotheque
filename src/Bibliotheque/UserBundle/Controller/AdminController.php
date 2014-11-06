@@ -15,6 +15,9 @@ use Bibliotheque\UserBundle\Entity\User;
 use Bibliotheque\UserBundle\Entity\Livres;
 use Bibliotheque\UserBundle\Entity\Auteur;
 use Bibliotheque\UserBundle\Entity\Editeur;
+use Bibliotheque\UserBundle\Entity\Theme;
+use Bibliotheque\UserBundle\Entity\Exemplaire;
+
 
 class AdminController extends Controller
 {
@@ -33,40 +36,18 @@ class AdminController extends Controller
 					->add('isbn', 'text', array('required' => true))
 					->add('description', 'textarea', array('required' => true))
 					->add('dateparution', 'date', array('required' => true, 'widget' => 'choice', 'years' => range(1900, 2014), 'empty_value' => ''))
-					->add('theme', 'choice', array(
-						'choices' => array(
-										'actu_politique_societe' => 'Actu, Politique et Société',
-										'adolescents' => 'Adolescents',
-										'art_musique_cinema' => 'Art, Musique et Cinéma',
-										'bandes_dessinees' => 'Bandes dessinées',
-										'beaux_livres' => 'Beaux livres',
-										'cuisine_vins' => 'Cuisine et Vins',
-										'dictionnaires_langues_encyclopedies' => 'Dictionnaires, langues et encyclopédies',
-										'droit' => 'Droit',
-										'entreprise_bourse' => 'Entreprise et Bourse',
-										'erotisme' => 'Erotisme',
-										'esotérisme_paranormal' => 'Esotérisme et Paranormal',
-										'etudes_superieures' => 'Etudes supérieures',
-										'famille_sante_bien-etre' => 'Famille, Santé et Bien-être',
-										'fantasy_terreur' => 'Fantasy et Terreur',
-										'histoire' => 'Histoire',
-										'humour' => 'Humour',
-										'informatique_internet' => 'Informatique et Internet',
-										'litterature' => 'Littérature',
-										'litterature_sentimentale' => 'Littérature sentimentale',
-										'livres_enfants' => 'Livres pour enfants',
-										'loisirs_creatifs_decoration_bricolage' => 'Loisirs créatifs, décoration et bricolage',
-										'manga' => 'Manga',
-										'nature_animaux' => 'Nature et animaux',
-										'policier_suspense' => 'Policier et Suspense',
-										'religions_spiritualites' => 'Religions et Spiritualités',
-										'science-fiction' => 'Science-Fiction',
-										'sciences_humaines' => 'Sciences humaines',
-										'sciences_techniques_Medecine' => 'Sciences, Techniques et Médecine',
-										'scolaire_parascolaire' => 'Scolaire et Parascolaire',
-										'sports_passions' => 'Sports et passions',
-										'tourisme_voyages' => 'Tourisme et Voyages',
-							)), array('required' => true))
+					->add('theme', 'entity', array(
+							'class' => 'UserBundle:Theme',
+							'property' => 'intitule',
+							'expanded' => false,
+							'multiple' => false,
+							'query_builder' => function(EntityRepository $er)
+							{
+        					return $er->createQueryBuilder('theme')->orderBy('theme.intitule', 'ASC');
+    						},
+							'empty_value' => 'Choisissez un thème',
+							'required' => true,
+						))
 					->add('auteur', 'entity', array(
 							'class' => 'UserBundle:Auteur',
 							'property' => 'nom',
@@ -77,6 +58,7 @@ class AdminController extends Controller
         					return $er->createQueryBuilder('auteur')->orderBy('auteur.nom', 'ASC');
     						},
 							'empty_value' => 'Choisissez un auteur',
+							'required' => true,
 						))
 					->add('editeur', 'entity', array(
 							'class' => 'UserBundle:Editeur',
@@ -87,10 +69,26 @@ class AdminController extends Controller
 							{
         					return $er->createQueryBuilder('editeur')->orderBy('editeur.nom', 'ASC');
     						},
-							'empty_value' => 'Choisissez un éditeur'
+							'empty_value' => 'Choisissez un éditeur',
+							'required' => true,
 						))
 					->add('save', 'submit', array('label' => 'Enregistrer', 'attr' => array('class' => 'submit spacer')))
 					->add('image', 'file', array('required' => true))
+					->getForm();
+
+	$exemplaire = new Exemplaire();
+
+		$formEx = $this->createFormBuilder($exemplaire)
+					->add('date_acquisition', 'date')
+					->add('usure', 'choice', array(
+							'expanded' => false,
+							'multiple' => false,
+							'choices' => array(
+									'neuf' => 'Neuf',
+									'moyen' => 'Moyen',
+									'poubelle' => 'Poubelle',
+								)
+						))
 					->getForm();
 
 		
@@ -124,7 +122,7 @@ class AdminController extends Controller
 		}
 
 
-		return $this->render('UserBundle:Admin:admin_ajout_livre.html.twig', array('form' => $form->createView()));
+		return $this->render('UserBundle:Admin:admin_ajout_livre.html.twig', array('form' => $form->createView(), 'formEx' => $formEx->createView()));
 	}
 	
 	public function admin_modif_livreAction(Request $request)
@@ -158,40 +156,18 @@ class AdminController extends Controller
 					->add('isbn', 'text', array('required' => true))
 					->add('description', 'textarea', array('required' => true))
 					->add('dateparution', 'date', array('required' => true))
-					->add('theme', 'choice', array(
-						'choices' => array(
-										'actu_politique_societe' => 'Actu, Politique et Société',
-										'adolescents' => 'Adolescents',
-										'art_musique_cinema' => 'Art, Musique et Cinéma',
-										'bandes_dessinees' => 'Bandes dessinées',
-										'beaux_livres' => 'Beaux livres',
-										'cuisine_vins' => 'Cuisine et Vins',
-										'dictionnaires_langues_encyclopedies' => 'Dictionnaires, langues et encyclopédies',
-										'droit' => 'Droit',
-										'entreprise_bourse' => 'Entreprise et Bourse',
-										'erotisme' => 'Erotisme',
-										'esotérisme_paranormal' => 'Esotérisme et Paranormal',
-										'etudes_superieures' => 'Etudes supérieures',
-										'famille_sante_bien-etre' => 'Famille, Santé et Bien-être',
-										'fantasy_terreur' => 'Fantasy et Terreur',
-										'histoire' => 'Histoire',
-										'humour' => 'Humour',
-										'informatique_internet' => 'Informatique et Internet',
-										'litterature' => 'Littérature',
-										'litterature_sentimentale' => 'Littérature sentimentale',
-										'livres_enfants' => 'Livres pour enfants',
-										'loisirs_creatifs_decoration_bricolage' => 'Loisirs créatifs, décoration et bricolage',
-										'manga' => 'Manga',
-										'nature_animaux' => 'Nature et animaux',
-										'policier_suspense' => 'Policier et Suspense',
-										'religions_spiritualites' => 'Religions et Spiritualités',
-										'science-fiction' => 'Science-Fiction',
-										'sciences_humaines' => 'Sciences humaines',
-										'sciences_techniques_Medecine' => 'Sciences, Techniques et Médecine',
-										'scolaire_parascolaire' => 'Scolaire et Parascolaire',
-										'sports_passions' => 'Sports et passions',
-										'tourisme_voyages' => 'Tourisme et Voyages',
-							)), array('required' => true))
+					->add('theme', 'entity', array(
+							'class' => 'UserBundle:Theme',
+							'property' => 'intitule',
+							'expanded' => false,
+							'multiple' => false,
+							'query_builder' => function(EntityRepository $er)
+							{
+        					return $er->createQueryBuilder('theme')->orderBy('theme.intitule', 'ASC');
+    						},
+							'empty_value' => 'Choisissez un thème',
+							'required' => true,
+						))
 					->add('auteur', 'entity', array(
 							'class' => 'UserBundle:Auteur',
 							'property' => 'nom',
@@ -201,7 +177,8 @@ class AdminController extends Controller
 							{
         					return $er->createQueryBuilder('auteur')->orderBy('auteur.nom', 'ASC');
     						},
-							'data_class' => null
+							'empty_value' => 'Choisissez un auteur',
+							'required' => true,
 						))
 					->add('editeur', 'entity', array(
 							'class' => 'UserBundle:Editeur',
@@ -212,7 +189,8 @@ class AdminController extends Controller
 							{
         					return $er->createQueryBuilder('editeur')->orderBy('editeur.nom', 'ASC');
     						},
-							'data_class' => null
+							'empty_value' => 'Choisissez un éditeur',
+							'required' => true,
 						))
 					->add('save', 'submit', array('label' => 'Enregistrer', 'attr' => array('class' => 'submit spacer')))
 					->add('image', 'file', array(
@@ -283,53 +261,41 @@ class AdminController extends Controller
 					->add('isbn', 'text', array('required' => true))
 					->add('description', 'textarea', array('required' => true))
 					->add('dateparution', 'date', array('required' => true))
-					->add('theme', 'choice', array(
-						'choices' => array(
-										'actu_politique_societe' => 'Actu, Politique et Société',
-										'adolescents' => 'Adolescents',
-										'art_musique_cinema' => 'Art, Musique et Cinéma',
-										'bandes_dessinees' => 'Bandes dessinées',
-										'beaux_livres' => 'Beaux livres',
-										'cuisine_vins' => 'Cuisine et Vins',
-										'dictionnaires_langues_encyclopedies' => 'Dictionnaires, langues et encyclopédies',
-										'droit' => 'Droit',
-										'entreprise_bourse' => 'Entreprise et Bourse',
-										'erotisme' => 'Erotisme',
-										'esotérisme_paranormal' => 'Esotérisme et Paranormal',
-										'etudes_superieures' => 'Etudes supérieures',
-										'famille_sante_bien-etre' => 'Famille, Santé et Bien-être',
-										'fantasy_terreur' => 'Fantasy et Terreur',
-										'histoire' => 'Histoire',
-										'humour' => 'Humour',
-										'informatique_internet' => 'Informatique et Internet',
-										'litterature' => 'Littérature',
-										'litterature_sentimentale' => 'Littérature sentimentale',
-										'livres_enfants' => 'Livres pour enfants',
-										'loisirs_creatifs_decoration_bricolage' => 'Loisirs créatifs, décoration et bricolage',
-										'manga' => 'Manga',
-										'nature_animaux' => 'Nature et animaux',
-										'policier_suspense' => 'Policier et Suspense',
-										'religions_spiritualites' => 'Religions et Spiritualités',
-										'science-fiction' => 'Science-Fiction',
-										'sciences_humaines' => 'Sciences humaines',
-										'sciences_techniques_Medecine' => 'Sciences, Techniques et Médecine',
-										'scolaire_parascolaire' => 'Scolaire et Parascolaire',
-										'sports_passions' => 'Sports et passions',
-										'tourisme_voyages' => 'Tourisme et Voyages',
-							)), array('required' => true))
+					->add('theme', 'entity', array(
+							'class' => 'UserBundle:Theme',
+							'property' => 'intitule',
+							'expanded' => false,
+							'multiple' => false,
+							'query_builder' => function(EntityRepository $er)
+							{
+        					return $er->createQueryBuilder('theme')->orderBy('theme.intitule', 'ASC');
+    						},
+							'empty_value' => 'Choisissez un thème',
+							'required' => true,
+						))
 					->add('auteur', 'entity', array(
 							'class' => 'UserBundle:Auteur',
 							'property' => 'nom',
 							'expanded' => false,
 							'multiple' => false,
-							'data_class' => null
+							'query_builder' => function(EntityRepository $er)
+							{
+        					return $er->createQueryBuilder('auteur')->orderBy('auteur.nom', 'ASC');
+    						},
+							'empty_value' => 'Choisissez un auteur',
+							'required' => true,
 						))
 					->add('editeur', 'entity', array(
 							'class' => 'UserBundle:Editeur',
 							'property' => 'nom',
 							'expanded' => false,
 							'multiple' => false,
-							'data_class' => null
+							'query_builder' => function(EntityRepository $er)
+							{
+        					return $er->createQueryBuilder('editeur')->orderBy('editeur.nom', 'ASC');
+    						},
+							'empty_value' => 'Choisissez un éditeur',
+							'required' => true,
 						))
 					->add('save', 'submit', array('label' => 'Supprimer', 'attr' => array('class' => 'submit spacer')))
 					->getForm();
@@ -384,11 +350,6 @@ class AdminController extends Controller
 		return $this->render('UserBundle:Admin:admin_suppr_auteur.html.twig', array('auteur' => $auteur));
 	}
 
-	public function suppr_auteurAction()
-	{
-		var_dump($_POST);
-	}
-
 	public function admin_ajout_editeurAction(request $request)
 	{
 		$editeur = new Editeur;
@@ -427,7 +388,13 @@ class AdminController extends Controller
 					->add('telephone', 'number', array('required' => true))
 					->add('email', 'text', array('required' => true))
 					->add('username', 'text', array('required' => true))
-					->add('password', 'password', array('required' => true))
+					->add('password', 'repeated', array(
+						    'type' => 'password',
+						    'invalid_message' => 'Les mots de passe doivent correspondre',
+						    'options' => array('required' => true),
+						    'first_options'  => array('label' => 'Mot de passe'),
+						    'second_options' => array('label' => 'Mot de passe (validation)'),
+						))
 					->add("roles", 'choice', array(
         				'expanded' => false,
         				'multiple' => true,
@@ -613,6 +580,34 @@ class AdminController extends Controller
 	public function admin_pretsAction()
 	{
 		return $this->render('UserBundle:Admin:admin_prets.html.twig');
+	}
+
+	public function admin_ajout_themeAction(Request $request)
+	{
+		$theme = new Theme;
+
+		$form = $this->createFormBuilder($theme)
+							->add('intitule', 'text', array('required' => true))
+							->add('ajouter', 'submit', array('label' => 'Enregistrer', 'attr' => array('class' => 'submit spacer')))
+							->getForm();
+
+		$form->handleRequest($request);
+
+		if($form->isValid()){
+
+			$em = $this->getDoctrine()->getManager();
+			$em->persist($theme);
+			$em->flush();
+
+			return $this->redirect($this->generateUrl('bibliotheque_admin_ajout_theme'));
+		}
+
+		return $this->render('UserBundle:Admin:admin_ajout_theme.html.twig', array('form' => $form->createView()));
+	}
+
+	public function admin_suppr_themeAction()
+	{
+		return $this->render('UserBundle:Admin:admin_suppr_theme.html.twig');
 	}
 
 }

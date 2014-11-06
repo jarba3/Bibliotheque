@@ -79,6 +79,13 @@ bibliotheque_admin_ajout_editeur:
   pattern:    /admin/ajout_editeur
   defaults:   { _controller: UserBundle:Admin:admin_ajout_editeur }
 
+bibliotheque_admin_ajout_theme:
+  pattern:    /admin/ajout_theme
+  defaults:   { _controller: UserBundle:Admin:admin_ajout_theme }
+
+bibliotheque_admin_suppr_theme:
+  pattern:     /admin/suppr_theme
+  defaults:    { _controller: UserBundle:Admin:admin_suppr_theme }
 
 
 
