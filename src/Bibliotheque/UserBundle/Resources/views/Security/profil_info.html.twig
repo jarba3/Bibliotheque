@@ -37,10 +37,10 @@
 			{{ form_label(form.username, "Nom d'utilisateur :", {'label_attr': {'class': 'label spacerUser'}}) }}
 			{{ form_widget(form.username) }}
 			<br>
-			{{ form_label(form.password, "Mot de passe :", {'label_attr': {'class': 'label spacerUser'}}) }}
+			{{ form_label(form.password, "Mot de passe : *", {'label_attr': {'class': 'label spacerUser'}}) }}
 			{{ form_widget(form.password) }}
 			<br>
-		</fieldset>
+		</fieldset><p style="text-align:center;">* A ressaisir</p>
 	{{ form_end(form) }}
 
 {% endblock %}

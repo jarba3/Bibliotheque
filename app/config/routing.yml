@@ -105,3 +105,5 @@ profil_info:
 Bibliotheque_contact:
   path:    /contact
   defaults: { _controller: UserBundle:Security:contact}
+  requirements:
+        _method:  GET|POST

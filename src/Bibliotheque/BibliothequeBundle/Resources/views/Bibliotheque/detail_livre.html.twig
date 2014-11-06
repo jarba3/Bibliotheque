@@ -37,51 +37,9 @@
 	</ul>
 </div>
 
-
-<table class="listLivre">
-	<tr>
-		{% for livre in livre|slice(0, 5) %}
-			<td >
-				 <a href="{{ path( 'bibliotheque_detail_livre', {'titre' : livre.titre } ) }}">
-				 <img src="{{ asset(livre.urlimage) }}" alt="{{ livre.altimage }}" class="miniCouv">
-				 {{ livre.titre }}
-				 </a>
-			</td>
-		{% endfor %}
-	</tr>
-	<tr>
-		{% for livre in livre|slice(5, 10) %}
-			<td>
-				<a href="{{ path( 'bibliotheque_detail_livre', {'titre' : livre.titre } ) }}">
-				 <img src="{{ asset(livre.urlimage) }}" alt="{{ livre.altimage }}" class="miniCouv">
-				 {{ livre.titre }}
-				 </a> 
-			</td>
-		{% endfor %}
-	</tr>
-	<tr>
-		{% for livre in livre|slice(10, 15) %}
-			<td>
-				<a href="{{ path( 'bibliotheque_detail_livre', {'titre' : livre.titre } ) }}">
-				 <img src="{{ asset(livre.urlimage) }}" alt="{{ livre.altimage }}" class="miniCouv">
-				 {{ livre.titre }}
-				 </a>
-			</td>
-		{% endfor %}
-	</tr>
-	<tr>
-		{% for livre in livre|slice(15, 20) %}
-			<td>
-				<a href="{{ path( 'bibliotheque_detail_livre', {'titre' : livre.titre } ) }}">
-				 <img src="{{ asset(livre.urlimage) }}" alt="{{ livre.altimage }}" class="miniCouv">
-				 {{ livre.titre }}
-				 </a>
-			</td>
-		{% endfor %}
-	</tr>
-</table>
-
-
+<div>
+	
+</div>
 
 
 {% endblock %}

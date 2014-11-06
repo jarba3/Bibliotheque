@@ -76,7 +76,7 @@ class SecurityController extends Controller
 									->add('telephone', 'number', array('required' => true))
 									->add('email', 'text', array('required' => true))
 									->add('username', 'text', array('required' => true))
-									->add('password', 'password', array('required' => false))
+									->add('password', 'password', array('required' => true))
 									->add('save', 'submit', array(
 														'label' => 'Enregistrer',
 												  'attr' => array(
@@ -130,13 +130,13 @@ class SecurityController extends Controller
 	                $message = \Swift_Message::newInstance()
 	                    ->setSubject('Demande de contact du site de la bibliotheque')
 	                    ->setFrom('arnaud.hascoet@gmail.com')
-	                    ->setTo($this->container->getParameter('Bibliotheque_Bibliotheque.emails.contact_email'))
+	                    ->setTo($this->container->getParameter('bibliotheque.emails.contact_email'))
 	                    ->setBody($this->renderView('UserBundle:Security:contactEmail.txt.twig', array('enquiry' => $enquiry)));
 	                $this->get('mailer')->send($message);
 	        
 	                $this->get('session')->getFlashBag()->add('contact-notice', 'Votre message a bien été envoyé. Merci!');
 	        
-	                return $this->redirect($this->generateUrl('Bibliotheque_contact', array('username' => $username)));
+	                return $this->redirect($this->generateUrl('Bibliotheque_contact'));
 	            }
 	        }
 

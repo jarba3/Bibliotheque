@@ -197,6 +197,10 @@ class AdminController extends Controller
 							'property' => 'nom',
 							'expanded' => false,
 							'multiple' => false,
+							'query_builder' => function(EntityRepository $er)
+							{
+        					return $er->createQueryBuilder('auteur')->orderBy('auteur.nom', 'ASC');
+    						},
 							'data_class' => null
 						))
 					->add('editeur', 'entity', array(
@@ -204,6 +208,10 @@ class AdminController extends Controller
 							'property' => 'nom',
 							'expanded' => false,
 							'multiple' => false,
+							'query_builder' => function(EntityRepository $er)
+							{
+        					return $er->createQueryBuilder('editeur')->orderBy('editeur.nom', 'ASC');
+    						},
 							'data_class' => null
 						))
 					->add('save', 'submit', array('label' => 'Enregistrer', 'attr' => array('class' => 'submit spacer')))

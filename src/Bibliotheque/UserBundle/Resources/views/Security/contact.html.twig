@@ -9,16 +9,18 @@
         </div>
     {% endfor %}
 
-    <form action="{{ path('Bibliotheque_contact') }}" method="post" {{ form_enctype(form) }}>
+    <form action="{{ path('Bibliotheque_contact') }}" method="post" {{ form_enctype(form) }} class=>
+        <fieldset class="contact spacer">
         {{ form_errors(form) }}
 
-        {{ form_row(form.name) }}
-        {{ form_row(form.email) }}
-        {{ form_row(form.subject) }}
-        {{ form_row(form.body) }}
+        {{ form_row(form.name , {'label_attr': {'class': 'spacer'}} ) }}
+        {{ form_row(form.email , {'label_attr': {'class': 'spacer'}} ) }}
+        {{ form_row(form.subject , {'label_attr': {'class': 'spacer'}} ) }}
+        {{ form_row(form.body , {'label_attr': {'class': 'contact spacer'}} ) }}
 
         {{ form_rest(form) }}
 
         <input type="submit" value="Submit" />
+        </fieldset>
     </form>
 {% endblock %}
