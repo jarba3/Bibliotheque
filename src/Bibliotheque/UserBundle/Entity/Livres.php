@@ -51,9 +51,7 @@ class Livres
     private $dateparution;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="theme", type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="Bibliotheque\UserBundle\Entity\Theme")     
      */
     private $theme;
 
@@ -192,29 +190,6 @@ class Livres
     }
 
     /**
-     * Set theme
-     *
-     * @param string $theme
-     * @return Livres
-     */
-    public function setTheme($theme)
-    {
-        $this->theme = $theme;
-
-        return $this;
-    }
-
-    /**
-     * Get theme
-     *
-     * @return string 
-     */
-    public function getTheme()
-    {
-        return $this->theme;
-    }
-
-    /**
      * Set image
      *
      * @param string $image
@@ -327,5 +302,28 @@ class Livres
     public function getEditeur()
     {
         return $this->editeur;
+    }
+
+    /**
+     * Set theme
+     *
+     * @param \Bibliotheque\UserBundle\Entity\Theme $theme
+     * @return Livres
+     */
+    public function setTheme(\Bibliotheque\UserBundle\Entity\Theme $theme = null)
+    {
+        $this->theme = $theme;
+
+        return $this;
+    }
+
+    /**
+     * Get theme
+     *
+     * @return \Bibliotheque\UserBundle\Entity\Theme 
+     */
+    public function getTheme()
+    {
+        return $this->theme;
     }
 }
