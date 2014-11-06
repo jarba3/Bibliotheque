@@ -32,7 +32,7 @@ class Livres
     /**
      * @var string
      *
-     * @ORM\Column(name="isbn", type="string", length=16)
+     * @ORM\Column(name="isbn", type="string", length=16, unique=true)
      */
     private $isbn;
 
