@@ -4,8 +4,12 @@ namespace Bibliotheque\BibliothequeBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Doctrine\ORM\EntityRepository;
 
 use Bibliotheque\UserBundle\Entity\Livres;
+use Bibliotheque\UserBundle\Entity\Theme;
+use Bibliotheque\UserBundle\Entity\Auteur;
+use Bibliotheque\UserBundle\Entity\Editeur;
 
 class BibliothequeController extends Controller
 {
@@ -52,23 +56,9 @@ class BibliothequeController extends Controller
                                 ->getForm();
 
         $repository = $this->getDoctrine()->getManager()->getRepository('UserBundle:Livres');
-        $livre = $repository->findAll($titre);
+        $livre = $repository->findByTitre($titre)[0];
 
-        $vueLivre = $this->createFormBuilder($livre)
-                    ->add('titre', 'text')
-                    ->add('isbn', 'text')
-                    ->add('description', 'textarea')
-                    ->add('dateparution', 'date')
-                    ->add('theme', 'text')
-                    ->add('auteur', 'text')
-                    ->add('editeur', 'text')
-                    ->add('save', 'submit', array('label' => 'Réserver', 'attr' => array('class' => 'submit spacer')))
-                    ->add('image', 'file')
-                    ->getForm();
-
-        $vueLivre->handleRequest($request);
-
-        return $this->render('BibliothequeBundle:Bibliotheque:detail_livre.html.twig', array('search' => $search->createView(), 'livre' => $vueLivre->createView()));
+        return $this->render('BibliothequeBundle:Bibliotheque:detail_livre.html.twig', array('search' => $search->createView(), 'livre' => $livre));
     }
     
 }
