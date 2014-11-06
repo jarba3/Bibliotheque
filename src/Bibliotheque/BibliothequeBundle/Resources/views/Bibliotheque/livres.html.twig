@@ -40,7 +40,7 @@
 
 <table class="listLivre">
 	<tr>
-		{% for livre in livre|slice(0, 5) %}
+		{% for livre in livre|slice(0, 4) %}
 			<td >
 				 <a href="{{ path( 'bibliotheque_detail_livre', {'titre' : livre.titre } ) }}">
 				 <img src="{{ asset(livre.urlimage) }}" alt="{{ livre.altimage }}" class="miniCouv">
@@ -50,7 +50,7 @@
 		{% endfor %}
 	</tr>
 	<tr>
-		{% for livre in livre|slice(5, 10) %}
+		{% for livre in livre|slice(4, 4) %}
 			<td>
 				<a href="{{ path( 'bibliotheque_detail_livre', {'titre' : livre.titre } ) }}">
 				 <img src="{{ asset(livre.urlimage) }}" alt="{{ livre.altimage }}" class="miniCouv">
@@ -60,7 +60,7 @@
 		{% endfor %}
 	</tr>
 	<tr>
-		{% for livre in livre|slice(10, 15) %}
+		{% for livre in livre|slice(8, 4) %}
 			<td>
 				<a href="{{ path( 'bibliotheque_detail_livre', {'titre' : livre.titre } ) }}">
 				 <img src="{{ asset(livre.urlimage) }}" alt="{{ livre.altimage }}" class="miniCouv">
@@ -70,7 +70,7 @@
 		{% endfor %}
 	</tr>
 	<tr>
-		{% for livre in livre|slice(15, 20) %}
+		{% for livre in livre|slice(12, 4) %}
 			<td>
 				<a href="{{ path( 'bibliotheque_detail_livre', {'titre' : livre.titre } ) }}">
 				 <img src="{{ asset(livre.urlimage) }}" alt="{{ livre.altimage }}" class="miniCouv">
