@@ -1,0 +1,13 @@
+{% extends 'base_admin.html.twig' %}
+{% block body %}
+	<div class="ajoutEx" >
+		<h1>{{ livre.titre }}</h1>
+		<img src="{{ asset(livre.urlimage) }}" alt="{{ livre.altimage }}" class="miniCouv">
+		<h4>{{ livre.auteur.nom }}</h4>
+		<h4>{{ livre.editeur.nom }}</h4>
+		<p>{{ livre.description }}</p>
+	</div>
+	{{ form_start(form) }}
+
+	{{ form_end(form) }}
+{% endblock %}

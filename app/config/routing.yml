@@ -67,6 +67,14 @@ bibliotheque_admin_suppr_livre_form:
   pattern:    /admin/admin_suppr_livre_form/{nom}
   defaults:   { _controller: UserBundle:Admin:admin_suppr_livre_form }
 
+bibliotheque_admin_ajout_exemplaire:
+  pattern:    /admin/admin_ajout_exemplaire
+  defaults:   { _controller: UserBundle:Admin:admin_ajout_exemplaire }
+
+bibliotheque_admin_ajout_exemplaire_form:
+  pattern:    /admin/admin_ajout_exemplaire_form/{isbn}
+  defaults:   { _controller: UserBundle:Admin:admin_ajout_exemplaire_form }
+
 bibliotheque_admin_ajout_auteur:
   pattern:    /admin/ajout_auteur
   defaults:   { _controller: UserBundle:Admin:admin_ajout_auteur }

@@ -26,6 +26,66 @@ class AdminController extends Controller
 		return $this->render('UserBundle:Admin:admin.html.twig');
 	}
 
+	public function admin_ajout_exemplaireAction(Request $request)
+	{
+		$exemplaire = new Exemplaire();
+
+		$form = $this->createFormBuilder($exemplaire)
+						->add('livre', 'entity', array(
+								'class' => 'UserBundle:Livres',
+								'property' => 'isbn',
+								'empty_value' => 'Choisissez un isbn'
+							))
+						->add('valider', 'submit', array('label' => 'Valider', 'attr' => array('class' => 'submit spacer')))
+						->getForm();
+
+		$form->handleRequest($request);
+
+		if($form->isValid()){
+
+			$isbn = $exemplaire->getLivre()->getIsbn();
+
+			return $this->redirect($this->generateUrl('bibliotheque_admin_ajout_exemplaire_form', array('isbn' => $isbn)));
+
+		}
+
+		return $this->render('UserBundle:Admin:admin_ajout_exemplaire.html.twig', array('form' => $form->createView()));
+	}
+
+	public function admin_ajout_exemplaire_formAction($isbn, Request $request)
+	{
+		$repository = $this->getDoctrine()->getManager()->getRepository('UserBundle:Livres');
+		$livre = $repository->findByIsbn($isbn)[0];
+
+		$exemplaire = new Exemplaire();
+
+		$form = $this->createFormBuilder($exemplaire)
+						->add('dateacquisition', 'date')
+						->add('usure', 'choice', array(
+							'expanded' => false,
+							'multiple' => false,
+							'choices' => array(
+									'neuf' => 'Neuf',
+									'bon-etat' => 'Bon état',
+									'usage' => 'Usagé',
+									'a-remplacer' => 'A remplacer'
+								)
+							))
+						->add('save', 'submit', array('label' => 'Enregistrer', 'attr' => array('class' => 'submit spacer')))
+						->getForm();
+
+		$form->handleRequest($request);
+
+		if($form->isValid()){
+			
+			$em = $this->getDoctrine()->getManager();
+			$em->persist($exemplaire);
+			$em->flush();
+		}
+
+		return $this->render('UserBundle:Admin:admin_ajout_exemplaire_form.html.twig', array('livre' => $livre, 'form' => $form->createView()));
+	}
+
 	public function admin_ajout_livreAction(Request $request)
 	{
 
@@ -76,21 +136,6 @@ class AdminController extends Controller
 					->add('image', 'file', array('required' => true))
 					->getForm();
 
-	$exemplaire = new Exemplaire();
-
-		$formEx = $this->createFormBuilder($exemplaire)
-					->add('date_acquisition', 'date')
-					->add('usure', 'choice', array(
-							'expanded' => false,
-							'multiple' => false,
-							'choices' => array(
-									'neuf' => 'Neuf',
-									'moyen' => 'Moyen',
-									'poubelle' => 'Poubelle',
-								)
-						))
-					->getForm();
-
 		
 
 		$form->handleRequest($request);
@@ -122,7 +167,7 @@ class AdminController extends Controller
 		}
 
 
-		return $this->render('UserBundle:Admin:admin_ajout_livre.html.twig', array('form' => $form->createView(), 'formEx' => $formEx->createView()));
+		return $this->render('UserBundle:Admin:admin_ajout_livre.html.twig', array('form' => $form->createView()));
 	}
 	
 	public function admin_modif_livreAction(Request $request)

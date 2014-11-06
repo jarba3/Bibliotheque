@@ -325,3 +325,16 @@ min-height:0;
 	width: 425px;
 	resize: none;
 }
+
+/*page detail livre*/
+
+.livreDetail{
+	display: inline-block;
+	vertical-align: top;
+	width: 920px;
+	padding-left: 10px;
+}
+
+.afficheImage{
+	float: right;
+}
