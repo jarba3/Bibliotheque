@@ -1,13 +1,23 @@
 {% extends 'base_admin.html.twig' %}
 {% block body %}
-	<div class="ajoutEx" >
-		<h1>{{ livre.titre }}</h1>
-		<img src="{{ asset(livre.urlimage) }}" alt="{{ livre.altimage }}" class="miniCouv">
-		<h4>{{ livre.auteur.nom }}</h4>
-		<h4>{{ livre.editeur.nom }}</h4>
-		<p>{{ livre.description }}</p>
-	</div>
-	{{ form_start(form) }}
+	<div class="livreDetail" >
+		<h1>Détails de votre sélection :</h1>
+			<h3>{{ livre.titre }} <span>de {{ livre.auteur.nom }}<span><span><img src="{{ asset(livre.urlimage) }}" alt="{{ livre.altimage }}"class="afficheImage"></span></h3>
+			<h3>Date de parution : {{ livre.dateparution|date("d/m/y") }}</h3>
+			<h3>Editeur : {{ livre.editeur.nom }}</h3>
+			<h3>Thème : {{ livre.theme.intitule }}</h3>
+			<h3>Résumé :</h3>
+			<h4>{{ livre.description }}</h4>
+			<h5>Isbn : {{ livre.isbn }}</h5>
 
+		</div>
+	{{ form_start(form) }}
+			<fieldset class="formExemplaire" >
+				{{ form_label(form.dateacquisition, "Date d'acquisition :") }}
+				{{ form_widget(form.dateacquisition) }}
+				<br>
+				{{ form_label(form.usure, "Etat de l'exemplaire :") }}
+				{{ form_widget(form.usure) }}
+			</fieldset>
 	{{ form_end(form) }}
 {% endblock %}

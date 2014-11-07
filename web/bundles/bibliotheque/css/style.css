@@ -338,3 +338,9 @@ min-height:0;
 .afficheImage{
 	float: right;
 }
+
+/*Page Ajout exemplaire*/
+
+.formExemplaire div{
+	display: inline-block;
+}

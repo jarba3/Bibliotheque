@@ -78,12 +78,54 @@ class AdminController extends Controller
 
 		if($form->isValid()){
 			
+			$exemplaire->setLivre($livre);
+
 			$em = $this->getDoctrine()->getManager();
 			$em->persist($exemplaire);
 			$em->flush();
+
+			return $this->redirect($this->generateUrl('bibliotheque_admin_ajout_exemplaire'));
 		}
 
 		return $this->render('UserBundle:Admin:admin_ajout_exemplaire_form.html.twig', array('livre' => $livre, 'form' => $form->createView()));
+	}
+
+	public function admin_suppr_exemplaireAction(Request $request)
+	{
+		$exemplaire = new Exemplaire();
+
+		$form = $this->createFormBuilder($exemplaire)
+						->add('livre', 'entity', array(
+								'class' => 'UserBundle:Livres',
+								'property' => 'isbn',
+								'empty_value' => 'Choisissez un isbn'
+							))
+						->add('valider', 'submit', array('label' => 'Valider', 'attr' => array('class' => 'submit spacer')))
+						->getForm();
+
+		$form->handleRequest($request);
+
+		if($form->isValid()){
+
+			$isbn = $exemplaire->getLivre()->getIsbn();
+
+			return $this->redirect($this->generateUrl('bibliotheque_admin_suppr_exemplaire_form', array('isbn' => $isbn)));
+
+		}
+
+		return $this->render('UserBundle:Admin:admin_suppr_exemplaire.html.twig', array('form' => $form->createView()));
+	}
+
+	public function admin_su_exemplaire_formAction($isbn, Request $request)
+	{
+		$repository = $this->getDoctrine()->getManager()->getRepository('UserBundle:Livres');
+		$livre = $repository->findByIsbn($isbn)[0];
+
+	
+		$livre->getExemplaire();
+	
+
+		return $this->render('UserBundle:Admin:admin_suppr_exemplaire_form.html.twig');
 	}
 
 	public function admin_ajout_livreAction(Request $request)
