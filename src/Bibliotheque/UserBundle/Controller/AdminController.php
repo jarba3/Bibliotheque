@@ -90,7 +90,7 @@ class AdminController extends Controller
 		return $this->render('UserBundle:Admin:admin_ajout_exemplaire_form.html.twig', array('livre' => $livre, 'form' => $form->createView()));
 	}
 
-	public function admin_suppr_exemplaireAction(Request $request)
+	public function admin_gestion_exemplaireAction(Request $request)
 	{
 		$exemplaire = new Exemplaire();
 
@@ -109,23 +109,69 @@ class AdminController extends Controller
 
 			$isbn = $exemplaire->getLivre()->getIsbn();
 
-			return $this->redirect($this->generateUrl('bibliotheque_admin_suppr_exemplaire_form', array('isbn' => $isbn)));
+			return $this->redirect($this->generateUrl('bibliotheque_admin_gestion_exemplaire_form', array('isbn' => $isbn)));
 
 		}
 
-		return $this->render('UserBundle:Admin:admin_suppr_exemplaire.html.twig', array('form' => $form->createView()));
+		return $this->render('UserBundle:Admin:admin_gestion_exemplaire.html.twig', array('form' => $form->createView()));
 	}
 
-	public function admin_su_exemplaire_formAction($isbn, Request $request)
+	public function admin_gestion_exemplaire_formAction($isbn)
 	{
 		$repository = $this->getDoctrine()->getManager()->getRepository('UserBundle:Livres');
 		$livre = $repository->findByIsbn($isbn)[0];
 
-	
-		$livre->getExemplaire();
-	
+		$exemplaire = $livre->getExemplaire()->getValues();
 
-		return $this->render('UserBundle:Admin:admin_suppr_exemplaire_form.html.twig');
+
+
+		return $this->render('UserBundle:Admin:admin_gestion_exemplaire_form.html.twig', array('exemplaire' => $exemplaire, 'livre' => $livre));
+	}
+
+	public function admin_suppressionAction($id, Request $request)
+	{
+		$repository = $this->getDoctrine()->getManager()->getRepository('UserBundle:Exemplaire');
+		$exemplaire = $repository->findById($id)[0];
+
+
+		$em = $this->getDoctrine()->getManager();
+		$em->remove($exemplaire);
+		$em->flush();
+
+		return $this->redirect($this->generateUrl('bibliotheque_admin_gestion_exemplaire'));
+	}
+
+	public function admin_modificationAction($id, Request $request)
+	{
+		$repository = $this->getDoctrine()->getManager()->getRepository('UserBundle:Exemplaire');
+		$exemplaire = $repository->findById($id)[0];
+
+		$form = $this->createFormBuilder($exemplaire)
+						->add('dateacquisition', 'date')
+						->add('usure', 'choice', array(
+							'expanded' => false,
+							'multiple' => false,
+							'choices' => array(
+									'neuf' => 'Neuf',
+									'bon-etat' => 'Bon état',
+									'usage' => 'Usagé',
+									'a-remplacer' => 'A remplacer'
+								)
+							))
+						->add('save', 'submit', array('label' => 'Enregistrer', 'attr' => array('class' => 'submit spacer')))
+						->getForm();
+
+		$form->handleRequest($request);
+
+		if($form->isValid()){
+
+			$em = $this->getDoctrine()->getManager();
+			$em->flush();
+			
+			return $this->redirect($this->generateUrl('bibliotheque_admin_gestion_exemplaire'));
+		}
+
+		return $this->render('UserBundle:Admin:admin_modif_exemplaire.html.twig', array('form' => $form->createView()));
 	}
 
 	public function admin_ajout_livreAction(Request $request)
@@ -214,6 +260,20 @@ class AdminController extends Controller
 	
 	public function admin_modif_livreAction(Request $request)
 	{
+		$repository = $this->getDoctrine()->getManager()->getRepository('UserBundle:Livres');
+		$livre = $repository->findAll();
+
+
+		$form = $this->createFormBuilder($livre)
+								->add('isbn', 'entity', array(
+									'class' => 'UserBundle:Livres',
+									'property' => 'isbn',
+									'expanded' => false,
+									'multiple' => false,
+									'empty_value' => 'Selectionner un isbn'
+									))
+								->getForm();
+
 		$search = $this->createFormBuilder()
 								->add('recherche', 'search', array('required' => true))
 								->add('save', 'submit', array('label' => 'Rechercher','attr' => array('class' => 'submit spacer')))
@@ -230,7 +290,7 @@ class AdminController extends Controller
 		}
 
 			
-		return $this->render('UserBundle:Admin:admin_modif_livre.html.twig', array('search' => $search->createView()));
+		return $this->render('UserBundle:Admin:admin_modif_livre.html.twig', array('search' => $search->createView(), 'form' => $form->createView()));
 	}
 
 	public function admin_modif_livre_formAction($nom, Request $request)
@@ -474,11 +534,17 @@ class AdminController extends Controller
 					->add('ville', 'text', array('required' => true))
 					->add('telephone', 'number', array('required' => true))
 					->add('email', 'text', array('required' => true))
-					->add('username', 'text', array('required' => true))
+					->add('username', 'text', array(
+							'required' => true,
+							'read_only' => true,
+						))
 					->add('password', 'repeated', array(
 						    'type' => 'password',
 						    'invalid_message' => 'Les mots de passe doivent correspondre',
-						    'options' => array('required' => true),
+						    'options' => array(
+						    	'required' => true,
+						    	'read_only' => true,
+						    ),
 						    'first_options'  => array('label' => 'Mot de passe'),
 						    'second_options' => array('label' => 'Mot de passe (validation)'),
 						))

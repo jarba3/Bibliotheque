@@ -106,6 +106,22 @@ class User implements UserInterface
      */
     private $roles;
 
+    /**
+    * @var $emprunt
+    *
+    * @ORM\ManyToOne(targetEntity="Emprunt", inversedBy="user", cascade={"persist"})
+    * @ORM\JoinColumns({@ORM\JoinColumn(name="emprunt_id", referencedColumnName="id")})
+    */
+    private $emprunt;
+
+    /**
+    * @var $reservation
+    *
+    * @ORM\ManyToOne(targetEntity="Reservation", inversedBy="user", cascade={"persist"})
+    * @ORM\JoinColumns({@ORM\JoinColumn(name="reservation_id", referencedColumnName="id")})
+    */
+    private $reservation;
+
     public function eraseCredentials()
     {
 
@@ -397,4 +413,50 @@ class User implements UserInterface
         return $this->email;
     }
 
+
+    /**
+     * Set emprunt
+     *
+     * @param \Bibliotheque\UserBundle\Entity\Emprunt $emprunt
+     * @return User
+     */
+    public function setEmprunt(\Bibliotheque\UserBundle\Entity\Emprunt $emprunt = null)
+    {
+        $this->emprunt = $emprunt;
+
+        return $this;
+    }
+
+    /**
+     * Get emprunt
+     *
+     * @return \Bibliotheque\UserBundle\Entity\Emprunt 
+     */
+    public function getEmprunt()
+    {
+        return $this->emprunt;
+    }
+
+    /**
+     * Set reservation
+     *
+     * @param \Bibliotheque\UserBundle\Entity\Reservation $reservation
+     * @return User
+     */
+    public function setReservation(\Bibliotheque\UserBundle\Entity\Reservation $reservation = null)
+    {
+        $this->reservation = $reservation;
+
+        return $this;
+    }
+
+    /**
+     * Get reservation
+     *
+     * @return \Bibliotheque\UserBundle\Entity\Reservation 
+     */
+    public function getReservation()
+    {
+        return $this->reservation;
+    }
 }

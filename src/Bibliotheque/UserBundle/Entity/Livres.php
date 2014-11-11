@@ -86,7 +86,30 @@ class Livres
      */
     private $editeur;
 
-    
+    /**
+    * @var ArrayCollection $exemplaire
+    *
+    * @ORM\OneToMany(targetEntity="Exemplaire", mappedBy="livre", cascade={"persist", "remove"})
+    */
+    private $exemplaire;
+
+    /**
+    * @var $reservation
+    *
+    * @ORM\ManyToOne(targetEntity="Reservation", inversedBy="livre", cascade={"persist"})
+    * @ORM\JoinColumns({@ORM\JoinColumn(name="reservation_id", referencedColumnName="id")})
+    */
+    private $reservation;
+
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->exemplaire = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
     /**
      * Get id
      *
@@ -259,6 +282,29 @@ class Livres
     }
 
     /**
+     * Set theme
+     *
+     * @param \Bibliotheque\UserBundle\Entity\Theme $theme
+     * @return Livres
+     */
+    public function setTheme(\Bibliotheque\UserBundle\Entity\Theme $theme = null)
+    {
+        $this->theme = $theme;
+
+        return $this;
+    }
+
+    /**
+     * Get theme
+     *
+     * @return \Bibliotheque\UserBundle\Entity\Theme 
+     */
+    public function getTheme()
+    {
+        return $this->theme;
+    }
+
+    /**
      * Set auteur
      *
      * @param \Bibliotheque\UserBundle\Entity\Auteur $auteur
@@ -305,25 +351,58 @@ class Livres
     }
 
     /**
-     * Set theme
+     * Add exemplaire
      *
-     * @param \Bibliotheque\UserBundle\Entity\Theme $theme
+     * @param \Bibliotheque\UserBundle\Entity\Exemplaire $exemplaire
      * @return Livres
      */
-    public function setTheme(\Bibliotheque\UserBundle\Entity\Theme $theme = null)
+    public function addExemplaire(\Bibliotheque\UserBundle\Entity\Exemplaire $exemplaire)
     {
-        $this->theme = $theme;
+        $this->exemplaire[] = $exemplaire;
 
         return $this;
     }
 
     /**
-     * Get theme
+     * Remove exemplaire
      *
-     * @return \Bibliotheque\UserBundle\Entity\Theme 
+     * @param \Bibliotheque\UserBundle\Entity\Exemplaire $exemplaire
      */
-    public function getTheme()
+    public function removeExemplaire(\Bibliotheque\UserBundle\Entity\Exemplaire $exemplaire)
     {
-        return $this->theme;
+        $this->exemplaire->removeElement($exemplaire);
+    }
+
+    /**
+     * Get exemplaire
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getExemplaire()
+    {
+        return $this->exemplaire;
+    }
+
+    /**
+     * Set reservation
+     *
+     * @param \Bibliotheque\UserBundle\Entity\Reservation $reservation
+     * @return Livres
+     */
+    public function setReservation(\Bibliotheque\UserBundle\Entity\Reservation $reservation = null)
+    {
+        $this->reservation = $reservation;
+
+        return $this;
+    }
+
+    /**
+     * Get reservation
+     *
+     * @return \Bibliotheque\UserBundle\Entity\Reservation 
+     */
+    public function getReservation()
+    {
+        return $this->reservation;
     }
 }

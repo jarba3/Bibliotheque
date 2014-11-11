@@ -1,0 +1,36 @@
+{% extends 'base_admin.html.twig' %}
+{% block body %}
+	<h1>Gestion des exempaires</h1>
+		<div class="livreDetail" >
+			<h3>{{ livre.titre }} <span>de {{ livre.auteur.nom }}<span><span><img src="{{ asset(livre.urlimage) }}" alt="{{ livre.altimage }}"class="afficheImage"></span></h3>
+			<h3>Date de parution : {{ livre.dateparution|date("d/m/y") }}</h3>
+			<h3>Editeur : {{ livre.editeur.nom }}</h3>
+			<h3>Thème : {{ livre.theme.intitule }}</h3>
+			<h3>Résumé :</h3>
+			<h4>{{ livre.description }}</h4>
+			<h5>Isbn : {{ livre.isbn }}</h5>
+
+		</div>
+		<br>
+		<table class="exemplaire-table" >
+		<thead>
+			<th>Date d'aquisition</th>
+			<th>Etat de l'exemplaire</th>
+			<th>Action</th>
+		</thead>
+			{% for ex in exemplaire %}
+			 	<tr>
+			 		<td>
+			 			{{ exemplaire[ loop.index0 ].dateAcquisition|date("m/d/Y") }}
+			 		</td>
+			 		<td>
+						{{ exemplaire[ loop.index0 ].usure }}
+			 		</td>
+			 		<td>
+			 			<div class="btn-suppr" ><a href="{{ path( 'bibliotheque_admin_suppression', {'id' : exemplaire[ loop.index0 ].id } ) }}">Supprimer</a></div>
+			 			<div class="btn-modif" ><a href="{{ path( 'bibliotheque_admin_modification', {'id' : exemplaire[ loop.index0 ].id } ) }}">Modifier</a></div>
+			 		</td>
+			 	</tr>
+			{% endfor %}
+		</table>
+{% endblock %}

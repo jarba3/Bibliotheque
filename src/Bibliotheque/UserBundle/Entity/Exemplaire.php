@@ -36,9 +36,22 @@ class Exemplaire
     private $usure;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Bibliotheque\UserBundle\Entity\Livres")
+     * @var $livre
+     *
+     * @ORM\ManyToOne(targetEntity="Livres", inversedBy="exemplaire", cascade={"persist"})
+     * @ORM\JoinColumns({@ORM\JoinColumn(name="livre_id", referencedColumnName="id")})
      */
     private $livre;
+
+    /**
+    * @var $emprunt
+    *
+    * @ORM\ManyToOne(targetEntity="Emprunt", inversedBy="exemplaire", cascade={"persist"})
+    * @ORM\JoinColumns({@ORM\JoinColumn(name="emprunt_id", referencedColumnName="id")})
+    */
+    private $emprunt;
+
+
 
     /**
      * Get id
@@ -117,5 +130,28 @@ class Exemplaire
     public function getLivre()
     {
         return $this->livre;
+    }
+
+    /**
+     * Set emprunt
+     *
+     * @param \Bibliotheque\UserBundle\Entity\Emprunt $emprunt
+     * @return Exemplaire
+     */
+    public function setEmprunt(\Bibliotheque\UserBundle\Entity\Emprunt $emprunt = null)
+    {
+        $this->emprunt = $emprunt;
+
+        return $this;
+    }
+
+    /**
+     * Get emprunt
+     *
+     * @return \Bibliotheque\UserBundle\Entity\Emprunt 
+     */
+    public function getEmprunt()
+    {
+        return $this->emprunt;
     }
 }

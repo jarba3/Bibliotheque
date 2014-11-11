@@ -15,7 +15,7 @@
 <fieldset class='userField spacer'>
 
 {{ form_label(form.nom, 'Nom :', {'label_attr': {'class': 'label spacerUser'}}) }}
-{{ form_widget(form.nom) }}
+{{ form_widget(form.nom, {'attr': {'id': 'nom'}}) }}
 <br>
 {{ form_label(form.prenom, 'Prenom :', {'label_attr': {'class': 'label spacerUser'}}) }}
 {{ form_widget(form.prenom) }}
@@ -39,7 +39,7 @@
 {{ form_widget(form.telephone) }}
 <br>
 {{ form_label(form.username, "Nom d'utilisateur :", {'label_attr': {'class': 'label spacerUser'}}) }}
-{{ form_widget(form.username) }}
+{{ form_widget(form.username, {'attr': {'id': 'username'}}) }}
 <br>
 <br>
 {{ form_widget(form.password) }}
@@ -53,7 +53,3 @@
 {{ form_end(form) }}
 
 {% endblock %}
-
-{#% block sidebar %}
-    
-{% endblock %#}

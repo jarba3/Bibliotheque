@@ -75,13 +75,21 @@ bibliotheque_admin_ajout_exemplaire_form:
   pattern:    /admin/admin_ajout_exemplaire_form/{isbn}
   defaults:   { _controller: UserBundle:Admin:admin_ajout_exemplaire_form }
 
-bibliotheque_admin_suppr_exemplaire:
-  pattern:    /admin/admin_suppr_exemplaire
-  defaults:   { _controller: UserBundle:Admin:admin_suppr_exemplaire }
+bibliotheque_admin_gestion_exemplaire:
+  pattern:    /admin/admin_gestion_exemplaire
+  defaults:   { _controller: UserBundle:Admin:admin_gestion_exemplaire }
 
-bibliotheque_admin_suppr_exemplaire_form:
-  pattern:    /admin/admin_suppr_exemplaire_form/{isbn}
-  defaults:   { _controller: UserBundle:Admin:admin_suppr_exemplaire_form }
+bibliotheque_admin_gestion_exemplaire_form:
+  pattern:    /admin/admin_gestion_exemplaire_form/{isbn}
+  defaults:   { _controller: UserBundle:Admin:admin_gestion_exemplaire_form }
+
+bibliotheque_admin_suppression:
+  pattern:    /admin/suppression/{id}
+  defaults:   { _controller: UserBundle:Admin:admin_suppression }
+
+bibliotheque_admin_modification:
+  pattern:    /admin/modification/{id}
+  defaults:   { _controller: UserBundle:Admin:admin_modification }
 
 bibliotheque_admin_ajout_auteur:
   pattern:    /admin/ajout_auteur
