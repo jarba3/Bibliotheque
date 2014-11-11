@@ -1,0 +1,13 @@
+{% extends '::base_bibliothecaire.html.twig' %}
+{% block body %}
+<h1>Modifier un livre</h1>
+{{ form_start(search) }}
+<fieldset class="searchLivre">
+			{{ form_label(search.recherche, "Rechercher un livre :") }}
+			{{ form_widget(search.recherche) }}
+			</fieldset>
+{{ form_end(search) }}
+{{ form_start(form) }}
+
+{{ form_end(form) }}
+{% endblock %}

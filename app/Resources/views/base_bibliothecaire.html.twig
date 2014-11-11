@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Admin Bibliothèque{% endblock %}</title>
+        <title>{% block title %}bibliothecaire Bibliothèque{% endblock %}</title>
         {% block stylesheets %}
         <link href='http://fonts.googleapis.com/css?family=Irish+Grover' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=La+Belle+Aurore' rel='stylesheet' type='text/css'>
@@ -18,22 +18,50 @@
                     <nav>
                     <img class="logo" src="{{asset('bundles/Bibliotheque/images/logo.png')}}" alt="Impossible à charger">
                         <ul class="menu">
-                            <li><a href="">Accueil bibliothecaire</a></li>
+                            <li><a href="{{ path( 'bibliotheque_bibliothecaire' ) }}">Accueil bibliothecaire</a></li>
                             <li>
                                 Gestion des livres
-                                 <ul>
-                                    <li><a href="">Ajout livre</a></li>
-                                    <li><a href="">Modification livre</a></li>
-                                    <li><a href="">Suppression livre</a></li>
+                                <ul>
+                                    <li>
+                                        <a href="">Livres</a>
+                                        <ul>
+                                            <li><a href="{{ path( 'bibliotheque_bibliothecaire_ajout_livre' ) }}">Ajouter un livre</a></li>
+                                            <li><a href="{{ path( 'bibliotheque_bibliothecaire_modif_livre' ) }}">Modifier un livre</a></li>
+                                            <li><a href="{{ path( 'bibliotheque_bibliothecaire_suppr_livre' ) }}">Supprimer un livre</a></li>
+                                            <li><a href="{{ path( 'bibliotheque_bibliothecaire_ajout_exemplaire' ) }}">Ajouter un exemplaire</a></li>
+                                            <li><a href="{{ path('bibliotheque_bibliothecaire_gestion_exemplaire') }}">Gestion des exemplaires</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="">Editeur</a>
+                                        <ul>
+                                            <li><a href="{{ path( 'bibliotheque_bibliothecaire_ajout_editeur' ) }}">Ajouter un éditeur</a></li>
+                                            <li><a href="">Supprimer un éditeur</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="">Auteur</a>
+                                        <ul>
+                                            <li><a href="{{ path( 'bibliotheque_bibliothecaire_ajout_auteur' ) }}">Ajouter un auteur</a></li>
+                                            <li><a href="{{ path( 'bibliotheque_bibliothecaire_suppr_auteur' ) }}">Supprimer un auteur</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="">Thème</a>
+                                        <ul>
+                                            <li><a href="{{ path( 'bibliotheque_bibliothecaire_ajout_theme' ) }}">Ajouter un thème</a></li>
+                                            <li><a href="{{ path( 'bibliotheque_bibliothecaire_suppr_theme' ) }}">Supprimer un thème</a></li>
+                                        </ul>
+                                    </li>
                                 </ul>
                             </li>
-                            <li><a href="">Gestion des prêts</a></li>
+                            <li><a href="{{ path( 'bibliotheque_bibliothecaire_prets' ) }}">Gestion des prêts</a></li>
                             <li>
-                                Gestion des utilisateurs
+                                Gestion des Profils
                                 <ul>
-                                    <li><a href="">Ajout utilisateur</a></li>
-                                    <li><a href="">Modification utilisateur</a></li>
-                                    <li><a href="">Suppression utilisateur</a></li>
+                                    <li><a href="{{ path( 'bibliotheque_bibliothecaire_ajout_user' ) }}">Ajout utilisateur</a></li>
+                                    <li><a href="{{ path( 'bibliotheque_bibliothecaire_modif_user' ) }}">Modification utilisateur</a></li>
+                                    <li><a href="{{ path( 'bibliotheque_bibliothecaire_suppr_user' ) }}">Suppression utilisateur</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -54,7 +82,10 @@
     
         <section class="main-col">
                     {% block body %}{% endblock %}
-                    {% block javascripts %}{% endblock %}
+                    {% block javascripts %}
+                            <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                            <script type="text/javascript" src="{{asset('bundles/Bibliotheque/js/app.js')}}" ></script>
+                    {% endblock %}
         </section>
         <section>
             <footer>

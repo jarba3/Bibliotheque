@@ -120,6 +120,93 @@ bibliotheque_bibliothecaire:
   pattern:    /bibliothecaire
   defaults:   { _controller: UserBundle:Bibliothecaire:bibliothecaire }
 
+bibliotheque_bibliothecaire_prets:
+  pattern:    /bibliothecaire/prets
+  defaults:   { _controller: UserBundle:Bibliothecaire:bibliothecaire_prets }
+
+bibliotheque_bibliothecaire_ajout_user:
+  pattern:    /bibliothecaire/ajout_utilisateur
+  defaults:   { _controller: UserBundle:Bibliothecaire:bibliothecaire_ajout_user }
+
+bibliotheque_bibliothecaire_modif_user:
+  pattern:    /bibliothecaire/modif_utilisateur
+  defaults:   { _controller: UserBundle:Bibliothecaire:bibliothecaire_modif_user }
+
+bibliotheque_bibliothecaire_modif_user_form:
+  path:       /bibliothecaire/modif_utilisateur_form/{nom}
+  defaults:   { _controller: UserBundle:Bibliothecaire:bibliothecaire_modif_user_form }
+
+bibliotheque_bibliothecaire_suppr_user:
+  pattern:    /bibliothecaire/suppr_utilisateur
+  defaults:   { _controller: UserBundle:Bibliothecaire:bibliothecaire_suppr_user }
+
+bibliotheque_bibliothecaire_suppr_user_form:
+  path:       /bibliothecaire/suppr_utilisateur_form/{nom}
+  defaults:   { _controller: UserBundle:Bibliothecaire:bibliothecaire_suppr_user_form }
+
+bibliotheque_bibliothecaire_ajout_livre:
+  pattern:    /bibliothecaire/ajout_livre
+  defaults:   { _controller: UserBundle:Bibliothecaire:bibliothecaire_ajout_livre }
+
+bibliotheque_bibliothecaire_modif_livre:
+  pattern:    /bibliothecaire/modif_livre
+  defaults:   { _controller: UserBundle:Bibliothecaire:bibliothecaire_modif_livre }
+
+bibliotheque_bibliothecaire_modif_livre_form:
+  pattern:    /bibliothecaire/modif_livre_form/{nom}
+  defaults:   { _controller: UserBundle:Bibliothecaire:bibliothecaire_modif_livre_form }
+
+bibliotheque_bibliothecaire_suppr_livre:
+  pattern:    /bibliothecaire/bibliothecaire_suppr_livre
+  defaults:   { _controller: UserBundle:Bibliothecaire:bibliothecaire_suppr_livre }
+
+bibliotheque_bibliothecaire_suppr_livre_form:
+  pattern:    /bibliothecaire/bibliothecaire_suppr_livre_form/{nom}
+  defaults:   { _controller: UserBundle:Bibliothecaire:bibliothecaire_suppr_livre_form }
+
+bibliotheque_bibliothecaire_ajout_exemplaire:
+  pattern:    /bibliothecaire/bibliothecaire_ajout_exemplaire
+  defaults:   { _controller: UserBundle:Bibliothecaire:bibliothecaire_ajout_exemplaire }
+
+bibliotheque_bibliothecaire_ajout_exemplaire_form:
+  pattern:    /bibliothecaire/bibliothecaire_ajout_exemplaire_form/{isbn}
+  defaults:   { _controller: UserBundle:Bibliothecaire:bibliothecaire_ajout_exemplaire_form }
+
+bibliotheque_bibliothecaire_gestion_exemplaire:
+  pattern:    /bibliothecaire/bibliothecaire_gestion_exemplaire
+  defaults:   { _controller: UserBundle:Bibliothecaire:bibliothecaire_gestion_exemplaire }
+
+bibliotheque_bibliothecaire_gestion_exemplaire_form:
+  pattern:    /bibliothecaire/bibliothecaire_gestion_exemplaire_form/{isbn}
+  defaults:   { _controller: UserBundle:Bibliothecaire:bibliothecaire_gestion_exemplaire_form }
+
+bibliotheque_bibliothecaire_suppression:
+  pattern:    /bibliothecaire/suppression/{id}
+  defaults:   { _controller: UserBundle:Bibliothecaire:bibliothecaire_suppression }
+
+bibliotheque_bibliothecaire_modification:
+  pattern:    /bibliothecaire/modification/{id}
+  defaults:   { _controller: UserBundle:Bibliothecaire:bibliothecaire_modification }
+
+bibliotheque_bibliothecaire_ajout_auteur:
+  pattern:    /bibliothecaire/ajout_auteur
+  defaults:   { _controller: UserBundle:Bibliothecaire:bibliothecaire_ajout_auteur }
+
+bibliotheque_bibliothecaire_suppr_auteur:
+  pattern:    /bibliothecaire/suppr_auteur
+  defaults:   { _controller: UserBundle:Bibliothecaire:bibliothecaire_suppr_auteur }
+
+bibliotheque_bibliothecaire_ajout_editeur:
+  pattern:    /bibliothecaire/ajout_editeur
+  defaults:   { _controller: UserBundle:Bibliothecaire:bibliothecaire_ajout_editeur }
+
+bibliotheque_bibliothecaire_ajout_theme:
+  pattern:    /bibliothecaire/ajout_theme
+  defaults:   { _controller: UserBundle:Bibliothecaire:bibliothecaire_ajout_theme }
+
+bibliotheque_bibliothecaire_suppr_theme:
+  pattern:     /bibliothecaire/suppr_theme
+  defaults:    { _controller: UserBundle:Bibliothecaire:bibliothecaire_suppr_theme }
 
 
 

@@ -1,0 +1,31 @@
+{% extends '::base_bibliothecaire.html.twig' %}
+{% block body %}
+	<h1>Supprimer un livre</h1>
+	{{ form_start(form) }}
+		<fieldset class="livreForm" >
+				{{ form_label(form.titre, 'Titre :', {'label_attr': {'class': 'label spacerUser'}}) }}
+				{{ form_widget(form.titre) }}
+				<br>
+				{{ form_label(form.isbn, 'Isbn :', {'label_attr': {'class': 'label spacerUser'}}) }}
+				{{ form_widget(form.isbn) }}
+				<br>
+				{{ form_label(form.description, 'Description :', {'label_attr': {'class': 'label spacerUser'}}) }}
+				{{ form_widget(form.description) }}
+				<br>
+				{{ form_label(form.dateparution, 'Date de parution :', {'label_attr': {'class': 'label spacerUser'}}) }}
+				{{ form_widget(form.dateparution) }}
+				<br>
+				{{ form_label(form.theme, 'Thème :', {'label_attr': {'class': 'label spacerUser'}}) }}
+				{{ form_widget(form.theme) }}
+				<br>
+				{{ form_label(form.auteur, 'Auteur :', {'label_attr': {'class': 'label spacerUser'}}) }}
+				{{ form_widget(form.auteur) }}
+				<br>
+				{{ form_label(form.editeur, 'Editeur :', {'label_attr': {'class': 'label spacerUser'}}) }}
+				{{ form_widget(form.editeur) }}
+				<br>
+				<br>
+				<img src="{{ asset(livre.urlimage) }}" alt="{{ livre.altimage }}" class="miniCouv">
+			</fieldset>
+	{{ form_end(form) }}
+{% endblock %}
