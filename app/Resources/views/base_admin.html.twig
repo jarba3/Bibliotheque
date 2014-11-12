@@ -23,13 +23,13 @@
                                 Gestion des livres
                                 <ul>
                                     <li>
-                                        <a href="">Livres</a>
+                                        <a href="{{ path( 'bibliotheque_livres' ) }}">Livres</a>
                                         <ul>
                                             <li><a href="{{ path( 'bibliotheque_admin_ajout_livre' ) }}">Ajouter un livre</a></li>
                                             <li><a href="{{ path( 'bibliotheque_admin_modif_livre' ) }}">Modifier un livre</a></li>
                                             <li><a href="{{ path( 'bibliotheque_admin_suppr_livre' ) }}">Supprimer un livre</a></li>
                                             <li><a href="{{ path( 'bibliotheque_admin_ajout_exemplaire' ) }}">Ajouter un exemplaire</a></li>
-                                            <li><a href="{{ path('bibliotheque_admin_gestion_exemplaire') }}">Gestion des exemplaires</a></li>
+                                            <li><a href="{{ path( 'bibliotheque_admin_gestion_exemplaire' ) }}">Gestion des exemplaires</a></li>
                                         </ul>
                                     </li>
                                     <li>

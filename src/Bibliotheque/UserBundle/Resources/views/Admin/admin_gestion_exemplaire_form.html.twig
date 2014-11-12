@@ -29,8 +29,11 @@
 			 		<td>
 			 			<div class="btn-suppr" ><a href="{{ path( 'bibliotheque_admin_suppression', {'id' : exemplaire[ loop.index0 ].id } ) }}">Supprimer</a></div>
 			 			<div class="btn-modif" ><a href="{{ path( 'bibliotheque_admin_modification', {'id' : exemplaire[ loop.index0 ].id } ) }}">Modifier</a></div>
+			 			<div class="btn-ajout" ><a href="{{ path( 'bibliotheque_admin_ajout_exemplaire_form', { 'isbn' : livre.isbn } ) }}">Ajouter</a></div>
 			 		</td>
 			 	</tr>
 			{% endfor %}
 		</table>
+
+
 {% endblock %}

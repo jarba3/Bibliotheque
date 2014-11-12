@@ -34,7 +34,11 @@ class BibliothequeController extends Controller
         $repository = $this->getDoctrine()->getManager()->getRepository('UserBundle:Livres');
         $livre = $repository->findAll();
 
-        return $this->render('BibliothequeBundle:Bibliotheque:livres.html.twig', array('search' => $search->createView(), 'livre' => $livre ));
+        $repository2 = $this->getDoctrine()->getManager()->getRepository('UserBundle:Theme');
+        $theme = $repository2->findAll();
+        
+
+        return $this->render('BibliothequeBundle:Bibliotheque:livres.html.twig', array('search' => $search->createView(), 'livre' => $livre, 'theme' => $theme));
     }
 
     public function panierAction()
@@ -57,8 +61,11 @@ class BibliothequeController extends Controller
 
         $repository = $this->getDoctrine()->getManager()->getRepository('UserBundle:Livres');
         $livre = $repository->findByTitre($titre)[0];
+        
+        $repository2 = $this->getDoctrine()->getManager()->getRepository('UserBundle:Theme');
+        $theme = $repository2->findAll();
 
-        return $this->render('BibliothequeBundle:Bibliotheque:detail_livre.html.twig', array('search' => $search->createView(), 'livre' => $livre));
+        return $this->render('BibliothequeBundle:Bibliotheque:detail_livre.html.twig', array('search' => $search->createView(), 'livre' => $livre, 'theme' => $theme));
     }
     
 }

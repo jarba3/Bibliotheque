@@ -326,6 +326,14 @@ min-height:0;
 	resize: none;
 }
 
+/*page liste des livres*/
+.listeLivre{
+	display: inline-block;
+	vertical-align: top;
+	width: 920px;
+	padding-left: 10px;
+}
+
 /*page detail livre*/
 
 .livreDetail{
@@ -344,6 +352,13 @@ min-height:0;
 .formExemplaire div{
 	display: inline-block;
 }
+
+.btn-suppr a, .btn-modif a, .btn-ajout a{
+	text-decoration: none;
+	color: white;
+	display: block;
+	margin-top: 3px;
+}
 .btn-suppr{
 	width: 100px;
 	height: 25px;
@@ -352,11 +367,8 @@ min-height:0;
 	border-radius: 5px;
 	text-align: center;
 }
-.btn-suppr a, .btn-modif a{
-	text-decoration: none;
-	color: white;
-	display: block;
-	margin-top: 3px;
+.btn-suppr:hover{
+	background-color: #E53939;
 }
 .btn-modif{
 	width: 100px;
@@ -366,12 +378,21 @@ min-height:0;
 	border-radius: 5px;
 	text-align: center;
 }
-.btn-suppr:hover{
-	background-color: #E53939;
-}
 .btn-modif:hover{
 	background-color: #E59400;
 }
+.btn-ajout{
+	width: 100px;
+	height: 25px;
+	background-color: green;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	text-align: center;
+}
+.btn-ajout:hover{
+	background-color: #00B200;
+}
+
 .exemplaire-table{
 	border-collapse: separate;
 	background: #fff;
