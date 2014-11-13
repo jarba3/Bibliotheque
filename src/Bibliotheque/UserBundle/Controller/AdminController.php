@@ -541,6 +541,28 @@ class AdminController extends Controller
 		return $this->render('UserBundle:Admin:admin_ajout_editeur.html.twig', array('form' => $form->createView()));
 	}
 
+	public function admin_suppr_editeurAction(Request $request)
+	{	
+
+		$repository = $this->getDoctrine()->getManager()->getRepository('UserBundle:Editeur');
+		$editeur = $repository->findAllOrderedByName();
+
+		return $this->render('UserBundle:Admin:admin_suppr_editeur.html.twig', array('editeur' => $editeur));
+	}
+
+	public function admin_suppression_editeurAction($id, Request $request)
+	{
+		$repository = $this->getDoctrine()->getManager()->getRepository('UserBundle:Editeur');
+		$exemplaire = $repository->findById($id)[0];
+
+
+		$em = $this->getDoctrine()->getManager();
+		$em->remove($exemplaire);
+		$em->flush();
+
+		return $this->redirect($this->generateUrl('bibliotheque_admin_suppr_editeur'));
+	}
+
 	public function admin_ajout_userAction(Request $request)
 	{
 		$session = $this->getRequest()->getSession();
@@ -783,20 +805,22 @@ class AdminController extends Controller
 	{	
 
 		$repository = $this->getDoctrine()->getManager()->getRepository('UserBundle:Theme');
-<<<<<<< HEAD
-		$theme = $repository->findAll();
-	
-=======
-				$theme = $repository->findAllOrderedByTheme();
+		$theme = $repository->findAllOrderedByTheme();
 
-		if($search->isValid())
-		{
+		return $this->render('UserBundle:Admin:admin_suppr_theme.html.twig', array('theme' => $theme));
+	}
 
-				return $this->redirect($this->generateUrl('bibliotheque_admin_suppr_theme_form', array('nom' => $nom)));
-		}	
+	public function admin_suppression_themeAction($id, Request $request)
+	{
+		$repository = $this->getDoctrine()->getManager()->getRepository('UserBundle:Theme');
+		$exemplaire = $repository->findById($id)[0];
 
->>>>>>> ec1f82a42f5fb26572157fe8b2adc65eaa5b7d9b
-		return $this->render('UserBundle:Admin:admin_suppr_theme.html.twig', array('search' => $search->createView(), 'theme' => $theme));
+
+		$em = $this->getDoctrine()->getManager();
+		$em->remove($exemplaire);
+		$em->flush();
+
+		return $this->redirect($this->generateUrl('bibliotheque_admin_suppr_theme'));
 	}
 
 }

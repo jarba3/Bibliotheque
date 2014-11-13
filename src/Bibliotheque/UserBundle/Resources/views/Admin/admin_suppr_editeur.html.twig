@@ -1,0 +1,16 @@
+{% extends 'base_admin.html.twig' %}
+{% block body %}
+    <h1>Supprimer un éditeur</h1>
+	<table class="exemplaire-table" >
+		<thead>
+			<th>Nom de l'éditeur</th>
+			<th>Action</th>
+		</thead>
+	    {% for editeur in editeur %}
+	        <tr>
+	        	<td>{{ editeur.nom }}</td>
+	        	<td><div class="btn-suppr" ><a href="{{ path( 'bibliotheque_admin_suppression_editeur', {'id' : editeur.id } ) }}">Supprimer</a></div></td>
+	        </tr>
+	    {% endfor %}
+    </table>
+{% endblock %}

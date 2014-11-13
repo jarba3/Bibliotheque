@@ -107,6 +107,14 @@ bibliotheque_admin_ajout_editeur:
   pattern:    /admin/ajout_editeur
   defaults:   { _controller: UserBundle:Admin:admin_ajout_editeur }
 
+bibliotheque_admin_suppr_editeur:
+  pattern:    /admin/suppr_editeur
+  defaults:   { _controller: UserBundle:Admin:admin_suppr_editeur }
+
+bibliotheque_admin_suppression_editeur:
+  pattern:    /admin/suppression/editeur/{id}
+  defaults:   { _controller: UserBundle:Admin:admin_suppression_editeur }
+
 bibliotheque_admin_ajout_theme:
   pattern:    /admin/ajout_theme
   defaults:   { _controller: UserBundle:Admin:admin_ajout_theme }
@@ -114,6 +122,10 @@ bibliotheque_admin_ajout_theme:
 bibliotheque_admin_suppr_theme:
   pattern:     /admin/suppr_theme
   defaults:    { _controller: UserBundle:Admin:admin_suppr_theme }
+
+bibliotheque_admin_suppression_theme:
+  pattern:    /admin/suppression/theme/{id}
+  defaults:   { _controller: UserBundle:Admin:admin_suppression_theme }
 
 
 

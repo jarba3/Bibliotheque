@@ -1,19 +1,15 @@
 {% extends 'base_admin.html.twig' %}
 {% block body %}
     <h1>Supprimer un thème</h1>
-
-{{ form_start(search) }}
-<fieldset class="searchLivre">
-			{{ form_label(search.recherche, "Rechercher un thème :") }}
-			{{ form_widget(search.recherche) }}
-			</fieldset>
-{{ form_end(search) }}
-
-	<table>
+	<table class="exemplaire-table" >
+		<thead>
+			<th>Ititulé</th>
+			<th>Action</th>
+		</thead>
 	    {% for theme in theme %}
 	        <tr>
 	        	<td>{{ theme.intitule }}</td>
-	        	<td></td>
+	        	<td><div class="btn-suppr" ><a href="{{ path( 'bibliotheque_admin_suppression_theme', {'id' : theme.id } ) }}">Supprimer</a></div></td>
 	        </tr>
 	    {% endfor %}
     </table>

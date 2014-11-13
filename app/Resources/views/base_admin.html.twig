@@ -35,7 +35,7 @@
                                         <a href="">Editeur</a>
                                         <ul>
                                             <li><a href="{{ path( 'bibliotheque_admin_ajout_editeur' ) }}">Ajouter un éditeur</a></li>
-                                            <li><a href="">Supprimer un éditeur</a></li>
+                                            <li><a href="{{ path( 'bibliotheque_admin_suppr_editeur' ) }}">Supprimer un éditeur</a></li>
                                         </ul>
                                     </li>
                                     <li>
@@ -72,6 +72,8 @@
                                     {% endif %}
                                     <hr>
                                     <a href="{{ path( 'bibliotheque_index' ) }}">Accueil</a>
+                                    <hr>
+                                    <a href="{{ path( 'bibliotheque_profil' ) }}">Profil</a>
                             </div>
                     </nav>
 
