@@ -20,4 +20,15 @@ class ThemeRepository extends EntityRepository
             )
             ->getResult();
     }
+
+    public function findByTheme($theme)
+    {
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT intitule FROM UserBundle:Theme intitule WHERE intitule = '$theme'
+            )
+            ->getResult();
+    }
+
+
 }

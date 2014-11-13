@@ -76,13 +76,23 @@ class BibliothequeController extends Controller
                                 ->add('save', 'submit', array('label' => 'Rechercher','attr' => array('class' => 'livreSearch')))
                                 ->getForm();
 
-        $repository = $this->getDoctrine()->getManager()->getRepository('UserBundle:Livres');
-        $livre = $repository->findAll($theme)[0];
-        
+        $repository = $this->getDoctrine()->getManager()->getRepository('UserBundle:Theme');
+        $livre = $repository->findbyTheme($theme);
+        //$livre = $repository->findAll($theme);
+        var_dump($livre);
+
+        die();
+
+        $themeCourant = $theme;
+
         $repository2 = $this->getDoctrine()->getManager()->getRepository('UserBundle:Theme');
         $theme = $repository2->findAllOrderedByTheme();
 
-        return $this->render('BibliothequeBundle:Bibliotheque:detail_livre_par_theme.html.twig', array('search' => $search->createView(), 'livre' => $livre, 'theme' => $theme));
+        //var_dump($livre);
+        //var_dump($theme);
+        //die();
+
+        return $this->render('BibliothequeBundle:Bibliotheque:detail_livre_par_theme.html.twig', array('search' => $search->createView(), 'livre' => $livre, 'theme' => $theme, 'themeCourant' => $themeCourant));
     }
     
 }

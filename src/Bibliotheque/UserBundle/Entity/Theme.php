@@ -28,6 +28,12 @@ class Theme
      */
     private $intitule;
 
+    /**
+    * @var ArrayCollection $livre
+    *
+    * @ORM\OneToMany(targetEntity="Livres", mappedBy="theme", cascade={"persist", "remove"})
+    */
+    private $livre;
 
     /**
      * Get id
@@ -60,5 +66,45 @@ class Theme
     public function getIntitule()
     {
         return $this->intitule;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->livre = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add livre
+     *
+     * @param \Bibliotheque\UserBundle\Entity\Livres $livre
+     * @return Theme
+     */
+    public function addLivre(\Bibliotheque\UserBundle\Entity\Livres $livre)
+    {
+        $this->livre[] = $livre;
+
+        return $this;
+    }
+
+    /**
+     * Remove livre
+     *
+     * @param \Bibliotheque\UserBundle\Entity\Livres $livre
+     */
+    public function removeLivre(\Bibliotheque\UserBundle\Entity\Livres $livre)
+    {
+        $this->livre->removeElement($livre);
+    }
+
+    /**
+     * Get livre
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getLivre()
+    {
+        return $this->livre;
     }
 }
