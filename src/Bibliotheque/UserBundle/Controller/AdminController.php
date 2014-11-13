@@ -783,8 +783,19 @@ class AdminController extends Controller
 	{	
 
 		$repository = $this->getDoctrine()->getManager()->getRepository('UserBundle:Theme');
+<<<<<<< HEAD
 		$theme = $repository->findAll();
 	
+=======
+				$theme = $repository->findAllOrderedByTheme();
+
+		if($search->isValid())
+		{
+
+				return $this->redirect($this->generateUrl('bibliotheque_admin_suppr_theme_form', array('nom' => $nom)));
+		}	
+
+>>>>>>> ec1f82a42f5fb26572157fe8b2adc65eaa5b7d9b
 		return $this->render('UserBundle:Admin:admin_suppr_theme.html.twig', array('search' => $search->createView(), 'theme' => $theme));
 	}
 

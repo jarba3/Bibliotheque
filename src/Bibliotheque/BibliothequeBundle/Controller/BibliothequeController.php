@@ -35,7 +35,7 @@ class BibliothequeController extends Controller
         $livre = $repository->findAll();
 
         $repository2 = $this->getDoctrine()->getManager()->getRepository('UserBundle:Theme');
-        $theme = $repository2->findAll();
+        $theme = $repository2->findAllOrderedByTheme();
         
 
         return $this->render('BibliothequeBundle:Bibliotheque:livres.html.twig', array('search' => $search->createView(), 'livre' => $livre, 'theme' => $theme));
@@ -66,6 +66,23 @@ class BibliothequeController extends Controller
         $theme = $repository2->findAll();
 
         return $this->render('BibliothequeBundle:Bibliotheque:detail_livre.html.twig', array('search' => $search->createView(), 'livre' => $livre, 'theme' => $theme));
+    }
+
+
+    public function detail_livre_par_themeAction($theme, request $request)
+    {
+        $search = $this->createFormBuilder()
+                                ->add('recherche', 'search', array('label' => '', 'attr' => array('class' => 'livreSearch')))
+                                ->add('save', 'submit', array('label' => 'Rechercher','attr' => array('class' => 'livreSearch')))
+                                ->getForm();
+
+        $repository = $this->getDoctrine()->getManager()->getRepository('UserBundle:Livres');
+        $livre = $repository->findAll($theme)[0];
+        
+        $repository2 = $this->getDoctrine()->getManager()->getRepository('UserBundle:Theme');
+        $theme = $repository2->findAllOrderedByTheme();
+
+        return $this->render('BibliothequeBundle:Bibliotheque:detail_livre_par_theme.html.twig', array('search' => $search->createView(), 'livre' => $livre, 'theme' => $theme));
     }
     
 }

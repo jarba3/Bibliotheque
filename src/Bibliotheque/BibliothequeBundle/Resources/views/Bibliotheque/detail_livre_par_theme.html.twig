@@ -1,6 +1,5 @@
 {% extends '::base.html.twig' %}
 {% block body %}
-
 <div class="listLivres" >
 	<ul>
 		{% for theme in theme %}
@@ -8,9 +7,10 @@
 		{% endfor %}
 	</ul>
 </div>
+<div class="livreDetail" >
+<h1>Les livres du thème : XXXXXXXXXXXXXXXXXXXXXXXX</h1>
 
 <div class="listeLivre">
-<h1>Livres</h1>
 <table class="listLivre">
 	<tr>
 		{% for livre in livre|slice(0, 4) %}
@@ -54,7 +54,5 @@
 	</tr>
 </table>
 </div>
-
-
 
 {% endblock %}

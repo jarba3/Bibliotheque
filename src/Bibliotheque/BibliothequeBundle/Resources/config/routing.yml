@@ -13,3 +13,7 @@ bibliotheque_panier:
 bibliotheque_detail_livre:
     path:     /detail_livre/{titre}
     defaults: { _controller: BibliothequeBundle:Bibliotheque:detail_livre }
+
+bibliotheque_detail_livre_par_theme:
+    path:     /detail_theme/{theme}
+    defaults: { _controller: BibliothequeBundle:Bibliotheque:detail_livre_par_theme }
