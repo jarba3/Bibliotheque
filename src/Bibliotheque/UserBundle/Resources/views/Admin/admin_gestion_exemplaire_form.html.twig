@@ -1,6 +1,6 @@
 {% extends 'base_admin.html.twig' %}
 {% block body %}
-	<h1>Gestion des exempaires</h1>
+	<h1>Gestion des exemplaires</h1>
 		<div class="livreDetail" >
 			<h3>{{ livre.titre }} <span>de {{ livre.auteur.nom }}<span><span><img src="{{ asset(livre.urlimage) }}" alt="{{ livre.altimage }}"class="afficheImage"></span></h3>
 			<h3>Date de parution : {{ livre.dateparution|date("d/m/y") }}</h3>
@@ -12,6 +12,7 @@
 
 		</div>
 		<br>
+		<div class="btn-ajout" ><a href="{{ path( 'bibliotheque_admin_ajout_exemplaire_form', { 'isbn' : livre.isbn } ) }}">Ajouter un exemplaire</a></div>
 		<table class="exemplaire-table" >
 		<thead>
 			<th>Date d'aquisition</th>
@@ -29,7 +30,6 @@
 			 		<td>
 			 			<div class="btn-suppr" ><a href="{{ path( 'bibliotheque_admin_suppression', {'id' : exemplaire[ loop.index0 ].id } ) }}">Supprimer</a></div>
 			 			<div class="btn-modif" ><a href="{{ path( 'bibliotheque_admin_modification', {'id' : exemplaire[ loop.index0 ].id } ) }}">Modifier</a></div>
-			 			<div class="btn-ajout" ><a href="{{ path( 'bibliotheque_admin_ajout_exemplaire_form', { 'isbn' : livre.isbn } ) }}">Ajouter</a></div>
 			 		</td>
 			 	</tr>
 			{% endfor %}

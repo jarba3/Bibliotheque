@@ -55,13 +55,15 @@ class AdminController extends Controller
 	public function admin_ajout_exemplaire_formAction($isbn, Request $request)
 	{	
 		$repository = $this->getDoctrine()->getManager()->getRepository('UserBundle:Livres');
-		var_dump($isbn)[0];
+		
 		$livre = $repository->findByIsbn($isbn)[0];
+		
+		$date = getdate();
 
 		$exemplaire = new Exemplaire();
 
 		$form = $this->createFormBuilder($exemplaire)
-						->add('dateacquisition', 'date')
+						->add('dateacquisition', 'date', array('required' => true, 'years' => range(1900, 2014), 'empty_value' => getdate()))
 						->add('usure', 'choice', array(
 							'expanded' => false,
 							'multiple' => false,
@@ -185,7 +187,7 @@ class AdminController extends Controller
 					->add('titre', 'text', array('required' => true))
 					->add('isbn', 'text', array('required' => true))
 					->add('description', 'textarea', array('required' => true))
-					->add('dateparution', 'date', array('required' => true, 'widget' => 'choice', 'years' => range(1900, 2014), 'empty_value' => ''))
+					->add('dateparution', 'date', array('required' => true, 'widget' => 'choice', 'years' => range(1900, 2014), 'empty_value' => getdate()))
 					->add('theme', 'entity', array(
 							'class' => 'UserBundle:Theme',
 							'property' => 'intitule',
