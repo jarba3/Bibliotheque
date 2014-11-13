@@ -792,7 +792,7 @@ class AdminController extends Controller
 		$search->handleRequest($request);
 
 		$repository = $this->getDoctrine()->getManager()->getRepository('UserBundle:Theme');
-				$theme = $repository->findAll();
+				$theme = $repository->findAllOrderedByTheme();
 
 		if($search->isValid())
 		{

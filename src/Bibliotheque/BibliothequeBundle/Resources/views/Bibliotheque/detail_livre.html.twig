@@ -3,7 +3,7 @@
 <div class="listLivres" >
 	<ul>
 		{% for theme in theme %}
-		<li>{{ theme.intitule }}</li>
+		<li><a href="{{ path( 'bibliotheque_detail_livre_par_theme', {'theme' : theme.intitule } ) }}">{{ theme.intitule }}</a></li>
 		{% endfor %}
 	</ul>
 </div>

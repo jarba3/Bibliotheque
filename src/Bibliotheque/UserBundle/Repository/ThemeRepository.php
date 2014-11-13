@@ -12,4 +12,12 @@ use Doctrine\ORM\EntityRepository;
  */
 class ThemeRepository extends EntityRepository
 {
+	public function findAllOrderedByTheme()
+    {
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT intitule FROM UserBundle:Theme intitule ORDER BY intitule.intitule ASC'
+            )
+            ->getResult();
+    }
 }
