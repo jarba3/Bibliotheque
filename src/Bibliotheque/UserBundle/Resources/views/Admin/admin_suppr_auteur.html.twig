@@ -1,19 +1,15 @@
 {% extends '::base_admin.html.twig' %}
 {% block body %}
     <h1>Supprimer un auteur</h1>
-
-{{ form_start(search) }}
-<fieldset class="searchLivre">
-			{{ form_label(search.recherche, "Rechercher un auteur :") }}
-			{{ form_widget(search.recherche) }}
-			</fieldset>
-{{ form_end(search) }}
-
-	<table>
+	<table class="exemplaire-table" >
+		<thead>
+			<th>Nom de l'auteur</th>
+			<th>Action</th>
+		</thead>
 	    {% for auteur in auteur %}
 	        <tr>
 	        	<td>{{ auteur.nom }}</td>
-	        	<td></td>
+	        	<td><div class="btn-suppr" ><a href="{{ path( 'bibliotheque_admin_suppression_auteur', {'id' : auteur.id } ) }}">Supprimer</a></div></td>
 	        </tr>
 	    {% endfor %}
     </table>

@@ -499,24 +499,23 @@ class AdminController extends Controller
 	public function admin_suppr_auteurAction(Request $request)
 	{
 
-	    $search = $this->createFormBuilder()
-						->add('recherche', 'search', array('required' => true))
-						->add('save', 'submit', array('label' => 'Rechercher','attr' => array('class' => 'submit spacer')))
-						->getForm();
-
-		$nom = $request->get('form')['recherche'];
-
-		$search->handleRequest($request);
-
 		$repository = $this->getDoctrine()->getManager()->getRepository('UserBundle:Auteur');
 		$auteur = $repository->findAllOrderedByName();
-		
-		if($search->isValid()){
+				
+		return $this->render('UserBundle:Admin:admin_suppr_auteur.html.twig', array('auteur' => $auteur));
+	}
 
-				return $this->redirect($this->generateUrl('bibliotheque_admin_suppr_auteur_form', array('nom' => $nom)));
-		}		
+	public function admin_suppression_auteurAction($id, Request $request)
+	{
+		$repository = $this->getDoctrine()->getManager()->getRepository('UserBundle:Auteur');
+		$exemplaire = $repository->findById($id)[0];
 
-		return $this->render('UserBundle:Admin:admin_suppr_auteur.html.twig', array('search' => $search->createView(), 'auteur' => $auteur));
+
+		$em = $this->getDoctrine()->getManager();
+		$em->remove($exemplaire);
+		$em->flush();
+
+		return $this->redirect($this->generateUrl('bibliotheque_admin_suppr_auteur'));
 	}
 
 	public function admin_ajout_editeurAction(request $request)
@@ -781,25 +780,11 @@ class AdminController extends Controller
 	}
 
 	public function admin_suppr_themeAction(Request $request)
-	{
-		$search = $this->createFormBuilder()
-						->add('recherche', 'search', array('required' => true))
-						->add('save', 'submit', array('label' => 'Rechercher','attr' => array('class' => 'submit spacer')))
-						->getForm();
-
-		$nom = $request->get('form')['recherche'];
-
-		$search->handleRequest($request);
+	{	
 
 		$repository = $this->getDoctrine()->getManager()->getRepository('UserBundle:Theme');
-				$theme = $repository->findAll();
-
-		if($search->isValid())
-		{
-
-				return $this->redirect($this->generateUrl('bibliotheque_admin_suppr_theme_form', array('nom' => $nom)));
-		}	
-
+		$theme = $repository->findAll();
+	
 		return $this->render('UserBundle:Admin:admin_suppr_theme.html.twig', array('search' => $search->createView(), 'theme' => $theme));
 	}
 
