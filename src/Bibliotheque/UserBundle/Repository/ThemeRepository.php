@@ -20,5 +20,4 @@ class ThemeRepository extends EntityRepository
             )
             ->getResult();
     }
-
 }
